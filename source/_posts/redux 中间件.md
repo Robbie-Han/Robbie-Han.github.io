@@ -4,7 +4,7 @@
 
 
 ### 2.理解中间件预备知识
-Redux 提供了一个叫 applyMiddleware的方法，==可以应用多个中间件==，要想理解applyMiddleware，首要理解compose()的用法，而要想看懂compose()函数，首先要理解arr.reduce()方法
+Redux 提供了一个叫 applyMiddleware() 的方法，== 可以应用多个中间件 ==，要想理解applyMiddleware，首要理解compose()的用法，而要想看懂compose()函数，首先要理解arr.reduce()方法
 
 #### 2.1 arr.reduce()：
 [详解](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
