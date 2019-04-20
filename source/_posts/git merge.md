@@ -1,3 +1,8 @@
+---
+title: async函数
+tags: 
+- Git
+---
 # git merge 的几种形式
 > 转载[连接](https://liuliqiang.info/post/difference-between-merge-squash-and-rebase)
 <div class="post-content">

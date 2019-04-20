@@ -1,3 +1,8 @@
+---
+title: Emoji
+tags: 
+- Git
+---
 People
 
 | :bowtie: `:bowtie:` | :smile: `:smile:` | :laughing: `:laughing:` |

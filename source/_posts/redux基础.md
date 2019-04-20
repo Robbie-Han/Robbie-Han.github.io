@@ -1,3 +1,8 @@
+---
+title: redux 基础
+tags: 
+- React
+---
 # redux笔记
 [点击查看图解](https://images2017.cnblogs.com/blog/1097840/201708/1097840-20170802140748615-1446659032.png)
 <p>action: 一个操作的定义，大概是这个样子, 本身是一个对象</p>

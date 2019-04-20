@@ -1,3 +1,8 @@
+---
+title: iTerm2插件git的缩写大全
+tags: 
+- Git
+---
 ### iTerm2插件git的缩写大全
 
 <table>

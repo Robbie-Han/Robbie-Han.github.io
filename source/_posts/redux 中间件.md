@@ -1,8 +1,13 @@
+---
+title: react中间件
+tags: 
+- React
+---
 # redux 中间件
 ###  1.什么是中间件
 普通使用同步功能时，action的改变会立即触发reducer处理状态，而中间件redux的本质的目的是提供第三方插件的模式，自定义拦截 action -> reducer 的过程。变为 action -> middlewares -> reducer 。这种机制可以让我们改变数据流，实现如异步 action ，action 过滤，日志输出，异常报告等功能。
 
-
+---
 ### 2.理解中间件预备知识
 Redux 提供了一个叫 applyMiddleware() 的方法，== 可以应用多个中间件 ==，要想理解applyMiddleware，首要理解compose()的用法，而要想看懂compose()函数，首先要理解arr.reduce()方法
 

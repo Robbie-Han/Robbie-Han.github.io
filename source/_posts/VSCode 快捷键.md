@@ -1,3 +1,8 @@
+---
+title: VSCode 快捷键
+tags: 
+- 开发工具
+---
 # VSCode 快捷键
 ### 打开控制台： cmd + shift + y
 ### 文件名搜索： cmd + p

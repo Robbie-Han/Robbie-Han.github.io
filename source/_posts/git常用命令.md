@@ -1,3 +1,8 @@
+---
+title: git常用命令
+tags: 
+- Git
+---
 ### git的使用
 ```
 新建文件： mkdir git-test 

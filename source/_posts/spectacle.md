@@ -1,3 +1,8 @@
+---
+title: spectacle踩坑总结
+tags: 
+- 开发工具
+---
 spectacle 踩坑总结
 ===
   spectacle 是一款免费的窗口调节工具，对比可以在Mac 中下载收费的`Magent`
