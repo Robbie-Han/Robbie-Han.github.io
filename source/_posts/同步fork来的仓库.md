@@ -1,6 +1,6 @@
 ---
-title: 
-tags: 如何同步自己fork来的仓库
+title: 如何同步自己fork来的仓库
+tags: 
 - Git
 ---
 如何同步自己fork来的仓库
