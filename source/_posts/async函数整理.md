@@ -1,5 +1,8 @@
 ---
-title: async函数总结
+title: async函数
+tags: 
+- JavaScript
+- 随笔
 ---
 ### 1、什么是async函数：
 
@@ -21,8 +24,7 @@ async/await相对与*/yield来说有更好的语义
 
 ##### 4、返回值是promise
 async函数返回值是promise类型，而Generator函数必须是Iterator 对象
-
-
+<!--more-->
 ### 2、async函数的语法
 #### 2.1 async函数结构表达式：
 

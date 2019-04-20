@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: Robbie Blog
+subtitle: winter is coming 
 description:
-keywords:
-author: John Doe
+keywords: Front-End, javaScript, Css, React, node, 开发工具
+author: Robbie Han
 language:
 timezone:
 
@@ -81,3 +81,22 @@ deploy:
   type: git
   repo: git@github.com:USTC-Han/USTC-Han.github.io.git
   branch: master
+
+jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
