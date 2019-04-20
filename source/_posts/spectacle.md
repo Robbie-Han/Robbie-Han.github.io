@@ -10,6 +10,7 @@ spectacle 踩坑总结
    点击找到仓库：[spectacle](https://github.com/eczarny/spectacle)
 
 下载到本地: ` git@github.com:eczarny/spectacle.git`
+<!--more-->
 
 ### 二、Build:
 * 安装 **carthage** ：`brew install carthage`

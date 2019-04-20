@@ -11,6 +11,7 @@ tags:
 ### 3. 应用：
 #### - parse方法：
 queryString.parse()方法用于将一个查询字符串解析为 JavaScript对象。
+<!--more-->
 
 ```
 var str = 'foo=bar&abc=xyz&abc=123';

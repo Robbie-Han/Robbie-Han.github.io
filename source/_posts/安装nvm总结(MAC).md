@@ -13,8 +13,9 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | b
 ###### *note：[oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)安装可以替换mac的bash,安装后可以安装一个喜欢的主题，界面将非常美观。*
 
 然后在控制台 cd ~/.nvm，观察nvm是否安装完成。
-
+<!--more-->
 安装完成后可以查看自己的配置文件，是否会添加新的配置项
+
 
 ```
 vim ~/.bash_profile

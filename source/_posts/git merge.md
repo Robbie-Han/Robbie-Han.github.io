@@ -29,6 +29,7 @@ tags:
 <li>先切换到目标分支（master）</li>
 <li>执行命令：<code>git merge devel</code></li>
 <li>删除旧分支（可以在上面一同做）：<code>git branch -D devel</code></li>
+<!--more-->
 <li>提交到远程分支：<code>git push origin master</code></li>
 </ul>
 <p>好像这样没啥问题的样子，但是这样操作之后，你知道结果是怎么样吗？假设合并之前的这样的：</p>

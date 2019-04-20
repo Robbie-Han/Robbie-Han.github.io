@@ -8,6 +8,7 @@ tags:
 ### 文件名搜索： cmd + p
 ### 打开新的窗口: cmd + shift + n
 ### 关闭当前文件：cmd + W
+<!--more-->
 
 ### 移动当前行：opt + 上/下
 ### 复制当前行：opt + shift + 上/下

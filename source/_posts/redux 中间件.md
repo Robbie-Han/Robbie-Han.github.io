@@ -13,6 +13,7 @@ Redux 提供了一个叫 applyMiddleware() 的方法，== 可以应用多个中�
 
 #### 2.1 arr.reduce()：
 [详解](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+<!--more-->
 
 eg:
 ```

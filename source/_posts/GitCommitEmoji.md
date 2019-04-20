@@ -6,7 +6,7 @@ tags:
 Inspired by [dannyfritz/commit-message-emoji](https://github.com/dannyfritz/commit-message-emoji)
 
 See also [gitmoji](https://gitmoji.carloscuesta.me/).
-
+<!--more-->
 |   Commit type              | Emoji                                         |
 |:---------------------------|:----------------------------------------------|
 | Initial commit             | :tada: `:tada:`                               |

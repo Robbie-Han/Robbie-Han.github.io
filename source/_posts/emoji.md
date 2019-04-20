@@ -4,7 +4,8 @@ tags:
 - Git
 ---
 People
-
+github中常用emoji集合
+<!--more-->
 | :bowtie: `:bowtie:` | :smile: `:smile:` | :laughing: `:laughing:` |
 |---|---|---|
 | :blush: `:blush:` | :smiley: `:smiley:` | :relaxed: `:relaxed:` |

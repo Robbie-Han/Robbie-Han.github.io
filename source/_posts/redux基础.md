@@ -24,6 +24,7 @@ function add (todo) {
         }
     }
 ```
+<!--more-->
 
 reducer： 真正更新数据操作的函数，大概是这么个样子
 ==此处return状态不可以直接改，可以用解构，对象还可以Object.assign()==

@@ -9,6 +9,7 @@ tags:
 **常规操作：**
 
 max-height 这个属性会阻止 height 属性的设置值变得比 max-height 更大。
+<!--more-->
 
 max-height 属性用来设置给定元素的最大高度.如果height 属性设置的高度比该属性设置的高度还大,则height 属性会失效,max-height 重载（覆盖掉） height.
 
