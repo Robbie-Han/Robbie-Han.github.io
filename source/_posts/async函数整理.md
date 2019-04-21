@@ -146,8 +146,8 @@ var concurrentPromise = function() {
   });
 }
 ```
-concurrentStart和concurrentPromise是两种异步函数无耦合的情况的下并发执行的方式：
-
+`concurrentStart和concurrentPromise是两种异步函数无耦合的情况的下并发执行的方式
+`
 
 
 
