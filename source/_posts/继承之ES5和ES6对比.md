@@ -1,6 +1,7 @@
 ---
 title: ES5和ES6面向对象的写法
 tags: JavaScript
+toc: true
 ---
 # ES5和ES6面向对象的写法：
 

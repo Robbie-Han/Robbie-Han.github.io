@@ -1,6 +1,7 @@
 ---
 title: Promise 详解
 tags: JavaScript
+toc: true
 ---
 ### 1、使用promise的原因
 解决回调函数多层嵌套，让异步方法可以像同步方法那样返回值，使代码更易读。

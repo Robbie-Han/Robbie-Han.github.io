@@ -2,6 +2,7 @@
 title: immutable的理解
 tags: 
 - React
+toc: true
 ---
 ## immutable的理解：
 ### 什么是immutable:

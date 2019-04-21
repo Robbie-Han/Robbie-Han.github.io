@@ -2,6 +2,7 @@
 title: 安装nvm管理多node版本
 tags: 
 - Node
+toc: true
 ---
 ### 1、安装nvm
 

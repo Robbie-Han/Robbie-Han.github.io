@@ -2,6 +2,7 @@
 title: 如何同步自己fork来的仓库
 tags: 
 - Git
+toc: true
 ---
 如何同步自己fork来的仓库
 ===

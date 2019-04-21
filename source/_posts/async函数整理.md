@@ -1,5 +1,6 @@
 ---
 title: async函数
+toc: true
 tags: 
 - JavaScript
 - 随笔
