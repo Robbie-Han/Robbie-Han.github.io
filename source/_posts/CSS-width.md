@@ -2,6 +2,8 @@
 title: 关于width
 tags: 
 - CSS
+- width:auto
+- width:100%
 toc: true
 ---
 ### **width:auto**

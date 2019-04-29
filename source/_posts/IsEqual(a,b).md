@@ -1,7 +1,7 @@
 title: Promise.all()手工代码实现
 toc: true
 tags: 
-- JavaScript
+- JS
 - 深比较
 - _.isEqual()
 ---

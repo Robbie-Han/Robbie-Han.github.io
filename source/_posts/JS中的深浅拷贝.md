@@ -1,6 +1,8 @@
 ---
 title: js中的深拷贝和浅拷贝
-tags: JavaScript
+tags: 
+- JS
+- 深拷贝
 toc: true
 ---
 ### 如何区分JS的拷贝是深拷贝还是浅拷贝

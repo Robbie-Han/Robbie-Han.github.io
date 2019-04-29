@@ -2,7 +2,8 @@
 title: async函数
 toc: true
 tags: 
-- JavaScript
+- JS
+- Async
 - 随笔
 ---
 ### 1、什么是async函数：

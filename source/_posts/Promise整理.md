@@ -1,6 +1,8 @@
 ---
 title: Promise 详解
-tags: JavaScript
+tags: 
+- JS
+- Promise
 toc: true
 ---
 ### 1、使用promise的原因

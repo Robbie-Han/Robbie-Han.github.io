@@ -1,6 +1,8 @@
 ---
 title: ES5和ES6面向对象的写法
-tags: JavaScript
+tags:  
+- JS
+- 继承
 toc: true
 ---
 # ES5和ES6面向对象的写法：

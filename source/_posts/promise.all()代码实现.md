@@ -2,7 +2,8 @@
 title: Promise.all()手工代码实现
 toc: true
 tags: 
-- JavaScript
+- JS
+- Promis.all()
 ---
 # 写个函数代替promise.all()
 

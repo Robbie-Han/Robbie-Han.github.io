@@ -2,7 +2,7 @@
 title: for...in 和 for...of对比
 toc: true
 tags: 
-- JavaScript
+- JS
 - for...in 
 - for...of
 ---
