@@ -10,8 +10,8 @@ toc: true
 - [ ] 父元素的content = 子元素（content + padding + border + margin )
 - [ ] 子元素（包括content+padding+border+margin）撑满整个父元素的content区域。
 
-- [ ] 子元素有margin、border、padding时，会减去自身content区域相对应的width值
-- 此时的自元素有点像IE盒模型，宽高的值就是父元素的宽高。
+- [ ] 子元素有margin、border、padding时，会减去子元素自身content相对应的width值
+- 此时的子元素有点像IE盒模型，宽高的值就是父元素的宽高。
 ---
 ### **width:100%**
 
