@@ -1,4 +1,4 @@
-title: Promise.all()手工代码实现
+title: 深比较两个值
 toc: true
 tags: 
 - JS
