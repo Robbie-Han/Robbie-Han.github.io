@@ -99,8 +99,8 @@ for (variable of iterable) {
 }
 ```
 variable对应每次迭代中属性的值，iterable对应的是被迭代的对象。
-### 2.3 for...in 遍历可迭代的对象
-#### 2.3.1 for...in迭代数组
+### 2.3 for...of 遍历可迭代的对象
+#### 2.3.1 for...of迭代数组
 ```
 let iterable = [10, 20, 30];
 
@@ -113,7 +113,7 @@ for (let value of iterable) {
 // 31
 
 ```
-#### 2.3.2 for...in迭代字符串
+#### 2.3.2 for...of迭代字符串
 ```
 let iterable = "boo";
 
@@ -125,7 +125,7 @@ for (let value of iterable) {
 // "o"
 ```
     对字符串和数组的迭代是比较常用的，其它可迭代的数据类型在项目中见的比较少
-#### 2.3.3 for...in迭代set
+#### 2.3.3 for...of迭代set
 ```
 let iterable = new Set([1, 1, 2, 2, 3, 3]);
 
@@ -138,7 +138,7 @@ for (let value of iterable) {
 ```
     这个例子也佐证了利用set可以对数组去重。[...iterable]解构给数组即可
 
-### 2.3.4 for...in迭代Map
+### 2.3.4 for...of迭代Map
 ```
 let iterable = new Map([["a", 1], ["b", 2], ["c", 3]]);
 
@@ -159,7 +159,7 @@ for (let [key, value] of iterable) {
 ```
     Map这个迭代引发思考：[key, value]是 entry的解构写法？那iterable是不是某种迭代器的简写？
 #### 2.3.4.1 集合对象迭代器：
-ES6中🈶️三种类型的集合对象：Array Set和 Map，
+ES6中有三种类型的集合对象：Array Set和 Map，
 这是三者都包含三种迭代器：
 * entries() 返回一个迭代器，其值为多个键值对的集合 [key,value]
 * values()  返回一个迭代器，其值为集合的值 value
@@ -208,3 +208,9 @@ iterator('han','robbie','TS')
 # 3. for...in 和for...of总结
      对于for...in，它可以遍历自有的、原型上的、继承来的可枚举属性，适合去遍历对象,并得到属性名
      对于for...of，它可以遍历可迭代的对象，可以得到可迭代对象属性的值，适合遍历字符串、数组、Set、Map等
+     <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="ustc-han" data-slug-hash="NVBWgV" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="test.html">
+  <span>See the Pen <a href="https://codepen.io/ustc-han/pen/NVBWgV/">
+  test.html</a> by USTC-Han (<a href="https://codepen.io/ustc-han">@ustc-han</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
