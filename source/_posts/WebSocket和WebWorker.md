@@ -8,9 +8,9 @@ tags:
 toc: true
 ---
 ## WebSocket
-  WebSocket是heml5中提出的一个新的应用层通信协议，位于OSI模型的应用层，建立在TCP链接上。
+  WebSocket是html5中提出的一个新的应用层通信协议，位于OSI模型的应用层，建立在TCP链接上。
 
-  HTTP存在缺陷，只能客户端发起。如果要实时的更新的服务器的状态变化需要使用Ajax轮询，轮询的效率比较低，浪费资源。
+  HTTP存在缺陷，请求只能客户端发起。如果要实时的更新的服务器的状态变化需要使用Ajax轮询，轮询的效率比较低，浪费资源。
 
   WebSocket最大的特点是服务器可以主动向客户端推送消息，客户端也可以向服务端推送消息，实现了全双工通信。可以将WebSocket看成HTTP协议的补充，
   在之前HTTP协议中使用Keep-alice connection是在一次TCP链接中可以传输多次HTTP请求，但是依旧采用轮询的方式。WebSocket 解决的第一个问题是，
