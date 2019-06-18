@@ -73,8 +73,7 @@ class LoggingButton extends React.Component {
 }
 
 ```
-ES6定义的箭头函数，函数內的this是在函数定义的时候绑定的，而ES5定义的函数则是在函数被调用的时候绑定的。所以使用箭头函数的时候，函数的this会绑定组件
-LoggingButton
+ES6定义的箭头函数，函数內的this是在函数定义的时候绑定的，而ES5定义的函数则是在函数被调用的时候绑定的。所以使用箭头函数的时候，函数的this会绑定组件`LoggingButton`
 
 #### 回调函数使用箭头函数
 
@@ -94,4 +93,4 @@ class LoggingButton extends React.Component {
   }
 }
 ```
-回调函数使用ES6的语法，在LoggingButton组件每次被渲染的时候都会重新生成回调函数，如果子组件通过props使用该函数，则会引起重复渲染。
+回调函数使用ES6的语法，在`LoggingButton`组件每次被渲染的时候都会重新生成回调函数，如果子组件通过props使用该函数，则会引起重复渲染。
