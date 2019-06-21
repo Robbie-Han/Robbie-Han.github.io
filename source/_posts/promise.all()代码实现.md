@@ -50,7 +50,7 @@ function promiseAll(promises) {
         return reject(new TypeError('arguments must be iterator'));
     }
     let promiseValue = [];
-    for (let item of promises) {
+    for (item of promises) {
         Promise.resolve(item).then(function(value) {
             promiseValue.push(value);
         }, function(reason) {return reject(reason)})
