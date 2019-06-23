@@ -22,20 +22,22 @@ new Promise( function(resolve, reject) {...} /* executor */  );
 ```
 promise参数 executor
 
-executor执行器函数包括两个参数resolve 和 reject，Promise构造函数执行时会立即调用exector函数，resolve 和 reject函数会被当作参数传给exector函数。exector函数一般会执行一些异步函数，异步函数调用的成功和失败分别调用resolve函数和reject函数，将promise状态分别转为fulfiled和rejected状态。
+executor执行器函数包括两个参数resolve 和 reject，`Promise构造函数执行时会立即调用exector函数（宏任务同步操作）`，resolve 和 reject函数会被当作参数传给exector函数。exector函数一般会执行一些异步函数，异步函数调用的成功和失败分别调用resolve函数和reject函数，将promise状态分别转为fulfiled和rejected状态。
 
 **eg:**
 ```
 function myAsyncFunction(url) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-    xhr.onload = () => resolve(xhr.responseText);
-    xhr.onerror = () => reject(xhr.statusText);
+    xhr.open("GET", url); // 通过url建立链接
+    xhr.onload = () => resolve(xhr.responseText); //接收到完整响应数据时触发
+    xhr.onerror = () => reject(xhr.statusText); //请求发生错误的时候触发。
     xhr.send();
   });
 };
 ```
+
+> 代码中的onload，onerror属于W3C规范中进度事件.进度事件规范定义了与客户端与服务器通信相关的一系列事件，这些事件监听了通信进程中的各个关键节点，使我们能够以更细的颗粒度掌控数据传输过程中的细节。
 <!--more-->
 #### 3.1、promise在事件轮循的注意事项：
 
@@ -53,7 +55,7 @@ number
 24
 */
 ```
-Promise本身是同步的立即执行函数，在执行到resolve()的时候属于异步操作，会把参数传给.then(),并将它放到微任务异步队列里。所以当executor函数中执行完同步操作后，console.log('number')被放到函数调用栈，调用栈的宏观同步任务执行完后，会去微任务队列里取微任务到调用栈。
+`Promise本身是同步的立即执行函数`，在执行到resolve()的时候属于异步操作，会把参数传给.then(),并将它放到微任务异步队列里。所以当executor函数中执行完同步操作后，console.log('number')被放到函数调用栈，调用栈的宏观同步任务执行完后，会去微任务队列里取微任务到调用栈。
 
 ### 4、Promise.prototype.then(onFulfilled, onRejected)
 当new Promise((resolve,reject) => resolve())的时候对应执行then操作，代表Promise的成功状态(fulfilled)。
@@ -201,6 +203,8 @@ Promise.all([p1, p2])
 当p1执行成功状态变为resolved，p2执行的时候会出错跳到catch()，执行完状态也会变为resolved，所以Promise.all()可以正常执行。
 
 如果p2没有catch的化，状态还是rejected，此时的Promise.all()不会执行。
+
+[Promise.all()代码实现](https://ustc-han.github.io/2019/04/22/promise.all()%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/)
 
 ### 7、Promise.prototype.race(iterable)
 

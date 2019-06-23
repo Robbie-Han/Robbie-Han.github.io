@@ -116,6 +116,9 @@ var resolveAfter1Second = function() {
     }, 1000);
   });
 };
+```
+
+```
 var sequentialStart = async function() {
   console.log('==SEQUENTIAL START==');
 
@@ -127,7 +130,9 @@ var sequentialStart = async function() {
   console.log(fast); // 3. this runs 3 seconds after 1.
 }
 // sequentialStart函数执行完需要三秒，两个无关的函数顺序执行
+```
 
+```
 var concurrentStart = async function() {
   console.log('==CONCURRENT START with await==');
   const slow = resolveAfter2Seconds(); // starts timer immediately
@@ -137,7 +142,8 @@ var concurrentStart = async function() {
   console.log(await slow); // 2. this runs 2 seconds after 1.
   console.log(await fast); // 3. this runs 2 seconds after 1., immediately after 2., since fast is already resolved
 }
-
+```
+```
 var concurrentPromise = function() {
   console.log('==CONCURRENT START with Promise.all==');
   return Promise.all([resolveAfter2Seconds(), resolveAfter1Second()]).then((messages) => {
