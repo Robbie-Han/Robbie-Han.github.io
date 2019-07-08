@@ -33,8 +33,12 @@ me.isHuman = true; // inherited properties can be overwritten
 
 me.printIntroduction();·
 // expected output: "My name is Matthew. Am I human? true"
-·
+
 ```
+![20190708102318.png](https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190708102318.png)
+
+由上图可以看出 Object.create()是将它里面的参数添加到对象的原型上，而不是添加到对象本身。
+
 使用Object.create()创建的对象会把person的内容添加到me的原型上，而不是添加到me的构造函数上。
 ```
 const person = {
@@ -46,6 +50,7 @@ const person = {
 
 const me = new Object(person);
 ```
+![20190708103210.png](https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190708103210.png)
 此时person中的内容将加到me的构造函数中。
 ## 1.3 {} 和 new Object() 和 Object.create(Object.prototype)
 ```
