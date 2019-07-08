@@ -204,7 +204,7 @@ Promise.all([p1, p2])
 
 如果p2没有catch的化，状态还是rejected，此时的Promise.all()不会执行。
 
-[Promise.all()代码实现](https://ustc-han.github.io/2019/04/22/promise.all()%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/)
+Promise.all()代码实现: https://ustc-han.github.io/2019/04/22/promise.all()%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/
 
 ### 7、Promise.prototype.race(iterable)
 
