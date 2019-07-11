@@ -16,7 +16,7 @@ Object.prototype.toString.call(num);//[object Number]
 方法一：
 ```
 function isFloat(num){
-  if(typeof num === 'number'){
+  if(typeof num !== 'number'){
     return false;
   }
   return ~~num !== num
@@ -32,7 +32,7 @@ function isFloat(num){
 方法二：
 ```
 function isFloat(num){
-  if(typeof num === 'number'){
+  if(typeof num !== 'number'){
     return false;
   }
   return num % 1 !== 0
