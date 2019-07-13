@@ -10,7 +10,7 @@ toc: true
 
 ---
 ### 2.理解中间件预备知识
-Redux 提供了一个叫 applyMiddleware() 的方法，== 可以应用多个中间件 ==，要想理解applyMiddleware，首要理解compose()的用法，而要想看懂compose()函数，首先要理解arr.reduce()方法
+Redux 提供了一个叫 applyMiddleware() 的方法，可以应用多个中间件，要想理解applyMiddleware，首要理解compose()的用法，而要想看懂compose()函数，首先要理解arr.reduce()方法
 
 #### 2.1 arr.reduce()：
 [详解](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
@@ -78,7 +78,7 @@ export default function applyMiddleware(...middlewares) {
 ```
 createStore(
     rootReducers,    //reducer
-    preloadedState,
+    preloadedState,  //初始化State
     applyMiddleware( //enhancer
         thunkMiddleware,
         createLogger()
@@ -108,7 +108,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
 > return enhancer(createStore)(reducer, preloadedState)
 > 
 等价于
-> applyMiddleware(thunkMiddleware,createLogger())==(createStore)(reducer, preloadedState)==
+> applyMiddleware(thunkMiddleware,createLogger())(createStore)(reducer, preloadedState)
 
 带着这条结果回头再看applyMiddleware源码：
 等价于
@@ -133,13 +133,17 @@ export default function createStore(reducer, preloadedState, enhancer) {
   }）(createStore)(reducer, preloadedState)
 
 ```
->  执行到这里调用 var store = createStore(reducer, preloadedState, enhancer)
-此时enhance为undefined，调用createStore时执行第一个if语句，最终返回store。
+项目中定义store = createStore(reducer, preloadedState, enhancer)，然后将store绑定在Provider组件上。
+
+由上可知，`store = createStore(reducer, preloadedState, enhancer)`等价于`enhancer(createStore)(reducer, preloadedState)`等价于`applyMiddleWare(middleWares)(createStore)(reducer, preloadedState)`等价与上面的代码段。
+
+>  上面的代码执行到这里调用 var store = createStore(reducer, preloadedState, enhancer)
+此时enhance为undefined，执行createStore源码中第一个if语句，最终返回store。
 
 
 ##### 总结：
 
-- applyMiddleware 执行过后返回一个闭包函数，目的是将创建 store的步骤放在这个闭包内执行，这样 middleware 就可以共享 store 对象。
+- applyMiddleware 执行过后返回一个闭包函数，目的是将创建 store（即上面代码中的creatStore）的步骤放在这个闭包内执行，这样 middleware 就可以共享 store 对象。
 
 - middlewares 数组 map 为新的 middlewares 数组，包含了 middlewareAPI
 
@@ -217,7 +221,8 @@ rest.reduce((composed, f) => f(composed), last(...args))
 
 执行到此生成新的dispatch函数，封装好的dispatch(action)就等价与composeABC(action)
 #### 执行阶段
-> dispatch(action) 等于 composedABC(action) 等于执行 function A(action) {...}
+compose后的函数结构大约是A(B(C(dispatch.store))
+> dispatch(action) 等于 composedABC(action) =>  等于执行 function A(action) {...}
 > 
 > 在函数 A 中执行 next(action), 此时 A 中 next 为 composedBC，那么等于执行 composedBC(action) 等于执行function B(action){...}
 > 
