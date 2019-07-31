@@ -28,6 +28,7 @@ sort()、reverse()、splice()、push()、pop()、shift()、unshift()
 ```
 map()、forEach()、reduce()、filter()、join()、concat()、slice()
 ```
+<!--more-->
 ## 原生方法实现：
 ```
 Array.prototype._flat = function(depth = 1){
