@@ -44,7 +44,7 @@ Array.prototype._flat = function(depth = 1){
 	return result
 }
 ```
-实现思路：递归 + 闭包
+实现思路：递归嵌套数组
 
 对数组的元素进行判断，如果是数组就递归，不是数组就推进result中。递归当depth为0的时候截止。最后返回result
 ## MDN的‘打平’思路：
