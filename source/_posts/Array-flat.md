@@ -30,7 +30,7 @@ map()、forEach()、reduce()、filter()、join()、concat()、slice()
 ```
 <!--more-->
 ## 原生方法实现：
-```
+```js
 Array.prototype._flat = function(depth = 1){
 	var result = [];
 	var length = this.length;
@@ -50,7 +50,7 @@ Array.prototype._flat = function(depth = 1){
 对数组的元素进行判断，如果是数组就递归，不是数组就推进result中。递归当depth为0的时候截止。最后返回result
 ## MDN的‘打平’思路：
 ### 使用递归：
-```
+```js
 var arr1 = [1,2,3,[1,2,3,4, [2,3,4]]];
 
 function flattenDeep(arr1) {
@@ -65,7 +65,7 @@ flattenDeep(arr1);
 `把acc换成push如何？`push返回的是数组的length。那样的话 acc = length。会怎么样？
 
 ### 不用递归：
-```
+```js
 function flatten(input) {
     var stack = [...input];
     var result = [];
@@ -85,7 +85,7 @@ function flatten(input) {
 ### 更简单的做法：
 
 前提：处理的数组，不管有多少层，只有数字类型
-```
+```js
 var arr1 = [1,2,3,[1,2,3,4,[2,3,4]]];
 arr1.join().split(',').map(value => +value);
 

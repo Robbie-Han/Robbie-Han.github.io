@@ -19,7 +19,7 @@ Redux 提供了一个叫 applyMiddleware() 的方法，可以应用多个中间�
 #### 2.1 arr.reduceRight()：
 reduceRight对数组的迭代方向是从右向左的迭代
 
-```
+```js
 let funcs = [f,g,h]
 funcs.reduceRight((a, b) => b(a), args);
 ```
@@ -27,7 +27,7 @@ funcs.reduceRight((a, b) => b(a), args);
 
 #### 2.2 compose源码
 
-```
+```js
 function compose(funcs) {
 	return args => funcs.reduceRight((composed,f) => f(compose), args)
 }
@@ -39,7 +39,7 @@ function compose(funcs) {
 ---
 ### 3.applyMiddleware源码：
 
-```
+```js
 import compose from './compose'
 
 export default function applyMiddleware(...middlewares) {
@@ -73,7 +73,7 @@ export default function applyMiddleware(...middlewares) {
 
 > createStore源码：
 
-```
+```js
 export default function createStore(reducer, preloadedState, enhancer) {
   if (typeof enhancer !== 'undefined') {
     if (typeof enhancer !== 'function') {
@@ -91,7 +91,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
 带着这条结果回头再看applyMiddleware源码：
 `store = createStore(reducer,initialState,enhancer)`相当于为applyMiddleware传递了所有它执行所需要的所有参数
 applyMiddleware(middlewares)执行后，传人(createStore)(reducer, preloadedState)；
-```
+```js
 （(createStore) => (reducer, preloadedState, enhancer) => {
     var store = createStore(reducer, preloadedState, enhancer)
     var dispatch = store.dispatch
@@ -119,7 +119,7 @@ applyMiddleware(middlewares)执行后，传人(createStore)(reducer, preloadedSt
 
 - 需要注意的地方
 
-```
+```js
     var middlewareAPI = {
       getState: store.getState,
       dispatch: (action) => dispatch(action)
@@ -137,14 +137,14 @@ applyMiddleware(middlewares)执行后，传人(createStore)(reducer, preloadedSt
 #### 3.1 中间件的庐山真面目
 中间件使用了函数式编程中函数柯理化的功能，每个中间件中的每步返回都是一个接受单参的函数。
 redux-thunk :
-``` 
+```js
 const thunk = store => next => action => 
 typeof action === 'function' ? action(store.dispatch, store.getState) : next(action);
 ```
 > redux-thunk在action为function的时候可以执行 function async(dispatch,getState) => {fetch....};当不是函数的时候调用next(action)。假如系统只用了Thunk中间件。那么next(action)就是dispatch同步action，action是对象。
 
 
-```
+```js
 const logger = store => next => action => {
   console.log('Middleware1: logger', store.getState())
   console.log('Middleware1: logger action:', action)
@@ -179,7 +179,7 @@ const logger = store => next => action => {
 
 一个中间件(ES5)的结构为:
 
-```
+```js
 function ({getState，dispatch}) {
     return function (next) {
         return function (action) {...}
@@ -192,7 +192,7 @@ function ({getState，dispatch}) {
 
 执行过后，middleware 变为了
 
-```
+```js
 function (next) {
     return function (action) {...}
 }
@@ -200,7 +200,7 @@ function (next) {
 > 初始化阶段二：compose 新的 dispatch
 
 
-```
+```js
 const newDispatch = compose(newMiddlewares)(store.dispatch)
 ```
 
