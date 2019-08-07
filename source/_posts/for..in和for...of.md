@@ -17,7 +17,7 @@ tags:
   * for...in 不但可以遍历被遍历对象的自有属性，还可以遍历原型上的和继承来的可枚举属性。
   *  String 的 indexOf()  方法或 Object的toString()方法，这些显然是原型上不可枚举的属性
 ### 1.2 for...in 语法
-```
+```js
 for (variable in object) {...}
 ```
 其中 variable为属性名，object是被遍历对象。
@@ -27,7 +27,7 @@ for (variable in object) {...}
 考虑到遍历数组不能直接得到数组元素和索引顺序的不确定性，所以最好不要使用for...in。另外for...in的便利还有可能把数组原型上的属性遍历出来。
 <!--More-->
 #### 1.3.1 数组使用for...in举例
-```
+```js
 //向数组的原型上添加属性
 Array.prototype.sayHello = function(){
     console.log("Hello")
@@ -55,7 +55,7 @@ str
 使用for...in遍历对象可以直接知道对象的key,间接知道对象每项对应的值，这么使用显然是合理的。
 
 #### 1.4.1 对象使用for...in举例
-```
+```js
 
 // 向原型上添加属性
 Object.prototype.sayHello = function(){
@@ -76,7 +76,7 @@ str
 ```
 #### 1.4.2 如何只遍历自有属性
   使用`hasOwnProperty()`,可以保证只迭代自身属性
-```
+```js
 for(let index in myObject){
     if(myObject.hasOwnProperty(index)){
         console.log(index)
@@ -93,7 +93,7 @@ for(let index in myObject){
 * for...of 和forEach()在遍历数组的时候会有什么不同呢？
 ### 2.2 for...of 语法
 
-```
+```js
 for (variable of iterable) {
     //statements
 }
@@ -101,7 +101,7 @@ for (variable of iterable) {
 variable对应每次迭代中属性的值，iterable对应的是被迭代的对象。
 ### 2.3 for...of 遍历可迭代的对象
 #### 2.3.1 for...of迭代数组
-```
+```js
 let iterable = [10, 20, 30];
 
 for (let value of iterable) {
@@ -114,7 +114,7 @@ for (let value of iterable) {
 
 ```
 #### 2.3.2 for...of迭代字符串
-```
+```js
 let iterable = "boo";
 
 for (let value of iterable) {
@@ -124,9 +124,10 @@ for (let value of iterable) {
 // "o"
 // "o"
 ```
+
     对字符串和数组的迭代是比较常用的，其它可迭代的数据类型在项目中见的比较少
 #### 2.3.3 for...of迭代set
-```
+```js
 let iterable = new Set([1, 1, 2, 2, 3, 3]);
 
 for (let value of iterable) {
@@ -139,7 +140,7 @@ for (let value of iterable) {
     这个例子也佐证了利用set可以对数组去重。[...iterable]解构给数组即可
 
 ### 2.3.4 for...of迭代Map
-```
+```js
 let iterable = new Map([["a", 1], ["b", 2], ["c", 3]]);
 
 for (let entry of iterable) {
@@ -165,12 +166,12 @@ ES6中有三种类型的集合对象：Array Set和 Map，
 * values()  返回一个迭代器，其值为集合的值 value
 * keys() 返回一个迭代器，其值为集合中所有的键名 key
 
-      思考：
-      * 对于Array和Set类型的对象，这三个迭代器意义不大。数组的index用遍历器迭代没啥意义，对于Set,键值相同。
-      * 对于Map是有意义的，可以得到Map中每个元素的键和值
+思考：
+* 对于Array和Set类型的对象，这三个迭代器意义不大。数组的index用遍历器迭代没啥意义，对于Set,键值相同。
+* 对于Map是有意义的，可以得到Map中每个元素的键和值
 
 eg: 对于Set
-```
+```js
 let iterable = new Set([3322, 2233]);
 
 for (let entry of iterable.entries()) {
@@ -182,7 +183,7 @@ for (let entry of iterable.entries()) {
 */
 ```
 eg: 对于Map
-```
+```js
 let iterable = new Map([["a", 1], ["b", 2], ["c", 3]]);
 // 键：
 for (let key of iterable.keys()) {
@@ -194,7 +195,7 @@ for (let value of iterable.values()) {
 }
 ```
 ### 2.3.5 for...in迭代arguments
-```
+```js
 function iterator(){
  for (let argument of arguments) {
     console.log(argument);
@@ -208,9 +209,3 @@ iterator('han','robbie','TS')
 # 3. for...in 和for...of总结
      对于for...in，它可以遍历自有的、原型上的、继承来的可枚举属性，适合去遍历对象,并得到属性名
      对于for...of，它可以遍历可迭代的对象，可以得到可迭代对象属性的值，适合遍历字符串、数组、Set、Map等
-     <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="ustc-han" data-slug-hash="NVBWgV" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="test.html">
-  <span>See the Pen <a href="https://codepen.io/ustc-han/pen/NVBWgV/">
-  test.html</a> by USTC-Han (<a href="https://codepen.io/ustc-han">@ustc-han</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
