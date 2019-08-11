@@ -1,7 +1,7 @@
 ---
 title: 从源码看redux中间件
 tags: 
-- Redux
+- React
 toc: true
 ---
 
