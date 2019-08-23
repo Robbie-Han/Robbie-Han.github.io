@@ -21,7 +21,7 @@ export const firstNamedReducer = (state = {b: 2}, action) => state
 
 export const secondNamedReducer = (state = {c:3}, action) => state
 ```
-
+<!--more-->
 ```js
 // rootReducer.js
 import { combineReducers, createStore } from 'redux' //从redux中引入combineReducers方法

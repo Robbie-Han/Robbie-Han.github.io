@@ -58,7 +58,7 @@ var newObj = {}
 newObj.__proto__ === new Object().__proto__ ===  Object.create(Object.prototype).__proto__
 ```
 ## 1.4 Object.create()在继承中的使用
-```
+```js
 function User(name,age){
     this.name = name;
     this.age = age;        

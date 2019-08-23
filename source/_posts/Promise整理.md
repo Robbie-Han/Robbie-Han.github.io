@@ -17,7 +17,7 @@ rejected: 意味着操作失败。
 
 ### 3、promise语法：
 
-```
+```js
 new Promise( function(resolve, reject) {...} /* executor */  );
 ```
 promise参数 executor
@@ -25,7 +25,7 @@ promise参数 executor
 executor执行器函数包括两个参数resolve 和 reject，`Promise构造函数执行时会立即调用exector函数（宏任务同步操作）`，resolve 和 reject函数会被当作参数传给exector函数。exector函数一般会执行一些异步函数，异步函数调用的成功和失败分别调用resolve函数和reject函数，将promise状态分别转为fulfiled和rejected状态。
 
 **eg:**
-```
+```js
 function myAsyncFunction(url) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -41,7 +41,7 @@ function myAsyncFunction(url) {
 <!--more-->
 #### 3.1、promise在事件轮循的注意事项：
 
-```
+```js
 new Promise(function(resolve, reject){
     console.log('hello');
     resolve(24);
@@ -65,7 +65,7 @@ number
 当Promise变成拒绝状态（rejected ）时，onRejected参数作为回调函数被调用。此时等价与.catch()功能
 
 
-```
+```js
 var p = new Promise((resolve, reject) => {
     resolve('foo')
 })
@@ -80,7 +80,7 @@ p.then('bar').then((value) => {
 
 #### 4.1、promise.then()的注意事项：
 
-```
+```js
 Promise.resolve()
   .then( () => {
     // 使 .then() 返回一个 rejected promise
@@ -97,7 +97,7 @@ Promise.resolve()
 这时候只要catch中不返回rejected。此时都会执行后面的then操作。
 
 #### 4.2 注意promise和setTimeOut()的优先级：
-```
+```js
 Promise.resolve("foo")
   // 1. 接收 "foo" 并与 "bar" 拼接，并将其结果做为下一个resolve返回。
   .then(function(string) {
@@ -134,7 +134,7 @@ Promise.resolve("foo")
 ### 5、Promise.prototype.catch(onRejected)
 
 当返回一个rejected promise的时候，或者throw出一个错，此时会被catch()捕获
-```
+```js
 var p1 = new Promise(function(resolve, reject) {
   throw 'Uh-oh!';
 }).catch();
@@ -144,7 +144,7 @@ var p1 = new Promise(function(resolve, reject) {
 }).catch();
 ```
 #### 5.1、catch()的注意事项；
-```
+```js
 // 在异步函数中抛出的错误不会被catch捕获到
 var p2 = new Promise(function(resolve, reject) {
   setTimeout(function() {
@@ -181,7 +181,7 @@ p3.catch(function(e) {
 
 如果传入的 promise 中有一个失败（rejected），promise.all 异步地将失败的那个结果给失败状态的回调函数，而不管其它 promise 是否完成。
 #### 6.1 Promise.all()的注意事项
-```
+```js
 const p1 = new Promise((resolve, reject) => {
   resolve('hello');
 })
@@ -210,7 +210,7 @@ Promise.all()代码实现: https://ustc-han.github.io/2019/04/22/promise.all()%E
 
 Promise.race(iterable) 方法返回一个 promise，一旦迭代器中的某个promise解决或拒绝，就会返回一个解决状态或拒绝状态的promise。简言之，以最先返回结果的promise的状态为准。
 
-```
+```js
 var p3 = new Promise(function(resolve, reject) { 
     setTimeout(resolve, 100, "three");
 });
@@ -227,7 +227,7 @@ Promise.race([p3, p4]).then(function(value) {
 ```
 
 
-```
+```js
 var promise1 = new Promise(function(resolve, reject) {
     setTimeout(resolve, 500, 'one');
 });
@@ -249,14 +249,14 @@ Promise.race([promise1, promise2]).then(function(value) {
 
 value的值分多种情况，当value的值是Promise，此时Promise.resolve()不起作用，返回的promise状态和value的最后状态保持一致。当value是thenable（带有then方法），返回的promise会“跟随”这个thenable的对象，采用它的最终状态。其它情况返回成功状态的promise。
 
-```
+```js
 Promise.resolve(value);
 Promise.resolve(promise);
 Promise.resolve(thenable);
 ```
 thenable函数使用第一参数函数返回一个成功状态的promise,使用第二个参数函数返回一个失败的promise。
 
-```
+```js
 var p1 = Promise.resolve({ 
   then: function(test, rej) { rej("rejected!"); }
 });

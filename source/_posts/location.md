@@ -1,6 +1,7 @@
 ---
 title: window.location
 tags:  
+- 网络
 - location
 toc: true
 ---
@@ -21,6 +22,7 @@ var result = window.location.origin; // Returns:'https://developer.mozilla.org'
 location.href = "https://developer.mozilla.org:443/en-US/HTMLHyperlinkElementUtils.host"
 location.host == "developer.mozilla.org:443"
 ```
+<!--more-->
 ### location.hostname（主机名）
 返回主机名
 ```js

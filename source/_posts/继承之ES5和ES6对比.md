@@ -10,7 +10,7 @@ toc: true
 ## ES5代码：
 
 
-```
+```js
 function User(name,age){
     this.name = name;
     this.age = age;        
@@ -44,7 +44,7 @@ v1.showLevel();
 ==注意User后面没有括号==
 
 
-```
+```js
 class User{
     constructor(name,age){
         this.name = name;

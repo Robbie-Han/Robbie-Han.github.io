@@ -13,6 +13,8 @@ toc: true
 
 **中间件机制的本质就是一个闭包，通过闭包将原生dispatch保存在内存,并通过每层中间件封装新的dispatch。applyMiddleware方法的主要任务就是通过一系列的中间件改造原生dispatch为满足特定需求的dispatch。**
 
+我和我的小伙伴在我们的开源库，实现了redux的mini版，有兴趣欢迎浏览。链接：https://github.com/ThinkBucket/redux-mini
+
 ### 2.理解中间件预备知识
 Redux 提供了一个叫 applyMiddleware() 的方法，可以应用多个中间件，要想理解applyMiddleware，首要理解compose()的用法，而要想看懂compose()函数，首先要理解arr.reduceRight()方法
 
@@ -248,6 +250,7 @@ compose后的函数结构大约是A(B(C(dispatch.store))
 > 将A中的执行结果返还给最外层
 > 
 > 整个执行 action 的过程为 A -> B -> C -> dispatch -> C -> B -> A
+
 
 
 

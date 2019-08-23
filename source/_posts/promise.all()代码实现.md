@@ -10,7 +10,7 @@ tags:
 ### 百度版
 这我百度过来感觉相对比较靠谱的代码：
 <!--more-->
-```
+```js
 function promiseAll(promises) {
   return new Promise(function(resolve, reject) {
     if (!Array.isArray(promises)) {
@@ -43,7 +43,7 @@ function promiseAll(promises) {
 当我对这段代码不满意时，我参考了阮一峰大佬的《ES6 入门》和另外一本经典书《深入理解ES6》关于Iterator这一章的讲解，得到下面又换后的代码：
 
 #### 代码优化：
-```
+```js
 function promiseAll(promises) {
   return new Promise(function(resolve, reject) {
     if (typeof promises[Symbol.iterator] !== "function") {
