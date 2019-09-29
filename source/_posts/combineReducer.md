@@ -1,7 +1,7 @@
 ---
 title: Reducer的整合者combineReducers
 tags: 
-- Reducer
+- React
 - Redux
 - toc: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: http缓存
 tags: 
-- 网络
+- Web
 - http 缓存
 ---
 [链接一](https://juejin.im/post/5b3c87386fb9a04f9a5cb037#heading-3)

@@ -1,9 +1,9 @@
 ---
 title: window.location
 tags:  
-- 网络
+- Web
 - location
-toc: true
+toc: true 
 ---
 ## location
 ### location.href

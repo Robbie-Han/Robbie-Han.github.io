@@ -1,7 +1,7 @@
 ---
 title: webSocket 和 webWorker
 tags: 
-- 网络
+- Web
 - H5
 - webSocket
 - web Worker

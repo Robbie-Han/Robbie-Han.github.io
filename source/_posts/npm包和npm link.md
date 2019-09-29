@@ -12,7 +12,7 @@ tags:
 ![20190902134410.png](https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190902134410.png)
 
 ## create-react-app
-[create-react-app](https://github.com/facebook/create-react-app)是一款React应用开发工具,我们可以在控制台通过npx `create-react-app my-app`来安装，然后`cd my-app`进入app，此时我们创建了一个很简单的react项目。
+[create-react-app](https://github.com/facebook/create-react-app)是一款React应用开发工具,我们可以在控制台通过`npx create-react-app my-app`来安装，然后`cd my-app`进入app，此时我们创建了一个很简单的react项目。
 
 此时，我们在本项目中输入`npm link <packageName>`
 ![20190902135218.png](https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190902135218.png)
@@ -23,6 +23,8 @@ tags:
 ![20190902135404.png](https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190902135404.png)
 
 测试完毕后，可以使用`npm unlink <npmPackage>`断开链接
+
+相关知识链接：[npx](http://www.ruanyifeng.com/blog/2019/02/npx.html)、[create-react-app](https://github.com/facebook/create-react-app)
 
 参考链接一：https://ui.muwenzi.com/apps/start/usage
 

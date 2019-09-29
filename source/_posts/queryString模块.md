@@ -1,9 +1,9 @@
-    ---
-    title: queryString模块
-    tags: 
-    - Node
-    toc: true
-    ---
+---
+title: queryString模块
+tags: 
+- Node
+toc: true
+---
 ## queryString模块
 ### 1. 安装：
     npm install query-string;

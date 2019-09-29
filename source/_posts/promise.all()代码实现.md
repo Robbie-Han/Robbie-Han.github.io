@@ -44,18 +44,24 @@ function promiseAll(promises) {
 
 #### 代码优化：
 ```js
+
 function promiseAll(promises) {
   return new Promise(function(resolve, reject) {
-    if (typeof promises[Symbol.iterator] !== "function") {
+    if (typeof obj[Symbol.iterator] !== 'function') {
         return reject(new TypeError('arguments must be iterator'));
     }
     let promiseValue = [];
-    for (item of promises) {
-        Promise.resolve(item).then(function(value) {
-            promiseValue.push(value);
-        }, function(reason) {return reject(reason)})
-    }
-    return resolve(promiseValue)
+    let length = promises.length;
+
+    for (let i = 0; i < length; i++) {
+          Promise.resolve(promises[i]).then(function(value) {
+            promiseValue[i] = value;
+              if(promiseValue.length === length) {
+                resolve(promiseValue)
+              }
+            }, function(reason) {return reject(reason)})
+        }
+
   })
 }
 

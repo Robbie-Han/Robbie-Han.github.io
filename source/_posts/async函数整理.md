@@ -36,7 +36,7 @@ async function name([param[, param[, ... param]]]) {
 ```
 eg:
 
-```
+```js
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -78,7 +78,7 @@ async function f() {
 有时候我们希望一个await函数执行失败后，不要影响其它函数的执行。可以将await用try{}catch(){}包起来。
 
 如下所示：
-```
+```js
 async function f() {
   try {
     await Promise.reject('出错了');
@@ -96,7 +96,7 @@ f()
 #### 4、async函数并发执行
 当多个await命令后的函数之间没有依赖关系的时候，可以考虑让它们并发的执行：
 
-```
+```js
 var resolveAfter2Seconds = function() {
   console.log("starting slow promise");
   return new Promise(resolve => {
@@ -118,7 +118,7 @@ var resolveAfter1Second = function() {
 };
 ```
 
-```
+```js
 var sequentialStart = async function() {
   console.log('==SEQUENTIAL START==');
 
