@@ -9,19 +9,19 @@ tags:
 
 浏览器工作流程大体分为如下三部分：
 
-1. 浏览器会解析三个东西：
+- 浏览器会解析三个东西：
     - 一个是HTML/SVG/XHTML，事实上，Webkit有三个C++的类对应这三类文档。解析这三种文件会产生一个DOM Tree。
     - CSS，解析CSS会产生CSS规则树。
     - Javascript，脚本，主要是通过DOM API和CSSOM API来操作DOM Tree和CSS Rule Tree.
 
-2. 解析完成后，浏览器引擎会通过DOM Tree 和 CSS Rule Tree 来构造 Rendering Tree。
+-  解析完成后，浏览器引擎会通过DOM Tree 和 CSS Rule Tree 来构造 Rendering Tree。
 
-    - Rendering Tree 渲染树并不等同于DOM树，因为**一些像`<headr>`元素或CSS设置display:none的节点**就没必要放在渲染树中了。
+    - Rendering Tree 渲染树并不等同于DOM树，因为**一些像`<head>`元素或CSS设置display:none的节点**就没必要放在渲染树中了。
     - CSS 的 Rule Tree主要是为了完成匹配并把CSS Rule附加上Rendering Tree上的每个Element。也就是DOM结点。也就是所谓的Frame。
     - 然后，计算每个Frame（也就是每个Element）的位置，这又叫layout和reflow过程。
 
-3. 最后通过调用操作系统Native GUI(图像用户接口)的API绘制。
-
+- 最后通过调用操作系统Native GUI(图像用户接口)的API绘制。
+<!--more-->
 ![](https://cosmos-x.oss-cn-hangzhou.aliyuncs.com/kBpnEt.png)
 
 [如上图所示](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction?hl=zh-cn)，**在DOM树和CSS规则树合并成渲染树的时候会忽略`<head>`等不可见节点和设置了样式为display:none的节点**。生成渲染树后然后进入布局，布局计算每个对象的精确位置和大小，然后通过绘制，呈现出页面。
@@ -53,3 +53,6 @@ JavaScript的加载、解析与执行会阻塞DOM的构建，也就是说，在�
 [参考链接一](https://juejin.im/post/5b88ddca6fb9a019c7717096#heading-4)
 
 [参考链接二](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css?hl=zh-cn)
+
+
+![20191007170811.png](https://robbie-blog.oss-cn-shanghai.aliyuncs.com/img/20191007170811.png)

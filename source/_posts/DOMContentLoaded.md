@@ -1,5 +1,5 @@
 ---
-title: 页面渲染
+title: DOMContentLoaded和load
 tags: 
 - Web
 - 页面渲染
@@ -16,9 +16,9 @@ tags:
 在下图中，在控制台中展示了DOMContentLoaded、load的执行时间，其中蓝色线代表的是DOMContentLoaded，红色的线代表load的时间。
 
 ![](https://cosmos-x.oss-cn-hangzhou.aliyuncs.com/L5hJR0.png)
-
+<!--more-->
 通过这个[链接](https://testdrive-archive.azurewebsites.net/HTML5/DOMContentLoaded/Default.html)，可以直观感受下两者的不同。
-
+<!--more-->
 ## 两者的意义
 
 对于load来说，它代表了访问页面所需要的所有资源已经全部加载完毕。
