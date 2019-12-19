@@ -1,5 +1,5 @@
 ---
-title: 判断对象是否可迭代
+title: js可迭代对象
 toc: true
 tags: 
 - JS
