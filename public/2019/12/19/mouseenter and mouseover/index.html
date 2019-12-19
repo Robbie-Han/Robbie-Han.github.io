@@ -14,20 +14,18 @@
   <link rel="dns-prefetch" href="http://ustc-han.github.io">
   <title>mouseenter和mouseove的区别 | Robbie Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言：在做input组件的时候，需要有一个鼠标悬浮后，出现一个小图标，点击小图标清楚文字的事件。如下图：  此时如果使用mouseover和mouseout事件控制图标显示，发现如果鼠标移到icon边界，就会出现icon闪烁。这代表着mouseleave事件被触发，显示图标的变量变为false.">
-<meta name="keywords" content="Web,mouseenter,mouseover">
+  <meta name="description" content="使用这段代码运行时，代码会一直占用主线程，造成线程阻塞123456789101112131415161718192021const http = require(&apos;http&apos;);const longComputation = () =&amp;gt; &amp;#123;  let sum = 0;  for (let i = 0; i &amp;lt; 1e10; i++) &amp;#123;    sum += i;  &amp;">
+<meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mouseenter和mouseove的区别">
 <meta property="og:url" content="http://ustc-han.github.io/2019/12/19/mouseenter and mouseover/index.html">
 <meta property="og:site_name" content="Robbie Blog">
-<meta property="og:description" content="前言：在做input组件的时候，需要有一个鼠标悬浮后，出现一个小图标，点击小图标清楚文字的事件。如下图：  此时如果使用mouseover和mouseout事件控制图标显示，发现如果鼠标移到icon边界，就会出现icon闪烁。这代表着mouseleave事件被触发，显示图标的变量变为false.">
+<meta property="og:description" content="使用这段代码运行时，代码会一直占用主线程，造成线程阻塞123456789101112131415161718192021const http = require(&apos;http&apos;);const longComputation = () =&amp;gt; &amp;#123;  let sum = 0;  for (let i = 0; i &amp;lt; 1e10; i++) &amp;#123;    sum += i;  &amp;">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://robbie-blog.oss-cn-shanghai.aliyuncs.com/img/20191012200452.png">
-<meta property="og:updated_time" content="2019-12-19T14:17:20.668Z">
+<meta property="og:updated_time" content="2019-12-19T14:27:24.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mouseenter和mouseove的区别">
-<meta name="twitter:description" content="前言：在做input组件的时候，需要有一个鼠标悬浮后，出现一个小图标，点击小图标清楚文字的事件。如下图：  此时如果使用mouseover和mouseout事件控制图标显示，发现如果鼠标移到icon边界，就会出现icon闪烁。这代表着mouseleave事件被触发，显示图标的变量变为false.">
-<meta name="twitter:image" content="https://robbie-blog.oss-cn-shanghai.aliyuncs.com/img/20191012200452.png">
+<meta name="twitter:description" content="使用这段代码运行时，代码会一直占用主线程，造成线程阻塞123456789101112131415161718192021const http = require(&apos;http&apos;);const longComputation = () =&amp;gt; &amp;#123;  let sum = 0;  for (let i = 0; i &amp;lt; 1e10; i++) &amp;#123;    sum += i;  &amp;">
   
     <link rel="alternative" href="/atom.xml" title="Robbie Blog" type="application/atom+xml">
   
@@ -231,45 +229,17 @@
         
         
         <a href="/2019/12/19/mouseenter and mouseover/" class="archive-article-date">
-  	<time datetime="2019-12-19T14:17:20.667Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+  	<time datetime="2019-12-19T14:27:24.032Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
     
     <!-- 目录内容 -->
-
-  <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
-        <span class="btn-bg"></span>
-        <span class="btn-text">文章导航</span>
-        </p>
-<div id="toc-article" class="toc-article">
-    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
-  <strong class="toc-title">文章目录</strong>
-         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言："><span class="toc-number">1.</span> <span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mouseenter和mouseove的区别"><span class="toc-number">2.</span> <span class="toc-text">mouseenter和mouseove的区别</span></a></li></ol>
-       </div>
- <script type="text/javascript">
-function showToc(){
-  var toc_article = document.getElementById("toc-article");
-  var show_toc_btn = document.getElementById("show-toc-btn");
-  toc_article.setAttribute("style","display:block");
-  show_toc_btn.setAttribute("style","display:none");
-  };
-function showBtn(){
-  var toc_article = document.getElementById("toc-article");
-  var show_toc_btn = document.getElementById("show-toc-btn");
-  toc_article.setAttribute("style","display:none");
-  show_toc_btn.setAttribute("style","display:block");
-  };
- </script>
-    		
+		
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>在做<code>input</code>组件的时候，需要有一个鼠标悬浮后，出现一个小图标，点击小图标清楚文字的事件。如下图：</p>
-<p><img src="https://robbie-blog.oss-cn-shanghai.aliyuncs.com/img/20191012200452.png" alt="20191012200452.png"></p>
-<p>此时如果使用<code>mouseover</code>和<code>mouseout</code>事件控制图标显示，发现如果鼠标移到icon边界，就会出现icon闪烁。这代表着<code>mouseleave</code>事件被触发，显示图标的变量变为<code>false</code>.<br><a id="more"></a></p>
-<h2 id="mouseenter和mouseove的区别"><a href="#mouseenter和mouseove的区别" class="headerlink" title="mouseenter和mouseove的区别"></a>mouseenter和mouseove的区别</h2><p>类似<code>mouseover</code>，它们两者之间的差别是 <code>mouseenter</code>不会冒泡，也就是说当指针从它的子层物理空间移到它的物理空间上时不会触发。对应的<code>mouseout</code>和<code>mouseleave</code>相同。这就导致了在icon的边界，<code>mouseover</code>和<code>mouseout</code>的频繁切换，表现出现icon闪烁。</p>
-<p>此<a href="https://qianlongo.github.io/zepto-analysis/example/event/mouseEnter-mouseOver.html" target="_blank" rel="noopener">链接</a>直观的展示了两者的区别，可以点击查看。</p>
+        <p>使用这段代码运行时，代码会一直占用主线程，造成线程阻塞<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> longComputation = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1e10</span>; i++) &#123;</span><br><span class="line">    sum += i;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> server = http.createServer();</span><br><span class="line">server.on(<span class="string">'request'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.url === <span class="string">'/compute'</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">'计算开始'</span>,<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="keyword">const</span> sum = longComputation();</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">'计算结束'</span>,<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="keyword">return</span> res.end(<span class="string">`Sum is <span class="subst">$&#123;sum&#125;</span>`</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.end(<span class="string">'Ok'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
 
       
       
@@ -326,15 +296,7 @@ function showBtn(){
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mouseenter</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mouseover</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
         		</li>
       		
 		</ul>
@@ -404,18 +366,18 @@ function showBtn(){
   
 <nav id="article-nav">
   
-    <a href="/2019/12/19/垂直盒子边距合并/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/19/node-update/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          垂直margin合并
+          node版本升级
         
       </div>
     </a>
   
   
-    <a href="/2019/11/20/耗时线程案例/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">耗时线程</div>
+    <a href="/2019/12/19/js可迭代对象/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">js可迭代对象</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -434,19 +396,6 @@ function showBtn(){
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言："><span class="toc-number">1.</span> <span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mouseenter和mouseove的区别"><span class="toc-number">2.</span> <span class="toc-text">mouseenter和mouseove的区别</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
@@ -559,11 +508,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Array</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">flat</a>
+                <a href="javascript:void(0)" class="js-tag color1">babel</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -579,31 +524,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">babel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闭包</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存泄漏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">深比较</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">_.isEqual()</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">变量互换</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,11 +548,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Math</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">深拷贝</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Array</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">flat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">深比较</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">_.isEqual()</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">变量互换</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,6 +596,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Math</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Promise</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">H5</a>
               </li>
              
@@ -663,7 +616,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Promise</a>
+                <a href="javascript:void(0)" class="js-tag color1">Async</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -691,10 +644,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Async</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">for...in</a>
               </li>
              
@@ -703,23 +652,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">immutable</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">http 缓存</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">location</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mouseenter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mouseover</a>
+                <a href="javascript:void(0)" class="js-tag color5">immutable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -728,6 +665,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">min-hight</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">location</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Iterable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -763,14 +708,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">replace</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DNS</a>
               </li>
              
@@ -780,6 +717,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">四次挥手</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">replace</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -799,23 +744,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">链式调用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">margin合并</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BFC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterable</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ASCALL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">链式调用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -843,6 +776,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">margin合并</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BFC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
@@ -855,11 +796,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">柯理化</a>
+                <a href="javascript:void(0)" class="js-tag color1">浏览器内核</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浏览器内核</a>
+                <a href="javascript:void(0)" class="js-tag color4">柯理化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -875,6 +816,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">继承</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">重新思考setTimeout</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件循环</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mouseenter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">节流</a>
               </li>
              
@@ -883,7 +840,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">继承</a>
+                <a href="javascript:void(0)" class="js-tag color3">防抖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -896,18 +853,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时间循环</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">重新思考setTimeout</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件循环</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防抖</a>
               </li>
             
             <div class="clearfix"></div>
