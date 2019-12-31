@@ -204,22 +204,22 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Math" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-max-height，min-height，height一起使用时，优先级问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/06/Math/">Math对象常用方法</a>
+      <a class="article-title" href="/2019/12/19/max-height，min-height，height一起使用时，优先级问题/">CSS height</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/05/06/Math/" class="archive-article-date">
-  	<time datetime="2019-05-06T08:55:21.614Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-06</time>
+        <a href="/2019/12/19/max-height，min-height，height一起使用时，优先级问题/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.144Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -229,10 +229,11 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-Math-abs-x"><a href="#1-Math-abs-x" class="headerlink" title="1.Math.abs(x);"></a>1.Math.abs(x);</h2><p>传入一个非数字形式的字符串或者 undefined/empty 变量，将返回 NaN。传入 null 将返回 0。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Math.abs(&apos;-1&apos;);     // 1</span><br><span class="line">Math.abs(-2);       // 2</span><br><span class="line">Math.abs(null);     // 0</span><br><span class="line">Math.abs(&quot;string&quot;); // NaN</span><br><span class="line">Math.abs();         // NaN</span><br></pre></td></tr></table></figure></p>
-<h2 id="2-Math-ceil-x"><a href="#2-Math-ceil-x" class="headerlink" title="2.Math.ceil(x):"></a>2.Math.ceil(x):</h2><p>函数返回大于或等于一个给定数字的最小整数。<br>
+        <h3 id="max-height，min-height，height一起使用时，优先级问题"><a href="#max-height，min-height，height一起使用时，优先级问题" class="headerlink" title="max-height，min-height，height一起使用时，优先级问题"></a>max-height，min-height，height一起使用时，优先级问题</h3><hr>
+<p><strong>常规操作：</strong></p>
+<p>max-height 这个属性会阻止 height 属性的设置值变得比 max-height 更大。<br>
         
-          <a class="article-more-a" href="/2019/05/06/Math/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/max-height，min-height，height一起使用时，优先级问题/#more">more >></a>
         
       
       
@@ -249,11 +250,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">max-hight</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">min-hight</a>
         		</li>
       		
 		</ul>
@@ -263,7 +268,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/06/Math/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/max-height，min-height，height一起使用时，优先级问题/">展开全文 >></a>
         </p>
       
 
@@ -293,22 +298,22 @@
 
 
   
-    <article id="post-async函数整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-location" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/06/async函数整理/">async函数</a>
+      <a class="article-title" href="/2019/12/19/location/">window.location</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/05/06/async函数整理/" class="archive-article-date">
-  	<time datetime="2019-05-06T08:03:30.925Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-06</time>
+        <a href="/2019/12/19/location/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.144Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -318,480 +323,187 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1、什么是async函数："><a href="#1、什么是async函数：" class="headerlink" title="1、什么是async函数："></a>1、什么是async函数：</h3><p>async函数是js处理异步函数的最终解决方案，它的语法看起来是用同步的代码结构来描述异步的代码。async函数返回值是一个成功或者失败状态的Promise，但必须等到内部所有的Promise执行完以后，才会发生状态改变。</p>
-<h4 id="1-1、-async函数的优点"><a href="#1-1、-async函数的优点" class="headerlink" title="1.1、 async函数的优点"></a>1.1、 async函数的优点</h4><p>async/await是Generator函数的语法糖，相比之下会有如下优点：</p>
-<h5 id="1、内置执行器："><a href="#1、内置执行器：" class="headerlink" title="1、内置执行器："></a>1、内置执行器：</h5><p>async函数自带执行器，不需要调用next()方法。</p>
-<h5 id="2、更好的语义："><a href="#2、更好的语义：" class="headerlink" title="2、更好的语义："></a>2、更好的语义：</h5><p>async/await相对与*/yield来说有更好的语义</p>
-<h5 id="3、更好的适用性："><a href="#3、更好的适用性：" class="headerlink" title="3、更好的适用性："></a>3、更好的适用性：</h5><p>对于yield，后面只能是thunk或者promise函数。而await后面可以是promise和原始类型值，如果不是Promise的话，会将其默认转化为Promise</p>
-<h5 id="4、返回值是promise"><a href="#4、返回值是promise" class="headerlink" title="4、返回值是promise"></a>4、返回值是promise</h5><p>async函数返回值是promise类型，而Generator函数必须是Iterator 对象<br>
-        
-          <a class="article-more-a" href="/2019/05/06/async函数整理/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Async</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/06/async函数整理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spectacle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/06/spectacle/">spectacle踩坑总结</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/05/06/spectacle/" class="archive-article-date">
-  	<time datetime="2019-05-06T07:17:55.743Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-06</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="spectacle-踩坑总结"><a href="#spectacle-踩坑总结" class="headerlink" title="spectacle 踩坑总结"></a>spectacle 踩坑总结</h1><p>  spectacle 是一款免费的窗口调节工具，对比可以在Mac 中下载收费的<code>Magent</code></p>
-<h3 id="一、Download"><a href="#一、Download" class="headerlink" title="一、Download:"></a>一、Download:</h3><p>   点击找到仓库：<a href="https://github.com/eczarny/spectacle" target="_blank" rel="noopener">spectacle</a></p>
-<p>下载到本地: <code>git@github.com:eczarny/spectacle.git</code><br>
-        
-          <a class="article-more-a" href="/2019/05/06/spectacle/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/06/spectacle/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Object.create()和new Object()" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/05/Object.create()和new Object()/">Object.create()和new Object()的区别</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/05/05/Object.create()和new Object()/" class="archive-article-date">
-  	<time datetime="2019-05-05T05:15:45.197Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-05</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Object-create"><a href="#1-Object-create" class="headerlink" title="1.Object.create()"></a>1.Object.create()</h1><p>Object.create()方法创建一个<code>新对象</code>，使用现有的对象来提供新创建的对象的<strong>proto</strong>。</p>
-<h2 id="1-1-语法"><a href="#1-1-语法" class="headerlink" title="1.1 语法"></a>1.1 语法</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.create(proto, [propertiesObject])</span><br></pre></td></tr></table></figure>
-<p><code>proto</code>: 新创建的对象的原型对象</p>
-<p><code>[propertiesObject]</code>: 默认是undefined,当为对象的时候，将对象添加到原型上。<br>
-        
-          <a class="article-more-a" href="/2019/05/05/Object.create()和new Object()/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Object.create()</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">new Object()</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/05/Object.create()和new Object()/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-IsEqual(a,b)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/29/IsEqual(a,b)/">深比较两个值</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/04/29/IsEqual(a,b)/" class="archive-article-date">
-  	<time datetime="2019-04-29T10:20:23.675Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-29</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Js深比较探究"><a href="#Js深比较探究" class="headerlink" title="Js深比较探究"></a>Js深比较探究</h1><h2 id="深比较的思路："><a href="#深比较的思路：" class="headerlink" title="深比较的思路："></a>深比较的思路：</h2><p>1、对于非引用类型：数字、字符串、null、undefined、布尔类型，使用===操作既可以判断出来。</p>
-<p><code>对于特殊的NaN === NaN 为false和 0===-0 为true这两种情况要特殊处理。但是写深比较函数不讨论这两种情况，因为我觉的这两种值没有意义，业务中也不会出现这两种值，但是他们在_.isEqual()下是相等的。</code></p>
-<p>2、对于日期类型(Date)、正则类型(RegExp)不能使用 === 处理，需要单独做处理。</p>
-<p>3、对于Object和Array类型则需要递归处理，Object和Array的元素可能包括任何数据类型。<br>
-        
-          <a class="article-more-a" href="/2019/04/29/IsEqual(a,b)/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">深比较</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">_.isEqual()</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/29/IsEqual(a,b)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-promise.all()代码实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/22/promise.all()代码实现/">Promise.all()手工代码实现</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/04/22/promise.all()代码实现/" class="archive-article-date">
-  	<time datetime="2019-04-22T14:38:55.495Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="写个函数代替promise-all"><a href="#写个函数代替promise-all" class="headerlink" title="写个函数代替promise.all()"></a>写个函数代替promise.all()</h1><h3 id="百度版"><a href="#百度版" class="headerlink" title="百度版"></a>百度版</h3><p>这我百度过来感觉相对比较靠谱的代码：<br>
-        
-          <a class="article-more-a" href="/2019/04/22/promise.all()代码实现/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Promis.all()</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/22/promise.all()代码实现/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-for..in和for...of" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/22/for..in和for...of/">for...in 和 for...of对比</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/04/22/for..in和for...of/" class="archive-article-date">
-  	<time datetime="2019-04-22T10:19:25.105Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="for…in-和-for…of-对比"><a href="#for…in-和-for…of-对比" class="headerlink" title="for…in 和 for…of 对比"></a>for…in 和 for…of 对比</h1><h2 id="1-关于for…in"><a href="#1-关于for…in" class="headerlink" title="1. 关于for…in"></a>1. 关于for…in</h2><h3 id="1-1-MDN的定义"><a href="#1-1-MDN的定义" class="headerlink" title="1.1 MDN的定义"></a>1.1 MDN的定义</h3><blockquote>
-<p>for…in语句以<strong>任意顺序</strong>遍历一个对象<code>自有的、继承的、可枚举的、非Symbol的属性</code>。对于每个不同的属性，语句都会被执行。</p>
-</blockquote>
-<p>思考：通过这个定义，我得到三点结论：</p>
-<ul>
-<li>for…in 遍历的结果不一定和被遍历对象的顺序相同。</li>
-<li>for…in 不但可以遍历被遍历对象的自有属性，还可以遍历原型上的和继承来的可枚举属性。</li>
-<li>String 的 indexOf()  方法或 Object的toString()方法，这些显然是原型上不可枚举的属性<h3 id="1-2-for…in-语法"><a href="#1-2-for…in-语法" class="headerlink" title="1.2 for…in 语法"></a>1.2 for…in 语法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (variable <span class="keyword">in</span> object) &#123;...&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><h3 id="location-href"><a href="#location-href" class="headerlink" title="location.href"></a>location.href</h3><ul>
+<li>location.href对应的是整个URL。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//developer.mozilla.org/en-US/docs/Web/API/HTMLHyperlinkElementUtils/origin</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>其中 variable为属性名，object是被遍历对象。</p>
-<h3 id="1-3-for…in-能不能遍历数组？"><a href="#1-3-for…in-能不能遍历数组？" class="headerlink" title="1.3 for…in 能不能遍历数组？"></a>1.3 for…in 能不能遍历数组？</h3><blockquote>
-<p>数组索引只是具有整数名称的枚举属性，并且与通用对象属性相同。不能保证for … in将以任何特定的顺序返回索引。</p>
-</blockquote>
-<p>考虑到遍历数组不能直接得到数组元素和索引顺序的不确定性，所以最好不要使用for…in。另外for…in的便利还有可能把数组原型上的属性遍历出来。<br>
+<h3 id="location-origin"><a href="#location-origin" class="headerlink" title="location.origin"></a>location.origin</h3><ul>
+<li>从协议名到pathname之间的部分,如果有协议包含协议名。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">window</span>.location.origin; <span class="comment">// Returns:'https://developer.mozilla.org'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="location-host"><a href="#location-host" class="headerlink" title="location.host"></a>location.host</h3><p>返回主机名和端口号<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">location.href = <span class="string">"https://developer.mozilla.org:443/en-US/HTMLHyperlinkElementUtils.host"</span></span><br><span class="line">location.host == <span class="string">"developer.mozilla.org:443"</span></span><br></pre></td></tr></table></figure></p>
         
-          <a class="article-more-a" href="/2019/04/22/for..in和for...of/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/location/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">location</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/location/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-mouseenter and mouseover" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/mouseenter and mouseover/">mouseenter和mouseove的区别</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/mouseenter and mouseover/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.144Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用这段代码运行时，代码会一直占用主线程，造成线程阻塞<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> longComputation = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1e10</span>; i++) &#123;</span><br><span class="line">    sum += i;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> server = http.createServer();</span><br><span class="line">server.on(<span class="string">'request'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.url === <span class="string">'/compute'</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">'计算开始'</span>,<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="keyword">const</span> sum = longComputation();</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">'计算结束'</span>,<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="keyword">return</span> res.end(<span class="string">`Sum is <span class="subst">$&#123;sum&#125;</span>`</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.end(<span class="string">'Ok'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
+
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/mouseenter and mouseover/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-immutable优化react" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/immutable优化react/">immutable的理解</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/immutable优化react/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.143Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="immutable的理解："><a href="#immutable的理解：" class="headerlink" title="immutable的理解："></a>immutable的理解：</h2><h3 id="什么是immutable"><a href="#什么是immutable" class="headerlink" title="什么是immutable:"></a>什么是immutable:</h3><p> Immutable 实现的原理是 <strong>Persistent Data Structure</strong>（持久化数据结构），也就是使用旧数据创建新数据时，要保证旧数据同时可用且不变。同时为了避免 deepCopy 把所有节点都复制一遍带来的性能损耗，Immutable 使用了 <strong>Structural Sharing</strong>（结构共享），即如果对象树中一个节点发生变化，只修改这个节点和受它影响的父节点，其它节点则进行共享。<br>
+        
+          <a class="article-more-a" href="/2019/12/19/immutable优化react/#more">more >></a>
         
       
       
@@ -808,15 +520,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">for...in</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">for...of</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">immutable</a>
         		</li>
       		
 		</ul>
@@ -826,7 +534,96 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/22/for..in和for...of/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/immutable优化react/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-js可迭代对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/js可迭代对象/">js可迭代对象</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/js可迭代对象/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.143Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="js可迭代对象"><a href="#js可迭代对象" class="headerlink" title="js可迭代对象"></a>js可迭代对象</h2><p><code>可迭代对象的原型中都包含Symbol.iterator 属性</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Set(0) &#123;&#125;</span><br><span class="line">size: (...)</span><br><span class="line">__proto__: Set</span><br><span class="line">add: ƒ add()</span><br><span class="line">clear: ƒ clear()</span><br><span class="line">constructor: ƒ Set()</span><br><span class="line">delete: ƒ delete()</span><br><span class="line">entries: ƒ entries()</span><br><span class="line">forEach: ƒ forEach()</span><br><span class="line">has: ƒ has()</span><br><span class="line">keys: ƒ values()</span><br><span class="line">size: (...)</span><br><span class="line">values: ƒ values()</span><br><span class="line">Symbol(Symbol.iterator): ƒ values()</span><br><span class="line">Symbol(Symbol.toStringTag): &quot;Set&quot;</span><br><span class="line">get size: ƒ size()</span><br><span class="line">__proto__: Object</span><br><span class="line">[[Entries]]: Array(0)</span><br></pre></td></tr></table></figure></p>
+<p>常用的可迭代对象，有数组、Set、Map、字符串。</p>
+<h2 id="判断可迭代的方法"><a href="#判断可迭代的方法" class="headerlink" title="判断可迭代的方法"></a>判断可迭代的方法</h2><p><code>Symbol.iterator in Object(iter)</code><br>判断被判断对象的原型连上是不是有Symbol.iterator属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Symbol.iterator in Object([1,2])//true</span><br><span class="line">Symbol.iterator in Object(&#123;&#125;)//false</span><br><span class="line">Object(12) =&gt; Number(12)</span><br><span class="line">Object() 相当于 new Object();是对Object()里内容类型的实例</span><br></pre></td></tr></table></figure></p>
+<p><code>typeof obj[Symbol.iterator] === &#39;function&#39;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [];</span><br><span class="line">typeof arr[Symbol.iterator] === &apos;function&apos; //true</span><br></pre></td></tr></table></figure></p>
+
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Iterable</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/js可迭代对象/">展开全文 >></a>
         </p>
       
 
@@ -863,15 +660,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/20/git在zash中的缩写/">iTerm2插件git的缩写大全</a>
+      <a class="article-title" href="/2019/12/19/git在zash中的缩写/">iTerm2插件git的缩写大全</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/04/20/git在zash中的缩写/" class="archive-article-date">
-  	<time datetime="2019-04-20T13:58:28.941Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-20</time>
+        <a href="/2019/12/19/git在zash中的缩写/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.142Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -886,7 +683,7 @@
 </blockquote>
 <h2 id="Aliases"><a href="#Aliases" class="headerlink" title="Aliases"></a>Aliases</h2><p><a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugin:git" target="_blank" rel="noopener">完整版</a><br>
         
-          <a class="article-more-a" href="/2019/04/20/git在zash中的缩写/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/git在zash中的缩写/#more">more >></a>
         
       
       
@@ -913,7 +710,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/20/git在zash中的缩写/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/git在zash中的缩写/">展开全文 >></a>
         </p>
       
 
@@ -943,22 +740,22 @@
 
 
   
-    <article id="post-推一个空的commit" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/20/推一个空的commit/">推空的commit</a>
+      <a class="article-title" href="/2019/12/19/git常用命令/">git常用命令</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/04/20/推一个空的commit/" class="archive-article-date">
-  	<time datetime="2019-04-20T13:14:14.464Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-20</time>
+        <a href="/2019/12/19/git常用命令/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.142Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -968,9 +765,10 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="推空的commit"><a href="#推空的commit" class="headerlink" title="推空的commit"></a>推空的commit</h1><p>当镜像没有打成功，需要新进一个task,去触发翻译流程</p>
-<p>git commit –allow-empty</p>
-
+        <h3 id="git常用操作"><a href="#git常用操作" class="headerlink" title="git常用操作"></a>git常用操作</h3>
+        
+          <a class="article-more-a" href="/2019/12/19/git常用命令/#more">more >></a>
+        
       
       
       
@@ -996,7 +794,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/20/推一个空的commit/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/git常用命令/">展开全文 >></a>
         </p>
       
 
@@ -1026,22 +824,22 @@
 
 
   
-    <article id="post-宏任务和微任务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-http缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/18/宏任务和微任务/">宏任务和微任务</a>
+      <a class="article-title" href="/2019/12/19/http缓存/">http缓存</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/04/18/宏任务和微任务/" class="archive-article-date">
-  	<time datetime="2019-04-18T12:36:03.607Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-18</time>
+        <a href="/2019/12/19/http缓存/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.142Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -1051,23 +849,8 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h1><p>进入ES6或Node环境中，JS的任务分为两种，分别是宏任务（macro-task）和微任务（micro-task），在最新的ECMAScript中，微任务称为jobs，宏任务称为task，他们的执行顺序如下:</p>
-<p><code>宏任务(同步任务) --&gt; 微任务 --&gt; 宏任务(异步任务)</code></p>
-<h2 id="一、宏任务："><a href="#一、宏任务：" class="headerlink" title="一、宏任务："></a>一、宏任务：</h2><p>宏任务按照执行顺序细分为：宏任务同步任务和宏任务异步任务</p>
-<p>  1.同步任务：</p>
-<p>  同步任务指的是在<code>JS引擎主线程</code>上按顺序执行的任务，只有前一个任务执行完毕后，才能执行后一个任务，形成一个执行栈（函数调用栈）。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>);</span><br></pre></td></tr></table></figure></p>
-<p>  2.异步任务：</p>
-<p>  异步任务指的是不直接进入JS引擎主线程，而是满足触发条件时，相关的线程将该异步任务推进<code>任务队列(task queue)</code>，等待JS引擎主线程上的任务执行完毕（函数调用栈为空）时读取执行的任务，例如：</p>
-<p> <code>异步Ajax、DOM事件、setTimeout、I/O、UI rendering</code></p>
-<h2 id="二、微任务"><a href="#二、微任务" class="headerlink" title="二、微任务"></a>二、微任务</h2><p>微任务（micro-task/job）是在es6和node环境中出现的一个任务类型，常见的微任务API有：Promise.then和async/await</p>
-<h2 id="三、宏任务和微任务执行顺序汇总"><a href="#三、宏任务和微任务执行顺序汇总" class="headerlink" title="三、宏任务和微任务执行顺序汇总"></a>三、宏任务和微任务执行顺序汇总</h2><ul>
-<li>执行宏任务中同步任务，执行结束；</li>
-<li>检查任务队列是否有微任务，存在微任务则读取微任务队列，将其推到函数调用栈中形成新的宏任务，如果包含异步任务继续放到任务队列等待执行。</li>
-<li>检查是否有宏任务异步任务，最后执行</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/04/18/宏任务和微任务/#more">more >></a>
-        
+        <p><a href="https://juejin.im/post/5b3c87386fb9a04f9a5cb037#heading-3" target="_blank" rel="noopener">链接一</a><br><a href="https://juejin.im/post/5a1d4e546fb9a0450f21af23" target="_blank" rel="noopener">链接二</a><br><a href="https://excaliburhan.com/post/things-you-should-know-about-browser-cache.html" target="_blank" rel="noopener">链接三</a></p>
+
       
       
       
@@ -1083,15 +866,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">宏任务</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">微任务</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">http 缓存</a>
         		</li>
       		
 		</ul>
@@ -1101,7 +880,222 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/18/宏任务和微任务/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/http缓存/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-git merge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/git merge/">git merge</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/git merge/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.141Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="git-merge-的几种形式"><a href="#git-merge-的几种形式" class="headerlink" title="git merge 的几种形式"></a>git merge 的几种形式</h1><blockquote>
+<p>转载<a href="https://liuliqiang.info/post/difference-between-merge-squash-and-rebase" target="_blank" rel="noopener">连接</a></p>
+</blockquote>
+<p><div class="post-content"></div></p>
+<p></p><p>这几天我就遇到了一个问题，其实也不是遇到问题，而是遇到了疑惑，那就是我在 github 系统中 merge 同时的 PR 的时候发现有好几个选项，但是，却说不清楚这几个选项分别代表什么含义，所以就稍微花了点时间了解了下，顺带做个总结。</p><p></p>
+<p></p><h3 id="toc-0">merge 的几种形式</h3><p></p>
+<p></p><p>在 merge pr 的时候，默认是有三种选项的，分别是</p><p></p>
+<p><ul></ul></p>
+<p><li>普通的 merge</li></p>
+<p><li>rebase merge</li></p>
+<p><li>squash merge</li><br></p>
+<p></p><p>这其实对应于我们在合并分支的时候的几种方式，所以我就以本地分支的形式来说说有啥区别。</p><p></p>
+<p></p><h3 id="toc-1">一个简单的模型</h3><p></p>
+<p></p><p>假设我们一开始的 master 分支上已经有了几个提交，就像这样：</p><p></p>
+<p></p><p><img src="http://images.liuliqiang.info/2017-11-08-15101468869266.jpg" alt></p><p></p>
+<p></p><p>然后，我们切出一条开发的分支，进行了一些 Feature 的开发，然后我们的分支可能就是这种情况：</p><p></p>
+<p></p><p><img src="http://images.liuliqiang.info/2017-11-08-15101478786848.jpg" alt></p><p></p>
+<p></p><p>这种情况还好，也比较常遇到，但是，现在问题来了，如果在这个时候 master 有了一些新提交（可能是其他分支合并进来的），那么这个时候情形就成了这样：</p><p></p>
+<p></p><p><img src="http://images.liuliqiang.info/2017-11-08-15101478014577.jpg" alt></p><p></p>
+<p></p><p>这个情况很有趣，但是我们不讨论，因为这和我们今天的主题无关，以后可以另外开一个话题来说，今天要说的是第二个情况。</p><p></p>
+<p></p><h3 id="toc-2">普通 Merge</h3><p></p>
+<p></p><p>说到合并分支，可能我们最熟悉的操作是这样的：</p><p></p>
+<p><ul></ul></p>
+<p><li>先切换到目标分支（master）</li></p>
+<p><li>执行命令：<code>git merge devel</code></li></p>
+<p><li>删除旧分支（可以在上面一同做）：<code>git branch -D devel</code></li><br>
+        
+          <a class="article-more-a" href="/2019/12/19/git merge/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/git merge/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-for..in和for...of" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/for..in和for...of/">for...in 和 for...of对比</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/for..in和for...of/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.141Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="for…in-和-for…of-对比"><a href="#for…in-和-for…of-对比" class="headerlink" title="for…in 和 for…of 对比"></a>for…in 和 for…of 对比</h1><h2 id="1-关于for…in"><a href="#1-关于for…in" class="headerlink" title="1. 关于for…in"></a>1. 关于for…in</h2><h3 id="1-1-MDN的定义"><a href="#1-1-MDN的定义" class="headerlink" title="1.1 MDN的定义"></a>1.1 MDN的定义</h3><blockquote>
+<p>for…in语句以<strong>任意顺序</strong>遍历一个对象<code>自有的、继承的、可枚举的、非Symbol的属性</code>。对于每个不同的属性，语句都会被执行。</p>
+</blockquote>
+<p>思考：通过这个定义，我得到三点结论：</p>
+<ul>
+<li>for…in 遍历的结果不一定和被遍历对象的顺序相同。</li>
+<li>for…in 不但可以遍历被遍历对象的自有属性，还可以遍历原型上的和继承来的可枚举属性。</li>
+<li>String 的 indexOf()  方法或 Object的toString()方法，这些显然是原型上不可枚举的属性<h3 id="1-2-for…in-语法"><a href="#1-2-for…in-语法" class="headerlink" title="1.2 for…in 语法"></a>1.2 for…in 语法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (variable <span class="keyword">in</span> object) &#123;...&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中 variable为属性名，object是被遍历对象。</p>
+<h3 id="1-3-for…in-能不能遍历数组？"><a href="#1-3-for…in-能不能遍历数组？" class="headerlink" title="1.3 for…in 能不能遍历数组？"></a>1.3 for…in 能不能遍历数组？</h3><blockquote>
+<p>数组索引只是具有整数名称的枚举属性，并且与通用对象属性相同。不能保证for … in将以任何特定的顺序返回索引。</p>
+</blockquote>
+<p>考虑到遍历数组不能直接得到数组元素和索引顺序的不确定性，所以最好不要使用for…in。另外for…in的便利还有可能把数组原型上的属性遍历出来。<br>
+        
+          <a class="article-more-a" href="/2019/12/19/for..in和for...of/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">for...in</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">for...of</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/for..in和for...of/">展开全文 >></a>
         </p>
       
 

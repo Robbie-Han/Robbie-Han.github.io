@@ -204,22 +204,22 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-combineReducer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-二叉树遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/02/combineReducer/">Reducer的整合者combineReducers</a>
+      <a class="article-title" href="/2019/12/19/二叉树遍历/">二叉树遍历</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/08/02/combineReducer/" class="archive-article-date">
-  	<time datetime="2019-08-02T13:38:15.793Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-02</time>
+        <a href="/2019/12/19/二叉树遍历/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.152Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -229,11 +229,400 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在公司的项目中我们可以发现我们代码中的reducer并不是都写在一个reducer.js中，而是被划分了代表特殊功能的小的reducer。然后在同级目录会创建一个index.js,里面引入了所有的reducer,并通过combineReducers整合在一起。例如：<code>combineReducers({lines: lines,document: document})</code>;我们的state对象里面也会做同样的划分<code>state = {lines: {}, document: {}};</code>。</p>
-<h3 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h3><p>前言中我们提到，系统会将state和更新state的reducer进行划分，每个可以表示特定功能的数据。然后通过combineReducers将它们组合在一起。此处我们就举例说明一下combineReducers怎么使用</p>
-<h4 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// reducers.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (theDefaultReducer = <span class="function">(<span class="params">state = &#123;a: <span class="number">1</span>&#125;, action</span>) =&gt;</span> state)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> firstNamedReducer = <span class="function">(<span class="params">state = &#123;b: <span class="number">2</span>&#125;, action</span>) =&gt;</span> state</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> secondNamedReducer = <span class="function">(<span class="params">state = &#123;c:<span class="number">3</span>&#125;, action</span>) =&gt;</span> state</span><br></pre></td></tr></table></figure>
+        <h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><h3 id="递归方式："><a href="#递归方式：" class="headerlink" title="递归方式："></a>递归方式：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> ans = [];</span><br><span class="line">    <span class="keyword">if</span>(root) &#123;</span><br><span class="line">        ans.push(root.val);</span><br><span class="line">        ans = ans.concat(preorderTraversal(root.left));</span><br><span class="line">        ans = ans.concat(preorderTraversal(root.right));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="非递归方式"><a href="#非递归方式" class="headerlink" title="非递归方式"></a>非递归方式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root === <span class="literal">null</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">var</span> stack = [root];</span><br><span class="line">    <span class="keyword">var</span> ans = [];</span><br><span class="line">    <span class="keyword">while</span>(stack.length) &#123;</span><br><span class="line">        <span class="keyword">var</span> node = stack.pop();</span><br><span class="line">        ans.push(node.val);</span><br><span class="line">        node.right &amp;&amp; stack.push(node.right);</span><br><span class="line">        node.left &amp;&amp; stack.push(node.left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2019/08/02/combineReducer/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/二叉树遍历/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前序遍历</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">中序遍历</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">后序遍历</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">层次遍历</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/二叉树遍历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spectacle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/spectacle/">spectacle踩坑总结</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/spectacle/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.151Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="spectacle-踩坑总结"><a href="#spectacle-踩坑总结" class="headerlink" title="spectacle 踩坑总结"></a>spectacle 踩坑总结</h1><p>  spectacle 是一款免费的窗口调节工具，对比可以在Mac 中下载收费的<code>Magent</code></p>
+<h3 id="一、Download"><a href="#一、Download" class="headerlink" title="一、Download:"></a>一、Download:</h3><p>   点击找到仓库：<a href="https://github.com/eczarny/spectacle" target="_blank" rel="noopener">spectacle</a></p>
+<p>下载到本地: <code>git@github.com:eczarny/spectacle.git</code><br>
+        
+          <a class="article-more-a" href="/2019/12/19/spectacle/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发工具</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/spectacle/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-url从输入到页面显示" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/url从输入到页面显示/">url从输入到页面显示的过程</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/url从输入到页面显示/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.151Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>从url输入到地址栏，到页面显示内容一般经历下面的步骤：</p>
+<ul>
+<li>DNS 解析:将域名解析成 IP 地址</li>
+<li>TCP 连接：TCP 三次握手</li>
+<li>发送 HTTP 请求</li>
+<li>服务器处理请求并返回 HTTP 报文</li>
+<li>浏览器解析渲染页面</li>
+<li>断开连接：TCP 四次挥手<h2 id="1、DNS解析："><a href="#1、DNS解析：" class="headerlink" title="1、DNS解析："></a>1、DNS解析：</h2>一般我们输入的是URL，但是浏览器并不能通过URL直接来访问服务器。DNS解析就是一个将域名解析为对应的IP地址的过程。<h3 id="1-1-浏览器通过域名转DNS的过程："><a href="#1-1-浏览器通过域名转DNS的过程：" class="headerlink" title="1.1 浏览器通过域名转DNS的过程："></a>1.1 浏览器通过域名转DNS的过程：</h3></li>
+<li>浏览器缓存：浏览器会按照一定的频率缓存 DNS 记录。</li>
+<li>操作系统缓存：如果浏览器缓存中找不到需要的 DNS 记录，那就去操作系统中找。</li>
+<li>路由缓存：路由器也有 DNS 缓存。</li>
+<li>ISP 的 DNS 服务器：ISP 是互联网服务提供商(Internet Service - Provider)的简称，ISP 有专门的 DNS 服务器应对 DNS 查询请求。</li>
+<li>根服务器：ISP 的 DNS 服务器还找不到的话，它就会向根服务器发出请求，进行递归查询（DNS 服务器先问根域名服务器.com 域名服务器的 IP 地址，然后再问.baidu 域名服务器，依次类推）<h2 id="2、TCP链接（三次握手）："><a href="#2、TCP链接（三次握手）：" class="headerlink" title="2、TCP链接（三次握手）："></a>2、TCP链接（三次握手）：</h2>TCP作为一种可靠传输控制协议，其核心思想：既要保证数据可靠传输，又要提高传输的效率！</li>
+</ul>
+<p>TCP连接的一方A，由操作系统动态<code>随机选取</code>一个32位长的序列号（Initial Sequence Number），假设A的初始序列号为1000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，1001，1002，1003…，并把自己的初始序列号ISN告诉B。如果A收到B确认编号为2001，则意味着字节编号为1001-2000，共1000个字节已经安全到达。</p>
+<p>同理B也是类似的操作，假设B的初始序列号ISN为2000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，2001，2002，2003…，并把自己的初始序列号ISN告诉A，以便A可以确认B发送的每一个字节。如果B收到A确认编号为4001，则意味着字节编号为2001-4000，共2000个字节已经安全到达。</p>
+<h3 id="2-1为什么是3次握手？"><a href="#2-1为什么是3次握手？" class="headerlink" title="2.1为什么是3次握手？"></a>2.1为什么是3次握手？</h3>
+        
+          <a class="article-more-a" href="/2019/12/19/url从输入到页面显示/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DNS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">三次握手</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">四次挥手</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/url从输入到页面显示/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-中间件教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/中间件教程/">中间件教程</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/中间件教程/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.151Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="中间件教程"><a href="#中间件教程" class="headerlink" title="中间件教程"></a>中间件教程</h2><ol>
+<li>中间件流程：<a href="https://zhuanlan.zhihu.com/p/21391101?refer=leanreact" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21391101?refer=leanreact</a></li>
+<li>通俗版：<a href="https://www.cnblogs.com/wshiqtb/p/7909770.html" target="_blank" rel="noopener">https://www.cnblogs.com/wshiqtb/p/7909770.html</a></li>
+<li>源码：<a href="https://blog.csdn.net/worisaa/article/details/61913915" target="_blank" rel="noopener">https://blog.csdn.net/worisaa/article/details/61913915</a></li>
+<li>redux函数源码：<a href="https://www.cnblogs.com/cloud-/p/7282188.html" target="_blank" rel="noopener">https://www.cnblogs.com/cloud-/p/7282188.html</a></li>
+</ol>
+
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/中间件教程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-redux基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/redux基础/">redux 基础</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/redux基础/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.150Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="redux笔记"><a href="#redux笔记" class="headerlink" title="redux笔记"></a>redux笔记</h1><p><a href="https://images2017.cnblogs.com/blog/1097840/201708/1097840-20170802140748615-1446659032.png" target="_blank" rel="noopener">点击查看图解</a></p>
+<p>action: 一个操作的定义，大概是这个样子, 本身是一个对象</p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    type:&apos;add&apos;,</span><br><span class="line">    todo </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>actionCreater: 一个函数，返回结果是一个action</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function add (todo) &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            type: &apos;add&apos;,</span><br><span class="line">            todo</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/12/19/redux基础/#more">more >></a>
         
       
       
@@ -252,14 +641,6 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">[object Object]</a>
-        		</li>
       		
 		</ul>
 	</div>
@@ -268,7 +649,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/02/combineReducer/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/redux基础/">展开全文 >></a>
         </p>
       
 
@@ -298,22 +679,22 @@
 
 
   
-    <article id="post-柯理化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-replace" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/31/柯理化/">函数柯理化</a>
+      <a class="article-title" href="/2019/12/19/replace/">String.replace()</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/07/31/柯理化/" class="archive-article-date">
-  	<time datetime="2019-07-31T03:04:32.084Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-31</time>
+        <a href="/2019/12/19/replace/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.150Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -323,12 +704,101 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="函数柯理化定义"><a href="#函数柯理化定义" class="headerlink" title="函数柯理化定义"></a>函数柯理化定义</h2><p>函数柯理化是函数式编程中的一个应用，主要的特点就是将多参数的函数递归降解为一个接受单个参数的函数，并返回能够接收剩余参数的函数。看了lodash和ramda的库，都有相关curry的封装，此处深入研究一下。</p>
-<h2 id="函数柯理化的功能"><a href="#函数柯理化的功能" class="headerlink" title="函数柯理化的功能"></a>函数柯理化的功能</h2><p>函数柯理化的功能：1、参数复用；2、延时执行；</p>
-<p>关于这部分的内容，我不打算细写，因为网上有一大堆的教程。推荐一篇掘金的相关文章讲的还不错：<a href="https://juejin.im/post/5af13664f265da0ba266efcf#heading-0" target="_blank" rel="noopener">https://juejin.im/post/5af13664f265da0ba266efcf#heading-0</a> </p>
-<h2 id="本文焦点-实现函数柯理化"><a href="#本文焦点-实现函数柯理化" class="headerlink" title="本文焦点-实现函数柯理化"></a>本文焦点-实现函数柯理化</h2><p>要想理解函数柯理化，我们有必要了解一下bind函数，bind函数与函数柯理化有太多的相似点。它们都可以返回函数，并且保存之前的参数，实现函数的延迟执行等；<br>
+        <h2 id="String-replace"><a href="#String-replace" class="headerlink" title="String.replace()"></a>String.replace()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.replace(string|[RegExp],newSubStr|function)</span><br></pre></td></tr></table></figure>
+
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">replace</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/replace/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
         
-          <a class="article-more-a" href="/2019/07/31/柯理化/#more">more >></a>
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-queryString模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/queryString模块/">queryString模块</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/queryString模块/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.149Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="queryString模块"><a href="#queryString模块" class="headerlink" title="queryString模块"></a>queryString模块</h2><h3 id="1-安装："><a href="#1-安装：" class="headerlink" title="1. 安装："></a>1. 安装：</h3><pre><code>npm install query-string;
+</code></pre><h3 id="2-引入："><a href="#2-引入：" class="headerlink" title="2. 引入："></a>2. 引入：</h3><pre><code>import queryString from &apos;query-string&apos;;
+</code></pre><h3 id="3-应用："><a href="#3-应用：" class="headerlink" title="3. 应用："></a>3. 应用：</h3><h4 id="parse方法："><a href="#parse方法：" class="headerlink" title="- parse方法："></a>- parse方法：</h4><p>queryString.parse()方法用于将一个查询字符串解析为 JavaScript对象。<br>
+        
+          <a class="article-more-a" href="/2019/12/19/queryString模块/#more">more >></a>
         
       
       
@@ -345,11 +815,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">柯理化</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
         		</li>
       		
 		</ul>
@@ -359,7 +825,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/31/柯理化/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/queryString模块/">展开全文 >></a>
         </p>
       
 
@@ -389,22 +855,22 @@
 
 
   
-    <article id="post-Array-flat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-react事件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/29/Array-flat/">Array.prototype.flat()</a>
+      <a class="article-title" href="/2019/12/19/react事件/">react 事件处理</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/07/29/Array-flat/" class="archive-article-date">
-  	<time datetime="2019-07-29T12:13:10.799Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-29</time>
+        <a href="/2019/12/19/react事件/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.149Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -414,22 +880,14 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="flat函数"><a href="#flat函数" class="headerlink" title="flat函数"></a>flat函数</h2><p>flat这个函数的方法很少的使用，它的意思就是将数组的元素‘打平’。说的感觉挺悬乎的，其实这是一个很简单的函数。那么下面我想通过这几方面来研究它：1、如何使用flat? 2、它是不是有副作用？会影响原数组？3、原生的flat方法是怎么实现的？</p>
-<h2 id="flat函数的用法"><a href="#flat函数的用法" class="headerlink" title="flat函数的用法"></a>flat函数的用法</h2><p>flat的语法：<code>var newArray = arr.flat(depth)</code>，其中的depth的值是个number类型。</p>
-<blockquote>
-<p>deepth指的提取嵌套数组的结构深度，默认值为 1</p>
-</blockquote>
-<h2 id="实测flat"><a href="#实测flat" class="headerlink" title="实测flat"></a>实测flat</h2><p><img src="https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190729203145.png" alt="20190729203145.png"></p>
-<p>测试的结果如上图所示。</p>
-<ul>
-<li>第一个方框说明当depth的值大于数组元素的嵌套深度的时候会将所有的数组元素打平输出。</li>
-<li>第二个红框则说明了，使用flat方法不会影响原数组</li>
-</ul>
-<p>那数组的那些方法会影响原数组呢？列举几个常见的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort()、reverse()、splice()、push()、pop()、shift()、unshift()</span><br></pre></td></tr></table></figure></p>
-<p>那数组的那些方法不会影响原数组呢？列举几个常见的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map()、forEach()、reduce()、filter()、join()、concat()、slice()</span><br></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2019/07/29/Array-flat/#more">more >></a>
-        
+        <h2 id="react-事件处理的几个方法："><a href="#react-事件处理的几个方法：" class="headerlink" title="react 事件处理的几个方法："></a>react 事件处理的几个方法：</h2><h4 id="class定义组件，在constructor函数绑定回调函数："><a href="#class定义组件，在constructor函数绑定回调函数：" class="headerlink" title="class定义组件，在constructor函数绑定回调函数："></a>class定义组件，在constructor函数绑定回调函数：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Toggle extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      isToggleOn: true,</span><br><span class="line">      value: 10</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    // This binding is necessary to make `this` work in the callback</span><br><span class="line">    this.handleClick = this.handleClick.bind(this,12); // 要点一(作用域绑定和传参)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleClick(v) &#123;</span><br><span class="line">    this.setState(prevState =&gt; (&#123;</span><br><span class="line">      isToggleOn: !prevState.isToggleOn,</span><br><span class="line">      value: v</span><br><span class="line">    &#125;)); </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;this.handleClick&#125;&gt;   // 要点二 （回调函数）</span><br><span class="line">           &#123;this.state.isToggleOn ? &apos;ON&apos; : &apos;OFF&apos;&#125;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line">        &lt;p&gt;&#123;this.state.value&#125;&lt;/p&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;Toggle /&gt;,</span><br><span class="line">  document.getElementById(&apos;root&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>当组件的方法使用ES5来写的话，需要将函数绑定到组件中。class 的方法默认不会绑定 this。如果你忘记绑定 this.handleClick 并把它传入了 onClick，当你调用这个函数的时候 this 的值为 undefined。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">function name() &#123;</span><br><span class="line">  console.log(this);\\ undefined</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">name();</span><br></pre></td></tr></table></figure></p>
+<p>这种写法还有一个弊端，当组件被多次使用的时候，多分同样的功能的函数将保存在内存中，比较冗余。</p>
+<h4 id="使用ES6语法定义函数。"><a href="#使用ES6语法定义函数。" class="headerlink" title="使用ES6语法定义函数。"></a>使用ES6语法定义函数。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class LoggingButton extends React.Component &#123;</span><br><span class="line">  // 此语法确保 `handleClick` 内的 `this` 已被绑定。</span><br><span class="line">  // 注意: 这是 *实验性* 语法。</span><br><span class="line">  handleClick = () =&gt; &#123;</span><br><span class="line">    console.log(&apos;this is:&apos;, this);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;button onClick=&#123;this.handleClick&#125;&gt;</span><br><span class="line">        Click me</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ES6定义的箭头函数，函数內的this是在函数定义的时候绑定的，而ES5定义的函数则是在函数被调用的时候绑定的。所以使用箭头函数的时候，函数的this会绑定组件<code>LoggingButton</code></p>
+<h4 id="回调函数使用箭头函数"><a href="#回调函数使用箭头函数" class="headerlink" title="回调函数使用箭头函数"></a>回调函数使用箭头函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class LoggingButton extends React.Component &#123;</span><br><span class="line">  handleClick() &#123;</span><br><span class="line">    console.log(&apos;this is:&apos;, this); //使用ES5</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    // 此语法确保 `handleClick` 内的 `this` 已被绑定。</span><br><span class="line">    return (</span><br><span class="line">      &lt;button onClick=&#123;(e) =&gt; this.handleClick(e)&#125;&gt;</span><br><span class="line">        Click me</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>回调函数使用ES6的语法，在<code>LoggingButton</code>组件每次被渲染的时候都会重新生成回调函数，如果子组件通过props使用该函数，则会引起重复渲染。</p>
+
       
       
       
@@ -445,15 +903,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flat</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
         		</li>
       		
 		</ul>
@@ -463,7 +913,120 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/29/Array-flat/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/react事件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-react-rooter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/react-rooter/">React路由</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/react-rooter/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.149Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="待更新"><a href="#待更新" class="headerlink" title="待更新"></a>待更新</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近回顾了react路由的相关知识，然后看了history相关的源码来从本质上区分react中常用的两种路由hashRooter和browserRooter之间的区别，发现两者最大的区别有两点，一点是在事件监听上，另一点是在页面刷新上。源码的大致的功能看明白了，但是还有许多细节需要之后的时间去完善。下面做一下技术总结。</p>
+<h2 id="React路由常用组件："><a href="#React路由常用组件：" class="headerlink" title="React路由常用组件："></a>React路由常用组件：</h2><p>在 <a href="https://reacttraining.com/react-router/web/api/Route" target="_blank" rel="noopener">React Rooter</a>的官方文档里对React常用的路由组件例如：<br><code>&lt;Router&gt;、&lt;Roote&gt;、&lt;Switch&gt;、&lt;Redict&gt;、&lt;Link&gt;</code>有详细的讲解，包括路由的匹配规则等都有详细的描述,此处不想过多的赘述它们的使用，只做简要的概括。</p>
+<ul>
+<li>Router：<ul>
+<li>在公司项目里使用的包是’react-router-dom’而不是’react-rooter’，这是因为前者是基于后者的，在’react-rooter’的基础上加入了一些新的组件，例如<code>&lt;Link&gt; 、&lt;HashRooter&gt;、&lt;browserRooter&gt;</code>。<a href="https://github.com/mrdulin/blog/issues/42" target="_blank" rel="noopener">参考链接</a><ul>
+<li>在引入的时候可以直接<code>import { BrowserRouter as Rooter, Route, Link } from &quot;react-router-dom&quot;;</code>也可以直接引入Rooter，然后再Rooter的history属性上绑定 hashRooter或browserRooter，不过这样比较麻烦，因为我们需要实例化history依赖中的createHashHistory或者createBrowserRooter方法。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Route<ul>
+<li>负责渲染具体的业务组件，负责匹配url和对应的组件</li>
+<li>有三种渲染的组件的方式：component(对应的组件)、render(值是匿名函数，函数里渲染组件)、children(不关心path的匹配，无论哪种路由都会渲染)</li>
+<li>component属性值最好是组件，如果是匿名函数的话，由于route通过属性component的值使用React.createElement来构造组件，而函数是引用类型，每次都不是同一个函数，会导致每次渲染都要生成新的组件。</li>
+</ul>
+</li>
+<li>Switch<ul>
+<li>匹配到一个Route子组件就返回不再继续匹配其他组件。</li>
+</ul>
+</li>
+<li>Link<ul>
+<li>Link是对a标签的封装，通过createHref函数将to里的字段和基础字段的拼接生成新的href。<br>当点击Link组件的时候会阻止a的默认事件，并将href的值传入history.pushState()。
+        
+          <a class="article-more-a" href="/2019/12/19/react-rooter/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </li></ul></li></ul></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">rooter</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">路由</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/react-rooter/">展开全文 >></a>
         </p>
       
 
@@ -500,15 +1063,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/14/parseInt函数/">痛定思痛parseInt()</a>
+      <a class="article-title" href="/2019/12/19/parseInt函数/">痛定思痛parseInt()</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/07/14/parseInt函数/" class="archive-article-date">
-  	<time datetime="2019-07-14T12:23:42.744Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
+        <a href="/2019/12/19/parseInt函数/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.148Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -556,579 +1119,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/14/parseInt函数/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-防抖和节流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/11/防抖和节流/">防抖和节流总结</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/07/11/防抖和节流/" class="archive-article-date">
-  	<time datetime="2019-07-11T03:50:14.660Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-11</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>  防抖和节流是项目中常用的知识点，可能平时不太能引起注意，但是防抖和节流肯定是项目事件优化必备的一项技术。</p>
-<h3 id="防抖："><a href="#防抖：" class="headerlink" title="防抖："></a>防抖：</h3><p><strong>首先，什么是防抖？</strong></p>
-<p>  防抖的核心思想就是在一定时间內（比如250ms）事件被多次触发的情况下，只会执行最后一次事件的触发，然后回调。</p>
-<p>  这个最常用在Input输入（keyup事件）和button（onclick）事件上，我们定义一个时间间隔，只要在这个时间间隔內多次触发，我们就只传最后一次的回调。试想如果这是个异步操作的化，他将节省很多不必要的拉取数据的操作。</p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> context = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">let</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    clearTimeout(timeout)</span><br><span class="line">    timeout = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      fn.apply(context,args);</span><br><span class="line">    &#125;,delay)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  此处如果setTimeout使用ES6的语法写函数的话就不需要<code>context = this;</code>,肩头函数可以保证函数绑定在DOM上<br>Demo: <a href="https://codepen.io/ustc-han/pen/MMLNqb" target="_blank" rel="noopener">https://codepen.io/ustc-han/pen/MMLNqb</a></p>
-<h3 id="节流："><a href="#节流：" class="headerlink" title="节流："></a>节流：</h3><p>  什么是节流？</p>
-<p>  节流就是事件每隔一段时间触发一次，在这个时间段内的事件不会被触发。比如说1000ms是时间间隔，1000ms的时候触发了，那么下次触发只能是2000ms之后。</p>
-<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> pre = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    <span class="keyword">const</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">if</span>(now - pre &gt; delay) &#123;</span><br><span class="line">      fn.apply(<span class="keyword">this</span>, args);</span><br><span class="line">      pre = now;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h4><p>  Demo: <a href="https://codepen.io/ustc-han/pen/WqmNvM" target="_blank" rel="noopener">https://codepen.io/ustc-han/pen/WqmNvM</a></p>
-<p>参考链接：<br><a href="https://zhuanlan.zhihu.com/p/38313717" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38313717</a><br>        <a href="https://juejin.im/post/5b7b88d46fb9a019e9767405#heading-4" target="_blank" rel="noopener">https://juejin.im/post/5b7b88d46fb9a019e9767405#heading-4</a></p>
-
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">防抖</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">节流</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/11/防抖和节流/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-线程和进程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/07/线程和进程/">老朋友-进程和线程</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/07/07/线程和进程/" class="archive-article-date">
-  	<time datetime="2019-07-07T02:55:18.321Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-07</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>  进程和线程应该是操作系统最基础的知识点，长时间不看有些遗忘，现总结一下。</p>
-<h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><p>课本中：进程是cpu资源分配的最小单位，线程是cpu调度的最小单位。</p>
-<blockquote>
-<p>进程就是包括上下文切换的程序执行时间总和 = CPU加载上下文+CPU执行+CPU保存上下文</p>
-</blockquote>
-<p><code>进程的颗粒度太大，每次都要有上下的调入，保存，调出。</code>如果我们把进程比喻为一个运行在电脑上的软件，那么一个软件的执行不可能是一条逻辑执行的，必定有多个分支和多个程序段，就好比要实现程序A，实际分成 a，b，c等多个块组合而成。</p>
-<p>那么这里具体的执行就可能变成：程序A得到CPU -&gt; CPU加载上下文，开始执行程序A的a小段，然后执行A的b小段，然后再执行A的c小段，最后CPU保存A的上下文。这里a，b，c的执行是共享了A的上下文，CPU在执行的时候没有进行上下文切换的。这里的a，b，c就是线程，<code>也就是说线程是共享了进程的上下文环境，的更为细小的CPU时间段</code>。</p>
-        
-          <a class="article-more-a" href="/2019/07/07/线程和进程/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/07/线程和进程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-http缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/26/http缓存/">http缓存</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/06/26/http缓存/" class="archive-article-date">
-  	<time datetime="2019-06-26T01:50:32.429Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-26</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://juejin.im/post/5b3c87386fb9a04f9a5cb037#heading-3" target="_blank" rel="noopener">链接一</a><br><a href="https://juejin.im/post/5a1d4e546fb9a0450f21af23" target="_blank" rel="noopener">链接二</a><br><a href="https://excaliburhan.com/post/things-you-should-know-about-browser-cache.html" target="_blank" rel="noopener">链接三</a></p>
-
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">http 缓存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/26/http缓存/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开发中遇到的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/23/开发中遇到的问题/">开发中遇到的问题</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/06/23/开发中遇到的问题/" class="archive-article-date">
-  	<time datetime="2019-06-23T12:30:24.965Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-23</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、框架样式是写在元素上的内联样式，导致做修改难于覆盖</p>
-<p>2、对象多层嵌套中间一层为空的时候报错</p>
-<p>eg：当这个部分被多次调用，而数组没有值的时候，这个时候会报错，采用lodash处理错误情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">props.line.collabration.array.length === 0</span><br><span class="line"> _.get(props, &apos;line.collabration.array&apos;, []).length</span><br></pre></td></tr></table></figure></p>
-<p>3、promise的吞噬异常，当promise中出错后，很难判断它出错的位置。</p>
-<p>4、公司中的less单位由标准的11px导致页面写死的宽高失调</p>
-<p>5、前端的filter数据和query数据使用key标记缓存在后端，调试过程导致key被污染，页面数据无法加载。</p>
-<p>6、ES-2015-loose模式的情况下，set转数组报错; <a href="https://ustc-han.github.io/2019/05/08/Bable%E7%9A%84loose%E6%A8%A1%E5%BC%8F/">地址</a></p>
-
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/23/开发中遇到的问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-react事件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/17/react事件/">react 事件处理</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/06/17/react事件/" class="archive-article-date">
-  	<time datetime="2019-06-17T01:09:48.464Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="react-事件处理的几个方法："><a href="#react-事件处理的几个方法：" class="headerlink" title="react 事件处理的几个方法："></a>react 事件处理的几个方法：</h2><h4 id="class定义组件，在constructor函数绑定回调函数："><a href="#class定义组件，在constructor函数绑定回调函数：" class="headerlink" title="class定义组件，在constructor函数绑定回调函数："></a>class定义组件，在constructor函数绑定回调函数：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Toggle extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      isToggleOn: true,</span><br><span class="line">      value: 10</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    // This binding is necessary to make `this` work in the callback</span><br><span class="line">    this.handleClick = this.handleClick.bind(this,12); // 要点一(作用域绑定和传参)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleClick(v) &#123;</span><br><span class="line">    this.setState(prevState =&gt; (&#123;</span><br><span class="line">      isToggleOn: !prevState.isToggleOn,</span><br><span class="line">      value: v</span><br><span class="line">    &#125;)); </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;this.handleClick&#125;&gt;   // 要点二 （回调函数）</span><br><span class="line">           &#123;this.state.isToggleOn ? &apos;ON&apos; : &apos;OFF&apos;&#125;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line">        &lt;p&gt;&#123;this.state.value&#125;&lt;/p&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;Toggle /&gt;,</span><br><span class="line">  document.getElementById(&apos;root&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>当组件的方法使用ES5来写的话，需要将函数绑定到组件中。class 的方法默认不会绑定 this。如果你忘记绑定 this.handleClick 并把它传入了 onClick，当你调用这个函数的时候 this 的值为 undefined。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">function name() &#123;</span><br><span class="line">  console.log(this);\\ undefined</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">name();</span><br></pre></td></tr></table></figure></p>
-<p>这种写法还有一个弊端，当组件被多次使用的时候，多分同样的功能的函数将保存在内存中，比较冗余。</p>
-<h4 id="使用ES6语法定义函数。"><a href="#使用ES6语法定义函数。" class="headerlink" title="使用ES6语法定义函数。"></a>使用ES6语法定义函数。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class LoggingButton extends React.Component &#123;</span><br><span class="line">  // 此语法确保 `handleClick` 内的 `this` 已被绑定。</span><br><span class="line">  // 注意: 这是 *实验性* 语法。</span><br><span class="line">  handleClick = () =&gt; &#123;</span><br><span class="line">    console.log(&apos;this is:&apos;, this);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;button onClick=&#123;this.handleClick&#125;&gt;</span><br><span class="line">        Click me</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ES6定义的箭头函数，函数內的this是在函数定义的时候绑定的，而ES5定义的函数则是在函数被调用的时候绑定的。所以使用箭头函数的时候，函数的this会绑定组件<code>LoggingButton</code></p>
-<h4 id="回调函数使用箭头函数"><a href="#回调函数使用箭头函数" class="headerlink" title="回调函数使用箭头函数"></a>回调函数使用箭头函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class LoggingButton extends React.Component &#123;</span><br><span class="line">  handleClick() &#123;</span><br><span class="line">    console.log(&apos;this is:&apos;, this); //使用ES5</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    // 此语法确保 `handleClick` 内的 `this` 已被绑定。</span><br><span class="line">    return (</span><br><span class="line">      &lt;button onClick=&#123;(e) =&gt; this.handleClick(e)&#125;&gt;</span><br><span class="line">        Click me</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>回调函数使用ES6的语法，在<code>LoggingButton</code>组件每次被渲染的时候都会重新生成回调函数，如果子组件通过props使用该函数，则会引起重复渲染。</p>
-
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/17/react事件/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-url从输入到页面显示" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/12/url从输入到页面显示/">url从输入到页面显示的过程</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/06/12/url从输入到页面显示/" class="archive-article-date">
-  	<time datetime="2019-06-12T01:54:28.440Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>从url输入到地址栏，到页面显示内容一般经历下面的步骤：</p>
-<ul>
-<li>DNS 解析:将域名解析成 IP 地址</li>
-<li>TCP 连接：TCP 三次握手</li>
-<li>发送 HTTP 请求</li>
-<li>服务器处理请求并返回 HTTP 报文</li>
-<li>浏览器解析渲染页面</li>
-<li>断开连接：TCP 四次挥手<h2 id="1、DNS解析："><a href="#1、DNS解析：" class="headerlink" title="1、DNS解析："></a>1、DNS解析：</h2>一般我们输入的是URL，但是浏览器并不能通过URL直接来访问服务器。DNS解析就是一个将域名解析为对应的IP地址的过程。<h3 id="1-1-浏览器通过域名转DNS的过程："><a href="#1-1-浏览器通过域名转DNS的过程：" class="headerlink" title="1.1 浏览器通过域名转DNS的过程："></a>1.1 浏览器通过域名转DNS的过程：</h3></li>
-<li>浏览器缓存：浏览器会按照一定的频率缓存 DNS 记录。</li>
-<li>操作系统缓存：如果浏览器缓存中找不到需要的 DNS 记录，那就去操作系统中找。</li>
-<li>路由缓存：路由器也有 DNS 缓存。</li>
-<li>ISP 的 DNS 服务器：ISP 是互联网服务提供商(Internet Service - Provider)的简称，ISP 有专门的 DNS 服务器应对 DNS 查询请求。</li>
-<li>根服务器：ISP 的 DNS 服务器还找不到的话，它就会向根服务器发出请求，进行递归查询（DNS 服务器先问根域名服务器.com 域名服务器的 IP 地址，然后再问.baidu 域名服务器，依次类推）<h2 id="2、TCP链接（三次握手）："><a href="#2、TCP链接（三次握手）：" class="headerlink" title="2、TCP链接（三次握手）："></a>2、TCP链接（三次握手）：</h2>TCP作为一种可靠传输控制协议，其核心思想：既要保证数据可靠传输，又要提高传输的效率！</li>
-</ul>
-<p>TCP连接的一方A，由操作系统动态<code>随机选取</code>一个32位长的序列号（Initial Sequence Number），假设A的初始序列号为1000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，1001，1002，1003…，并把自己的初始序列号ISN告诉B。如果A收到B确认编号为2001，则意味着字节编号为1001-2000，共1000个字节已经安全到达。</p>
-<p>同理B也是类似的操作，假设B的初始序列号ISN为2000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，2001，2002，2003…，并把自己的初始序列号ISN告诉A，以便A可以确认B发送的每一个字节。如果B收到A确认编号为4001，则意味着字节编号为2001-4000，共2000个字节已经安全到达。</p>
-<h3 id="2-1为什么是3次握手？"><a href="#2-1为什么是3次握手？" class="headerlink" title="2.1为什么是3次握手？"></a>2.1为什么是3次握手？</h3>
-        
-          <a class="article-more-a" href="/2019/06/12/url从输入到页面显示/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DNS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">三次握手</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">四次挥手</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/12/url从输入到页面显示/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/parseInt函数/">展开全文 >></a>
         </p>
       
 

@@ -204,22 +204,22 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-GitCommitEmoji" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-CSS-width" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/28/GitCommitEmoji/">PRcommentEmoji</a>
+      <a class="article-title" href="/2019/12/19/CSS-width/">关于width</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2018/11/28/GitCommitEmoji/" class="archive-article-date">
-  	<time datetime="2018-11-28T01:00:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-28</time>
+        <a href="/2019/12/19/CSS-width/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.131Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -229,10 +229,19 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Inspired by <a href="https://github.com/dannyfritz/commit-message-emoji" target="_blank" rel="noopener">dannyfritz/commit-message-emoji</a></p>
-<p>See also <a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">gitmoji</a>.<br>
+        <h3 id="width-auto"><a href="#width-auto" class="headerlink" title="width:auto"></a><strong>width:auto</strong></h3><hr>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 父元素的content = 子元素（content + padding + border + margin )</li>
+<li><p>[ ] 子元素（包括content+padding+border+margin）撑满整个父元素的content区域。</p>
+</li>
+<li><p>[ ] 子元素有margin、border、padding时，会减去子元素自身content相对应的width值</p>
+</li>
+<li>此时的子元素有点像IE盒模型，宽高的值就是父元素的宽高。</li>
+</ul>
+<hr>
+<h3 id="width-100"><a href="#width-100" class="headerlink" title="width:100%"></a><strong>width:100%</strong></h3><hr>
         
-          <a class="article-more-a" href="/2018/11/28/GitCommitEmoji/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/CSS-width/#more">more >></a>
         
       
       
@@ -240,7 +249,7 @@
         <div class="declare" hidden="hidden"></div>
       
       
-    </p></div>
+    </div>
     <div class="article-info article-info-index">
       
       
@@ -249,7 +258,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">width:auto</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">width:100%</a>
         		</li>
       		
 		</ul>
@@ -259,7 +276,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/28/GitCommitEmoji/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/CSS-width/">展开全文 >></a>
         </p>
       
 
@@ -371,94 +388,6 @@ showargs(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/09/10/类数组对象/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-继承之ES5和ES6对比" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/03/继承之ES5和ES6对比/">ES5和ES6继承的写法</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2018/09/03/继承之ES5和ES6对比/" class="archive-article-date">
-  	<time datetime="2018-09-03T04:25:58.108Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-03</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ES5和ES6继承的写法："><a href="#ES5和ES6继承的写法：" class="headerlink" title="ES5和ES6继承的写法："></a>ES5和ES6继承的写法：</h1><h2 id="ES5代码："><a href="#ES5代码：" class="headerlink" title="ES5代码："></a>ES5代码：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.showName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line">User.prototype.showAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vipuser</span>(<span class="params">name,age,level</span>)</span>&#123;</span><br><span class="line">    User.call(<span class="keyword">this</span>,name,age);</span><br><span class="line">    <span class="keyword">this</span>.level = level;</span><br><span class="line">&#125;</span><br><span class="line">Vipuser.prototype = <span class="keyword">new</span> User();</span><br><span class="line">Vipuser.prototype.constructor = Vipuser;</span><br><span class="line"></span><br><span class="line">Vipuser.prototype.showLevel=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.level);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v1 = <span class="keyword">new</span> Vipuser(<span class="string">'hum'</span>,<span class="number">12</span>,<span class="number">3</span>);</span><br><span class="line">v1.showName();        </span><br><span class="line">v1.showAge();       </span><br><span class="line">v1.showLevel();</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/09/03/继承之ES5和ES6对比/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/03/继承之ES5和ES6对比/">展开全文 >></a>
         </p>
       
 

@@ -204,22 +204,22 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-耗时线程案例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-防抖和节流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/耗时线程案例/">耗时线程</a>
+      <a class="article-title" href="/2019/12/19/防抖和节流/">防抖和节流总结</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/12/19/耗时线程案例/" class="archive-article-date">
-  	<time datetime="2019-12-19T14:27:24.035Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+        <a href="/2019/12/19/防抖和节流/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.162Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -229,452 +229,17 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mouseenter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/19/耗时线程案例/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-字母Ascall码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/字母Ascall码/">字母Ascall码</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/12/19/字母Ascall码/" class="archive-article-date">
-  	<time datetime="2019-12-19T14:27:24.034Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="codeware题"><a href="#codeware题" class="headerlink" title="codeware题"></a>codeware题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.</span><br><span class="line">[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;f&apos;] -&gt; &apos;e&apos;</span><br><span class="line">[&apos;O&apos;,&apos;Q&apos;,&apos;R&apos;,&apos;S&apos;] -&gt; &apos;P&apos;</span><br></pre></td></tr></table></figure>
-<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function findMissingLetter(array)&#123;</span><br><span class="line">  const toNumArray = array.map((item)=&gt;item.charCodeAt());</span><br><span class="line">  for(i=0;i&lt;toNumArray.length-1;i++)&#123;</span><br><span class="line">    if(toNumArray[i+1]-toNumArray[i] &gt; 1)&#123;</span><br><span class="line">       return String.fromCharCode(toNumArray[i]+1);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>网友更好的答案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function findMissingLetter(array)</span><br><span class="line">&#123;</span><br><span class="line">   var i=array[0].charCodeAt();</span><br><span class="line">   array.map(x=&gt;  x.charCodeAt()==i?i++:i);</span><br><span class="line">   return String.fromCharCode(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="字母转ASCALL使用charCodeAt"><a href="#字母转ASCALL使用charCodeAt" class="headerlink" title="字母转ASCALL使用charCodeAt()"></a>字母转ASCALL使用charCodeAt()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;a&apos;.charCodeAt();//97</span><br></pre></td></tr></table></figure>
-<h3 id="ASCALL转字母使用fromCharCode"><a href="#ASCALL转字母使用fromCharCode" class="headerlink" title="ASCALL转字母使用fromCharCode()"></a>ASCALL转字母使用fromCharCode()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(65)//A</span><br></pre></td></tr></table></figure>
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ASCALL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/19/字母Ascall码/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-垂直盒子边距合并" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/垂直盒子边距合并/">垂直margin合并</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/12/19/垂直盒子边距合并/" class="archive-article-date">
-  	<time datetime="2019-12-19T14:27:24.034Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>BFC中规定垂直方向属于同一个BFC里的元素<strong>垂直方向</strong>边距合并。</p>
-<p><strong>注意:</strong></p>
-<ul>
-<li>父子元素的垂直margin合并需要保证两者没有被非空内容、padding、border 或 clear 分隔开。在没有被分隔开的情况下，一个元素的 margin-top 会和它普通流中的第一个子元素(非浮动元素等)的 margin-top 相邻，会产生合并，否则不会合并。</li>
-<li>垂直方向的兄弟元素不受padding、border等的限制，即使含有也会产生合并
-        
-          <a class="article-more-a" href="/2019/12/19/垂直盒子边距合并/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </li></ul></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">margin合并</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/19/垂直盒子边距合并/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-node-update" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/node-update/">node版本升级</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/12/19/node-update/" class="archive-article-date">
-  	<time datetime="2019-12-19T14:27:24.033Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>更新npm ：</p>
-<p>npm install -g npm</p>
-<p>更新node版本：</p>
-<p>先清除npm缓存：npm cache clean -f</p>
-<p>然后安装n模块：npm install -g n</p>
-<p>升级node.js到最新稳定版：n stable</p>
-<p>升级到指定版本： n  8.11.2</p>
-<p>如果是mac 升级出现错误 在命令前面家sudo</p>
-<p>参考链接：<a href="https://juejin.im/post/5b9739d1e51d450e9f66ee3b" target="_blank" rel="noopener">https://juejin.im/post/5b9739d1e51d450e9f66ee3b</a></p>
-
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/19/node-update/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mouseenter and mouseover" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/mouseenter and mouseover/">mouseenter和mouseove的区别</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/12/19/mouseenter and mouseover/" class="archive-article-date">
-  	<time datetime="2019-12-19T14:27:24.032Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>使用这段代码运行时，代码会一直占用主线程，造成线程阻塞<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> longComputation = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1e10</span>; i++) &#123;</span><br><span class="line">    sum += i;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> server = http.createServer();</span><br><span class="line">server.on(<span class="string">'request'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.url === <span class="string">'/compute'</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">'计算开始'</span>,<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="keyword">const</span> sum = longComputation();</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">'计算结束'</span>,<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="keyword">return</span> res.end(<span class="string">`Sum is <span class="subst">$&#123;sum&#125;</span>`</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.end(<span class="string">'Ok'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
-
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/19/mouseenter and mouseover/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js可迭代对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/js可迭代对象/">js可迭代对象</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/12/19/js可迭代对象/" class="archive-article-date">
-  	<time datetime="2019-12-19T14:27:24.032Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="js可迭代对象"><a href="#js可迭代对象" class="headerlink" title="js可迭代对象"></a>js可迭代对象</h2><p><code>可迭代对象的原型中都包含Symbol.iterator 属性</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Set(0) &#123;&#125;</span><br><span class="line">size: (...)</span><br><span class="line">__proto__: Set</span><br><span class="line">add: ƒ add()</span><br><span class="line">clear: ƒ clear()</span><br><span class="line">constructor: ƒ Set()</span><br><span class="line">delete: ƒ delete()</span><br><span class="line">entries: ƒ entries()</span><br><span class="line">forEach: ƒ forEach()</span><br><span class="line">has: ƒ has()</span><br><span class="line">keys: ƒ values()</span><br><span class="line">size: (...)</span><br><span class="line">values: ƒ values()</span><br><span class="line">Symbol(Symbol.iterator): ƒ values()</span><br><span class="line">Symbol(Symbol.toStringTag): &quot;Set&quot;</span><br><span class="line">get size: ƒ size()</span><br><span class="line">__proto__: Object</span><br><span class="line">[[Entries]]: Array(0)</span><br></pre></td></tr></table></figure></p>
-<p>常用的可迭代对象，有数组、Set、Map、字符串。</p>
-<h2 id="判断可迭代的方法"><a href="#判断可迭代的方法" class="headerlink" title="判断可迭代的方法"></a>判断可迭代的方法</h2><p><code>Symbol.iterator in Object(iter)</code><br>判断被判断对象的原型连上是不是有Symbol.iterator属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Symbol.iterator in Object([1,2])//true</span><br><span class="line">Symbol.iterator in Object(&#123;&#125;)//false</span><br><span class="line">Object(12) =&gt; Number(12)</span><br><span class="line">Object() 相当于 new Object();是对Object()里内容类型的实例</span><br></pre></td></tr></table></figure></p>
-<p><code>typeof obj[Symbol.iterator] === &#39;function&#39;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [];</span><br><span class="line">typeof arr[Symbol.iterator] === &apos;function&apos; //true</span><br></pre></td></tr></table></figure></p>
+        <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>  防抖和节流是项目中常用的知识点，可能平时不太能引起注意，但是防抖和节流肯定是项目事件优化必备的一项技术。</p>
+<h3 id="防抖："><a href="#防抖：" class="headerlink" title="防抖："></a>防抖：</h3><p><strong>首先，什么是防抖？</strong></p>
+<p>  防抖的核心思想就是在一定时间內（比如250ms）事件被多次触发的情况下，只会执行最后一次事件的触发，然后回调。</p>
+<p>  这个最常用在Input输入（keyup事件）和button（onclick）事件上，我们定义一个时间间隔，只要在这个时间间隔內多次触发，我们就只传最后一次的回调。试想如果这是个异步操作的化，他将节省很多不必要的拉取数据的操作。</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> context = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">let</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    clearTimeout(timeout)</span><br><span class="line">    timeout = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      fn.apply(context,args);</span><br><span class="line">    &#125;,delay)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  此处如果setTimeout使用ES6的语法写函数的话就不需要<code>context = this;</code>,肩头函数可以保证函数绑定在DOM上<br>Demo: <a href="https://codepen.io/ustc-han/pen/MMLNqb" target="_blank" rel="noopener">https://codepen.io/ustc-han/pen/MMLNqb</a></p>
+<h3 id="节流："><a href="#节流：" class="headerlink" title="节流："></a>节流：</h3><p>  什么是节流？</p>
+<p>  节流就是事件每隔一段时间触发一次，在这个时间段内的事件不会被触发。比如说1000ms是时间间隔，1000ms的时候触发了，那么下次触发只能是2000ms之后。</p>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> pre = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    <span class="keyword">const</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">if</span>(now - pre &gt; delay) &#123;</span><br><span class="line">      fn.apply(<span class="keyword">this</span>, args);</span><br><span class="line">      pre = now;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h4><p>  Demo: <a href="https://codepen.io/ustc-han/pen/WqmNvM" target="_blank" rel="noopener">https://codepen.io/ustc-han/pen/WqmNvM</a></p>
+<p>参考链接：<br><a href="https://zhuanlan.zhihu.com/p/38313717" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38313717</a><br>        <a href="https://juejin.im/post/5b7b88d46fb9a019e9767405#heading-4" target="_blank" rel="noopener">https://juejin.im/post/5b7b88d46fb9a019e9767405#heading-4</a></p>
 
       
       
@@ -695,7 +260,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Iterable</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">防抖</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">节流</a>
         		</li>
       		
 		</ul>
@@ -705,101 +274,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/19/js可迭代对象/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Closures" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/18/Closures/">重新思考闭包和内存泄漏</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/10/18/Closures/" class="archive-article-date">
-  	<time datetime="2019-10-18T01:54:36.014Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-18</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包之前的理解是，一个函数引用外部函数的内部变量时，就会生成闭包。但是这个理解其实不是特别准确，其实即使不引用也会生成闭包。正确的理解是<code>内部函数可以访问其父级的函数变量和参数</code>，此时便是一个闭包。通过一个经典例子看一下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addHandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(<span class="string">'el'</span>);</span><br><span class="line">    el.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.style.backgroundColor = <span class="string">'red'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>虽然在内部回调函数没有引用外部函数中的变量el，但该变量依旧是闭包范围的一部分，即使它可能没有在函数本身内部直接引用（通过查看函数代码）。<br>区别在于引擎如何优化未使用的变量。<br>
-        
-          <a class="article-more-a" href="/2019/10/18/Closures/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">闭包</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">内存泄漏</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/18/Closures/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/防抖和节流/">展开全文 >></a>
         </p>
       
 
@@ -836,15 +311,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/12/重新思考setTimeout--2/">重新思考setTimeout(二)--setTimeout与setInterval</a>
+      <a class="article-title" href="/2019/12/19/重新思考setTimeout--2/">重新思考setTimeout(二)--setTimeout与setInterval</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/10/12/重新思考setTimeout--2/" class="archive-article-date">
-  	<time datetime="2019-10-12T12:15:59.618Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-12</time>
+        <a href="/2019/12/19/重新思考setTimeout--2/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.161Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -859,7 +334,7 @@
 <h2 id="setTimeout模仿setInterval"><a href="#setTimeout模仿setInterval" class="headerlink" title="setTimeout模仿setInterval`"></a>setTimeout<code>模仿</code>setInterval`</h2><p>为什么使用<code>setTimeout</code>模仿<code>setInterval</code>呢？这需要通过事件循环机制来解释，如果不清楚的话可以点击查看<a href="https://thinkbucket.github.io/docsite/docs/javascript/8.async-programming/event-loop" target="_blank" rel="noopener">事件循环机制</a>和<a href="https://thinkbucket.github.io/docsite/docs/web/13.rendering-engine/rendering-engine" target="_blank" rel="noopener">浏览器内核</a>相关内容。</p>
 <p>由于<code>setInterval</code>或<code>setTimeout</code>不是JS中定义的，他们并不会在JS引擎线程中直接执行。当代码执行到<code>setInterval</code>或<code>setTimeout</code>时，事件循环机制会为<code>setTimeout</code>或<code>setInterval</code>开一个定时器线程并开始计时，等定义的时间过后，将回调函数放到回调队列里，等到函数调用栈空（<code>JS</code>引擎线程空闲）时，将回调函数放入函数调用栈（使用JS引擎线程）执行。<br>
         
-          <a class="article-more-a" href="/2019/10/12/重新思考setTimeout--2/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/重新思考setTimeout--2/#more">more >></a>
         
       
       
@@ -898,7 +373,95 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/12/重新思考setTimeout--2/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/重新思考setTimeout--2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-继承之ES5和ES6对比" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/继承之ES5和ES6对比/">ES5和ES6继承的写法</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/继承之ES5和ES6对比/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.160Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ES5和ES6继承的写法："><a href="#ES5和ES6继承的写法：" class="headerlink" title="ES5和ES6继承的写法："></a>ES5和ES6继承的写法：</h1><h2 id="ES5代码："><a href="#ES5代码：" class="headerlink" title="ES5代码："></a>ES5代码：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.showName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line">User.prototype.showAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vipuser</span>(<span class="params">name,age,level</span>)</span>&#123;</span><br><span class="line">    User.call(<span class="keyword">this</span>,name,age);</span><br><span class="line">    <span class="keyword">this</span>.level = level;</span><br><span class="line">&#125;</span><br><span class="line">Vipuser.prototype = <span class="keyword">new</span> User();</span><br><span class="line">Vipuser.prototype.constructor = Vipuser;</span><br><span class="line"></span><br><span class="line">Vipuser.prototype.showLevel=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.level);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v1 = <span class="keyword">new</span> Vipuser(<span class="string">'hum'</span>,<span class="number">12</span>,<span class="number">3</span>);</span><br><span class="line">v1.showName();        </span><br><span class="line">v1.showAge();       </span><br><span class="line">v1.showLevel();</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/12/19/继承之ES5和ES6对比/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">继承</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/继承之ES5和ES6对比/">展开全文 >></a>
         </p>
       
 
@@ -935,15 +498,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/09/重新思考setTimeout--1/">重新思考setTimeout(一)</a>
+      <a class="article-title" href="/2019/12/19/重新思考setTimeout--1/">重新思考setTimeout(一)</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/10/09/重新思考setTimeout--1/" class="archive-article-date">
-  	<time datetime="2019-10-09T12:32:22.493Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
+        <a href="/2019/12/19/重新思考setTimeout--1/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.160Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -956,7 +519,7 @@
         <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>浏览器事件循环经典题目:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</span><br><span class="line">    setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>, i)</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
 <p>解析： 根据setTimeout定义的操作在函数调用栈清空之后才会执行的特点，for循环里定义了5个setTimeout操作。而等待1秒后，任务队列里的setTimeout开始依次执行时，for循环的i值，已经先一步变成了5。因为任务队列推到函数调用栈执行的时间可以忽略不记（毫秒级），所以打印的GMT时间（精确到秒）和i的值都是相同的。</p>
         
-          <a class="article-more-a" href="/2019/10/09/重新思考setTimeout--1/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/重新思考setTimeout--1/#more">more >></a>
         
       
       
@@ -991,7 +554,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/09/重新思考setTimeout--1/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/重新思考setTimeout--1/">展开全文 >></a>
         </p>
       
 
@@ -1021,22 +584,22 @@
 
 
   
-    <article id="post-DOMContentLoaded" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-节流-滚动加载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/29/DOMContentLoaded/">DOMContentLoaded和load</a>
+      <a class="article-title" href="/2019/12/19/节流-滚动加载/">节流-滚动加载</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/09/29/DOMContentLoaded/" class="archive-article-date">
-  	<time datetime="2019-09-29T11:29:29.597Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-29</time>
+        <a href="/2019/12/19/节流-滚动加载/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.160Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -1046,16 +609,209 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="DOMContentLoaded和load"><a href="#DOMContentLoaded和load" class="headerlink" title="DOMContentLoaded和load"></a>DOMContentLoaded和load</h2><ul>
-<li><p>当初始的 HTML 文档被完全加载和解析完成之后，<strong>DOMContentLoaded 事件</strong>被触发，而无需等待样式表、图像和子框架的完成加载。</p>
-</li>
-<li><p><strong>load事件</strong>，当整个页面加载后会触发该事件，包括所有相关资源，如样式表、图像。</p>
-</li>
-</ul>
-<p>在下图中，在控制台中展示了DOMContentLoaded、load的执行时间，其中蓝色线代表的是DOMContentLoaded，红色的线代表load的时间。</p>
-<p><img src="https://cosmos-x.oss-cn-hangzhou.aliyuncs.com/L5hJR0.png" alt><br>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在这篇<a href="https://ustc-han.github.io/2019/07/11/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">博客</a>中讲述了节流的内部实现。本篇主要通过节流来优化滚动加载。</p>
+<h2 id="滚动加载"><a href="#滚动加载" class="headerlink" title="滚动加载"></a>滚动加载</h2><p>滚动加载是前端性能优化常用的手段，通过滚动加载减少网路时延和白屏时间，提高用户的使用体验。</p>
+<h3 id="节流与滚动加载"><a href="#节流与滚动加载" class="headerlink" title="节流与滚动加载"></a>节流与滚动加载</h3><p>Jquery代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Check every 300ms the scroll position</span></span><br><span class="line">  $(<span class="built_in">document</span>).on(<span class="string">'scroll'</span>, _.throttle(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    check_if_needs_more_content();</span><br><span class="line">  &#125;, <span class="number">300</span>));</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">check_if_needs_more_content</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    pixelsFromWindowBottomToBottom = <span class="number">0</span> + $(<span class="built_in">document</span>).height() - $(<span class="built_in">window</span>).scrollTop() - $(<span class="built_in">window</span>).height();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// console.log($(document).height());</span></span><br><span class="line">  <span class="comment">// console.log($(window).scrollTop());</span></span><br><span class="line">  <span class="comment">// console.log($(window).height());</span></span><br><span class="line">  <span class="comment">//console.log(pixelsFromWindowBottomToBottom);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pixelsFromWindowBottomToBottom &lt; <span class="number">200</span>)&#123;</span><br><span class="line">      <span class="comment">// Here it would go an ajax request</span></span><br><span class="line">      $(<span class="string">'body'</span>).append($(<span class="string">'.item'</span>).clone());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>$(document).height()： 文档高度固定</p>
+<p>$(window).scrollTop() 视窗顶端到文档顶端的距离</p>
+<p>$(window).height() 视窗高度</p>
+<p>当滚动条到达视窗底部的时候：文档高度 = 视窗高度 +$(window).scrollTop()</p>
+<p><a href="https://codepen.io/ustc-han/pen/WNeXqWL?editors=0110" target="_blank" rel="noopener">damo链接</a></p>
+<p>参考链接：<a href="https://css-tricks.com/debouncing-throttling-explained-examples/" target="_blank" rel="noopener">https://css-tricks.com/debouncing-throttling-explained-examples/</a></p>
+
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">节流</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滚动加载</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/节流-滚动加载/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
         
-          <a class="article-more-a" href="/2019/09/29/DOMContentLoaded/#more">more >></a>
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-线程和进程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/线程和进程/">老朋友-进程和线程</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/线程和进程/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.159Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>  进程和线程应该是操作系统最基础的知识点，长时间不看有些遗忘，现总结一下。</p>
+<h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><p>课本中：进程是cpu资源分配的最小单位，线程是cpu调度的最小单位。</p>
+<blockquote>
+<p>进程就是包括上下文切换的程序执行时间总和 = CPU加载上下文+CPU执行+CPU保存上下文</p>
+</blockquote>
+<p><code>进程的颗粒度太大，每次都要有上下的调入，保存，调出。</code>如果我们把进程比喻为一个运行在电脑上的软件，那么一个软件的执行不可能是一条逻辑执行的，必定有多个分支和多个程序段，就好比要实现程序A，实际分成 a，b，c等多个块组合而成。</p>
+<p>那么这里具体的执行就可能变成：程序A得到CPU -&gt; CPU加载上下文，开始执行程序A的a小段，然后执行A的b小段，然后再执行A的c小段，最后CPU保存A的上下文。这里a，b，c的执行是共享了A的上下文，CPU在执行的时候没有进行上下文切换的。这里的a，b，c就是线程，<code>也就是说线程是共享了进程的上下文环境，的更为细小的CPU时间段</code>。</p>
+        
+          <a class="article-more-a" href="/2019/12/19/线程和进程/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/线程和进程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-柯理化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/柯理化/">函数柯理化</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/柯理化/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.158Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="函数柯理化定义"><a href="#函数柯理化定义" class="headerlink" title="函数柯理化定义"></a>函数柯理化定义</h2><p>函数柯理化是函数式编程中的一个应用，主要的特点就是将多参数的函数递归降解为一个接受单个参数的函数，并返回能够接收剩余参数的函数。看了lodash和ramda的库，都有相关curry的封装，此处深入研究一下。</p>
+<h2 id="函数柯理化的功能"><a href="#函数柯理化的功能" class="headerlink" title="函数柯理化的功能"></a>函数柯理化的功能</h2><p>函数柯理化的功能：1、参数复用；2、延时执行；</p>
+<p>关于这部分的内容，我不打算细写，因为网上有一大堆的教程。推荐一篇掘金的相关文章讲的还不错：<a href="https://juejin.im/post/5af13664f265da0ba266efcf#heading-0" target="_blank" rel="noopener">https://juejin.im/post/5af13664f265da0ba266efcf#heading-0</a> </p>
+<h2 id="本文焦点-实现函数柯理化"><a href="#本文焦点-实现函数柯理化" class="headerlink" title="本文焦点-实现函数柯理化"></a>本文焦点-实现函数柯理化</h2><p>要想理解函数柯理化，我们有必要了解一下bind函数，bind函数与函数柯理化有太多的相似点。它们都可以返回函数，并且保存之前的参数，实现函数的延迟执行等；<br>
+        
+          <a class="article-more-a" href="/2019/12/19/柯理化/#more">more >></a>
         
       
       
@@ -1072,19 +828,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面渲染</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">DOMContentLoaded</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">load</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">柯理化</a>
         		</li>
       		
 		</ul>
@@ -1094,7 +842,293 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/29/DOMContentLoaded/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/柯理化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-浏览器内核" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/浏览器内核/">浏览器内核</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/浏览器内核/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.158Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>  浏览器不是单进程的，假设浏览器是单进程，那么每个标签页都是浏览器的一个线程，那么当其中一个标签页崩溃后，整个浏览器将崩溃，这显然是不合理的。</p>
+<p>  另外相对于线程来说，进程之间是不共享资源和地址空间的,所以不会存在太多的安全问题，而多个线程由于共享着相同的地址空间和资源,所以线程之间有可能会存在恶意修改或者获取非授权数据等安全问题。这也是为什么浏览器是多进程的原因之一</p>
+<h2 id="浏览器内核："><a href="#浏览器内核：" class="headerlink" title="浏览器内核："></a>浏览器内核：</h2><p>对于浏览器的每个标签页都有属于自己的浏览器内核实例。而浏览器内核的主要功能是通过取得页面内容、整理信息（应用CSS）、计算和组合最终输出可视化的图像结果，因此也被称为渲染引擎(渲染进程)。</p>
+<p>浏览器内核划分：</p>
+<ul>
+<li>GUI 渲染线程</li>
+<li>JavaScript引擎线程</li>
+<li>定时触发器线程</li>
+<li>事件触发线程</li>
+<li>异步http请求线程</li>
+</ul>
+<h3 id="GUI-渲染线程"><a href="#GUI-渲染线程" class="headerlink" title="GUI 渲染线程"></a>GUI 渲染线程</h3><ul>
+<li>负责渲染浏览器界面，解析HTML，CSS，构建DOM树、CSS规则树以及渲染树，布局和绘制等。</li>
+<li>当界面需要重绘（Repaint）或由于某种操作引发回流(reflow)时，该线程就会执行</li>
+<li>GUI渲染线程与JS引擎线程是互斥的，当JS引擎执行时GUI线程会被挂起（相当于被冻结了），GUI更新会被保存在一个队列中等到JS引擎空闲时立即被执行。<h3 id="JavaScript引擎线程"><a href="#JavaScript引擎线程" class="headerlink" title="JavaScript引擎线程"></a>JavaScript引擎线程</h3>Javascript引擎，也可以称为JS内核，主要负责处理Javascript脚本程序，例如V8引擎。Javascript引擎线程理所当然是负责解析Javascript脚本，运行代码<h3 id="定时触发器线程"><a href="#定时触发器线程" class="headerlink" title="定时触发器线程"></a>定时触发器线程</h3>setInterval与setTimeout所在线程，浏览器定时计数器并不是由JavaScript引擎计数的, 因为JavaScript引擎是单线程的, 如果处于阻塞线程状态就会影响记计时的准确, 因此通过单独线程来计时并触发定时是更为合理的方案。
+        
+          <a class="article-more-a" href="/2019/12/19/浏览器内核/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </li></ul></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">浏览器内核</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/浏览器内核/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-推一个空的commit" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/推一个空的commit/">推空的commit</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/推一个空的commit/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.157Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="推空的commit"><a href="#推空的commit" class="headerlink" title="推空的commit"></a>推空的commit</h1><p>当镜像没有打成功，需要新进一个task,去触发翻译流程</p>
+<p>git commit –allow-empty</p>
+
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/推一个空的commit/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数组交集并集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/数组交集并集/">求两个数组的交并集</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/数组交集并集/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.157Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>集合元素有唯一性；</p>
+<h2 id="数组的交集："><a href="#数组的交集：" class="headerlink" title="数组的交集："></a>数组的交集：</h2><p>常规的操作方法（默认数组没有重复数据）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr1.filter(item =&gt; arr2.includes(item));</span><br></pre></td></tr></table></figure></p>
+<h2 id="求两个数组的相同元素："><a href="#求两个数组的相同元素：" class="headerlink" title="求两个数组的相同元素："></a>求两个数组的相同元素：</h2><p>此时用上面的方法存在问题，如下</p>
+<p>arr1 = [1,2,2,3]; arr2 = [2];<br>显然他们的交集只有2，但事实会返回[2,2]</p>
+<p>考虑拿短的来遍历？<br>arr1 = [1,2,2,3,4,5,6]; arr2 = [1,2,2,2];交集显然是[1,2,2]，但是用短的数组遍历直接用上面的方法也会出问题</p>
+<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p>用空间换时间：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const intersect = (nums1, nums2) =&gt; &#123;</span><br><span class="line">  const map = &#123;&#125;</span><br><span class="line">  const res = []</span><br><span class="line">  for (let n of nums1) &#123;</span><br><span class="line">    if (map[n]) &#123;</span><br><span class="line">      map[n]++</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      map[n] = 1</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  for (let n of nums2) &#123;</span><br><span class="line">    if (map[n] &gt; 0) &#123;</span><br><span class="line">      res.push(n)</span><br><span class="line">      map[n]--</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>时间换空间</p>
+<p>这种操作需要使用splice()来分割数组和查找索引，比较耗时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var number = [];</span><br><span class="line">arr1.forEach(item =&gt; &#123;</span><br><span class="line">var index = arr2.indexOf(item);</span><br><span class="line">index!=-1 &amp;&amp; number.push(...arr2.splice(index,1));</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="数组的并集-默认数组没有重复元素"><a href="#数组的并集-默认数组没有重复元素" class="headerlink" title="数组的并集(默认数组没有重复元素)"></a>数组的并集(默认数组没有重复元素)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = Array.from(new Set([...arr1,...arr2]));</span><br></pre></td></tr></table></figure>
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">交集</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并集</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/数组交集并集/">展开全文 >></a>
         </p>
       
 

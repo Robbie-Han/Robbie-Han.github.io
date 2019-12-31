@@ -204,22 +204,22 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-page-rendering" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-宏任务和微任务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/29/page-rendering/">页面渲染</a>
+      <a class="article-title" href="/2019/12/19/宏任务和微任务/">宏任务和微任务</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/09/29/page-rendering/" class="archive-article-date">
-  	<time datetime="2019-09-29T11:27:56.830Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-29</time>
+        <a href="/2019/12/19/宏任务和微任务/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.156Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -229,315 +229,22 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="浏览器页面渲染"><a href="#浏览器页面渲染" class="headerlink" title="浏览器页面渲染"></a>浏览器页面渲染</h2><p>浏览器工作流程大体分为如下三部分：</p>
-<ul>
-<li><p>浏览器会解析三个东西：</p>
-<ul>
-<li>一个是HTML/SVG/XHTML，事实上，Webkit有三个C++的类对应这三类文档。解析这三种文件会产生一个DOM Tree。</li>
-<li>CSS，解析CSS会产生CSS规则树。</li>
-<li>Javascript，脚本，主要是通过DOM API和CSSOM API来操作DOM Tree和CSS Rule Tree.</li>
+        <h1 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h1><p>进入ES6或Node环境中，JS的任务分为两种，分别是宏任务（macro-task）和微任务（micro-task），在最新的ECMAScript中，微任务称为jobs，宏任务称为task，他们的执行顺序如下:</p>
+<p><code>宏任务(同步任务) --&gt; 微任务 --&gt; 宏任务(异步任务)</code></p>
+<h2 id="一、宏任务："><a href="#一、宏任务：" class="headerlink" title="一、宏任务："></a>一、宏任务：</h2><p>宏任务按照执行顺序细分为：宏任务同步任务和宏任务异步任务</p>
+<p>  1.同步任务：</p>
+<p>  同步任务指的是在<code>JS引擎主线程</code>上按顺序执行的任务，只有前一个任务执行完毕后，才能执行后一个任务，形成一个执行栈（函数调用栈）。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>  2.异步任务：</p>
+<p>  异步任务指的是不直接进入JS引擎主线程，而是满足触发条件时，相关的线程将该异步任务推进<code>任务队列(task queue)</code>，等待JS引擎主线程上的任务执行完毕（函数调用栈为空）时读取执行的任务，例如：</p>
+<p> <code>异步Ajax、DOM事件、setTimeout、I/O、UI rendering</code></p>
+<h2 id="二、微任务"><a href="#二、微任务" class="headerlink" title="二、微任务"></a>二、微任务</h2><p>微任务（micro-task/job）是在es6和node环境中出现的一个任务类型，常见的微任务API有：Promise.then和async/await</p>
+<h2 id="三、宏任务和微任务执行顺序汇总"><a href="#三、宏任务和微任务执行顺序汇总" class="headerlink" title="三、宏任务和微任务执行顺序汇总"></a>三、宏任务和微任务执行顺序汇总</h2><ul>
+<li>执行宏任务中同步任务，执行结束；</li>
+<li>检查任务队列是否有微任务，存在微任务则读取微任务队列，将其推到函数调用栈中形成新的宏任务，如果包含异步任务继续放到任务队列等待执行。</li>
+<li>检查是否有宏任务异步任务，最后执行</li>
 </ul>
-</li>
-<li><p>解析完成后，浏览器引擎会通过DOM Tree 和 CSS Rule Tree 来构造 Rendering Tree。</p>
-<ul>
-<li>Rendering Tree 渲染树并不等同于DOM树，因为<strong>一些像<code>&lt;head&gt;</code>元素或CSS设置display:none的节点</strong>就没必要放在渲染树中了。</li>
-<li>CSS 的 Rule Tree主要是为了完成匹配并把CSS Rule附加上Rendering Tree上的每个Element。也就是DOM结点。也就是所谓的Frame。</li>
-<li>然后，计算每个Frame（也就是每个Element）的位置，这又叫layout和reflow过程。</li>
-</ul>
-</li>
-<li><p>最后通过调用操作系统Native GUI(图像用户接口)的API绘制。</p>
         
-          <a class="article-more-a" href="/2019/09/29/page-rendering/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </li></ul></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面渲染</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/29/page-rendering/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-节流-滚动加载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/05/节流-滚动加载/">节流-滚动加载</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/09/05/节流-滚动加载/" class="archive-article-date">
-  	<time datetime="2019-09-05T15:21:38.389Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-05</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在这篇<a href="https://ustc-han.github.io/2019/07/11/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">博客</a>中讲述了节流的内部实现。本篇主要通过节流来优化滚动加载。</p>
-<h2 id="滚动加载"><a href="#滚动加载" class="headerlink" title="滚动加载"></a>滚动加载</h2><p>滚动加载是前端性能优化常用的手段，通过滚动加载减少网路时延和白屏时间，提高用户的使用体验。</p>
-<h3 id="节流与滚动加载"><a href="#节流与滚动加载" class="headerlink" title="节流与滚动加载"></a>节流与滚动加载</h3><p>Jquery代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Check every 300ms the scroll position</span></span><br><span class="line">  $(<span class="built_in">document</span>).on(<span class="string">'scroll'</span>, _.throttle(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    check_if_needs_more_content();</span><br><span class="line">  &#125;, <span class="number">300</span>));</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">check_if_needs_more_content</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    pixelsFromWindowBottomToBottom = <span class="number">0</span> + $(<span class="built_in">document</span>).height() - $(<span class="built_in">window</span>).scrollTop() - $(<span class="built_in">window</span>).height();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// console.log($(document).height());</span></span><br><span class="line">  <span class="comment">// console.log($(window).scrollTop());</span></span><br><span class="line">  <span class="comment">// console.log($(window).height());</span></span><br><span class="line">  <span class="comment">//console.log(pixelsFromWindowBottomToBottom);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pixelsFromWindowBottomToBottom &lt; <span class="number">200</span>)&#123;</span><br><span class="line">      <span class="comment">// Here it would go an ajax request</span></span><br><span class="line">      $(<span class="string">'body'</span>).append($(<span class="string">'.item'</span>).clone());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>$(document).height()： 文档高度固定</p>
-<p>$(window).scrollTop() 视窗顶端到文档顶端的距离</p>
-<p>$(window).height() 视窗高度</p>
-<p>当滚动条到达视窗底部的时候：文档高度 = 视窗高度 +$(window).scrollTop()</p>
-<p><a href="https://codepen.io/ustc-han/pen/WNeXqWL?editors=0110" target="_blank" rel="noopener">damo链接</a></p>
-<p>参考链接：<a href="https://css-tricks.com/debouncing-throttling-explained-examples/" target="_blank" rel="noopener">https://css-tricks.com/debouncing-throttling-explained-examples/</a></p>
-
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">节流</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滚动加载</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/05/节流-滚动加载/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-npm包和npm link" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/02/npm包和npm link/">模块调试技巧 - npm link</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/09/02/npm包和npm link/" class="archive-article-date">
-  	<time datetime="2019-09-02T05:30:45.774Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在本地开发npm包后，如何实现在本地调试修改后的npm包？频发的发布上线调试显然是不可靠的，npm link可以很好的解决问题。</p>
-<h2 id="npm-link"><a href="#npm-link" class="headerlink" title="npm link"></a>npm link</h2><p>首先，在我们正在开发的模块的命令窗口使用<code>npm link</code>，我们会得到如下图的结果,此时就代表link成功<br><img src="https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190902134410.png" alt="20190902134410.png"></p>
-<h2 id="create-react-app"><a href="#create-react-app" class="headerlink" title="create-react-app"></a>create-react-app</h2><p><a href="https://github.com/facebook/create-react-app" target="_blank" rel="noopener">create-react-app</a>是一款React应用开发工具,我们可以在控制台通过<code>npx create-react-app my-app</code>来安装，然后<code>cd my-app</code>进入app，此时我们创建了一个很简单的react项目。</p>
-<p>此时，我们在本项目中输入<code>npm link &lt;packageName&gt;</code><br><img src="https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190902135218.png" alt="20190902135218.png"></p>
-<blockquote>
-<p>注意： 如果本地安装了nvm，要保证npm link 和 npm link packageName 在同一个node版本中，不然会报错</p>
-</blockquote>
-<p>此时就可以在项目中引入该包，然后测试包的功能是否正常。<br><img src="https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190902135404.png" alt="20190902135404.png"></p>
-<p>测试完毕后，可以使用<code>npm unlink &lt;npmPackage&gt;</code>断开链接</p>
-<p>相关知识链接：<a href="http://www.ruanyifeng.com/blog/2019/02/npx.html" target="_blank" rel="noopener">npx</a>、<a href="https://github.com/facebook/create-react-app" target="_blank" rel="noopener">create-react-app</a></p>
-<p>参考链接一：<a href="https://ui.muwenzi.com/apps/start/usage" target="_blank" rel="noopener">https://ui.muwenzi.com/apps/start/usage</a></p>
-<p>参考链接二：<a href="https://github.com/atian25/blog/issues/17" target="_blank" rel="noopener">https://github.com/atian25/blog/issues/17</a></p>
-<p>参考链接三：<a href="https://juejin.im/post/5be0fe39518825171726d671" target="_blank" rel="noopener">https://juejin.im/post/5be0fe39518825171726d671</a></p>
-
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">npm link</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">create-react-app</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/02/npm包和npm link/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-二叉树遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/二叉树遍历/">二叉树遍历</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/08/25/二叉树遍历/" class="archive-article-date">
-  	<time datetime="2019-08-25T13:21:48.478Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><h3 id="递归方式："><a href="#递归方式：" class="headerlink" title="递归方式："></a>递归方式：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> ans = [];</span><br><span class="line">    <span class="keyword">if</span>(root) &#123;</span><br><span class="line">        ans.push(root.val);</span><br><span class="line">        ans = ans.concat(preorderTraversal(root.left));</span><br><span class="line">        ans = ans.concat(preorderTraversal(root.right));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="非递归方式"><a href="#非递归方式" class="headerlink" title="非递归方式"></a>非递归方式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root === <span class="literal">null</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">var</span> stack = [root];</span><br><span class="line">    <span class="keyword">var</span> ans = [];</span><br><span class="line">    <span class="keyword">while</span>(stack.length) &#123;</span><br><span class="line">        <span class="keyword">var</span> node = stack.pop();</span><br><span class="line">        ans.push(node.val);</span><br><span class="line">        node.right &amp;&amp; stack.push(node.right);</span><br><span class="line">        node.left &amp;&amp; stack.push(node.left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2019/08/25/二叉树遍历/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/宏任务和微任务/#more">more >></a>
         
       
       
@@ -558,19 +265,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前序遍历</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">宏任务</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">中序遍历</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">后序遍历</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">层次遍历</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">微任务</a>
         		</li>
       		
 		</ul>
@@ -580,7 +279,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/二叉树遍历/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/宏任务和微任务/">展开全文 >></a>
         </p>
       
 
@@ -610,22 +309,22 @@
 
 
   
-    <article id="post-align-items和align-content区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-开发中遇到的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/align-items和align-content区别/">关于align-items:center和align-content:center的思考</a>
+      <a class="article-title" href="/2019/12/19/开发中遇到的问题/">开发中遇到的问题</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/08/25/align-items和align-content区别/" class="archive-article-date">
-  	<time datetime="2019-08-25T08:08:55.108Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+        <a href="/2019/12/19/开发中遇到的问题/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.156Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -635,15 +334,102 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>flex布局中可以通过flex-direction来设置主轴和交叉轴，其中align-items则是用来操作在交叉轴方向的布局方式的。关于flex的基础讲解推荐这篇<a href="https://www.cnblogs.com/qcloud1001/p/9848619.html" target="_blank" rel="noopener">文章</a>。</p>
-<h2 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h2><p>align-items定义了元素在交叉轴上的对齐方式。</p>
-<p>单行的center情况不用细说，多行的时候使用align-items的表现会是怎么样呢？</p>
-<p><img src="https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190825165139.png" alt="20190825165139.png"></p>
-<p>当align-items设置多行元素center的时候，有点类似于space-around的感觉。每两个块中间的高度是外侧高度的两倍。每行元素的中线在自己所分空间的交叉轴方向居中。</p>
-<h2 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h2><p>对于align-content，它会吧所有元素看成一个整体，在交叉轴居中。<br><img src="https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190825165710.png" alt="20190825165710.png"></p>
-<hr>
-<p>代码演示链接：<a href="https://codepen.io/ustc-han/pen/bGbBYOa?editors=1100" target="_blank" rel="noopener">https://codepen.io/ustc-han/pen/bGbBYOa?editors=1100</a></p>
+        <p>1、框架样式是写在元素上的内联样式，导致做修改难于覆盖</p>
+<p>2、对象多层嵌套中间一层为空的时候报错</p>
+<p>eg：当这个部分被多次调用，而数组没有值的时候，这个时候会报错，采用lodash处理错误情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">props.line.collabration.array.length === 0</span><br><span class="line"> _.get(props, &apos;line.collabration.array&apos;, []).length</span><br></pre></td></tr></table></figure></p>
+<p>3、promise的吞噬异常，当promise中出错后，很难判断它出错的位置。</p>
+<p>4、公司中的less单位由标准的11px导致页面写死的宽高失调</p>
+<p>5、前端的filter数据和query数据使用key标记缓存在后端，调试过程导致key被污染，页面数据无法加载。</p>
+<p>6、ES-2015-loose模式的情况下，set转数组报错; <a href="https://ustc-han.github.io/2019/05/08/Bable%E7%9A%84loose%E6%A8%A1%E5%BC%8F/">地址</a></p>
 
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/开发中遇到的问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-居中" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/居中/">CSS 居中</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/居中/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.156Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h2><h3 id="单行行内元素水平居中："><a href="#单行行内元素水平居中：" class="headerlink" title="单行行内元素水平居中："></a>单行行内元素水平居中：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text-align: center;</span><br></pre></td></tr></table></figure>
+<h3 id="块级元素居中："><a href="#块级元素居中：" class="headerlink" title="块级元素居中："></a>块级元素居中：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">margin: 0 auto;</span><br></pre></td></tr></table></figure>
+<h3 id="多个块元素居中"><a href="#多个块元素居中" class="headerlink" title="多个块元素居中"></a>多个块元素居中</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">父元素：</span><br><span class="line">text-align: center;</span><br><span class="line">多个块元素</span><br><span class="line">display: inline-block;</span><br></pre></td></tr></table></figure>
+<p>使用flex布局<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">父元素：display: flex;</span><br><span class="line">       justify-content: center;</span><br></pre></td></tr></table></figure></p>
+<h2 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h2>
+        
+          <a class="article-more-a" href="/2019/12/19/居中/#more">more >></a>
+        
       
       
       
@@ -663,15 +449,15 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">水平居中</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">align-items</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">垂直居中</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">align-content</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">水平垂直居中</a>
         		</li>
       		
 		</ul>
@@ -681,7 +467,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/align-items和align-content区别/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/居中/">展开全文 >></a>
         </p>
       
 
@@ -711,22 +497,22 @@
 
 
   
-    <article id="post-JS互换两个变量" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-字母Ascall码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/JS互换两个变量/">js交换两个变量</a>
+      <a class="article-title" href="/2019/12/19/字母Ascall码/">字母Ascall码</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/08/25/JS互换两个变量/" class="archive-article-date">
-  	<time datetime="2019-08-25T01:42:22.387Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+        <a href="/2019/12/19/字母Ascall码/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.155Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -736,14 +522,11 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个题目是一道大厂的面试题(我不喜欢这个题)，要求用尽量多的方式实现两个变量互换，此处做个总结。</p>
-<h2 id="推荐写法"><a href="#推荐写法" class="headerlink" title="推荐写法"></a>推荐写法</h2><h3 id="中间值法"><a href="#中间值法" class="headerlink" title="中间值法"></a>中间值法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> t = a;</span><br><span class="line">a = b;</span><br><span class="line">b = t</span><br></pre></td></tr></table></figure>
-<p>虽然这个写法比较累赘，但是这种写法是最易读的，无论JS开发人员，还是其它语言的使用者，都可以看懂。</p>
-<h3 id="ES6结构赋值"><a href="#ES6结构赋值" class="headerlink" title="ES6结构赋值"></a>ES6结构赋值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">"one"</span>,b = <span class="string">"two"</span>;</span><br><span class="line">[a, b] = [b, a];</span><br><span class="line"><span class="built_in">console</span>.log(a, b);<span class="comment">//two one</span></span><br></pre></td></tr></table></figure>
-<p>利用ES6语法实现两值交换相比上一种写法简单好多，也是我比较喜欢的一种写法，包括在React hook中的useState也是这种写法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[count, setCount] = useState(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2019/08/25/JS互换两个变量/#more">more >></a>
-        
+        <h2 id="codeware题"><a href="#codeware题" class="headerlink" title="codeware题"></a>codeware题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.</span><br><span class="line">[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;f&apos;] -&gt; &apos;e&apos;</span><br><span class="line">[&apos;O&apos;,&apos;Q&apos;,&apos;R&apos;,&apos;S&apos;] -&gt; &apos;P&apos;</span><br></pre></td></tr></table></figure>
+<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function findMissingLetter(array)&#123;</span><br><span class="line">  const toNumArray = array.map((item)=&gt;item.charCodeAt());</span><br><span class="line">  for(i=0;i&lt;toNumArray.length-1;i++)&#123;</span><br><span class="line">    if(toNumArray[i+1]-toNumArray[i] &gt; 1)&#123;</span><br><span class="line">       return String.fromCharCode(toNumArray[i]+1);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>网友更好的答案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function findMissingLetter(array)</span><br><span class="line">&#123;</span><br><span class="line">   var i=array[0].charCodeAt();</span><br><span class="line">   array.map(x=&gt;  x.charCodeAt()==i?i++:i);</span><br><span class="line">   return String.fromCharCode(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="字母转ASCALL使用charCodeAt"><a href="#字母转ASCALL使用charCodeAt" class="headerlink" title="字母转ASCALL使用charCodeAt()"></a>字母转ASCALL使用charCodeAt()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;a&apos;.charCodeAt();//97</span><br></pre></td></tr></table></figure>
+<h3 id="ASCALL转字母使用fromCharCode"><a href="#ASCALL转字母使用fromCharCode" class="headerlink" title="ASCALL转字母使用fromCharCode()"></a>ASCALL转字母使用fromCharCode()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(65)//A</span><br></pre></td></tr></table></figure>
       
       
       
@@ -763,7 +546,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">变量互换</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ASCALL</a>
         		</li>
       		
 		</ul>
@@ -773,7 +556,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/JS互换两个变量/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/字母Ascall码/">展开全文 >></a>
         </p>
       
 
@@ -803,22 +586,22 @@
 
 
   
-    <article id="post-query-string源码仿写" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-安装nvm总结(MAC)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/24/query-string源码仿写/">query-string中parse的源码实现</a>
+      <a class="article-title" href="/2019/12/19/安装nvm总结(MAC)/">安装nvm管理多node版本</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/08/24/query-string源码仿写/" class="archive-article-date">
-  	<time datetime="2019-08-24T15:56:01.895Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
+        <a href="/2019/12/19/安装nvm总结(MAC)/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.155Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -828,9 +611,102 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>query-string模块在做地址解析查询参数时，会经常用到，在项目中自己曾经通过对<code>location.search</code>做过查询参数和值的解析，但是代码写出来还是很长的，而且当别的同事看你的代码时，很可能不知道你写的是什么，所以在此处我们完全可以使用query-string来辅助我们开发。</p>
-<p>我曾经在这篇<a href="https://ustc-han.github.io/2018/12/20/queryString%E6%A8%A1%E5%9D%97/">博客</a>里写到过具体用法，此处不再赘述，网上教程也很多，简单易懂。我们的重心是queryString.parse(str)功能的实现，下面的代码是仿照源码所写，实现了queryString.parse(str)的功能。</p>
-<h2 id="源码实现"><a href="#源码实现" class="headerlink" title="源码实现"></a>源码实现</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">splitFirst</span>(<span class="params">item, flag</span>) </span>&#123;</span><br><span class="line"> <span class="comment">// 定位首次出现的 '=',避免value中有等号</span></span><br><span class="line">  <span class="keyword">const</span> index = item.indexOf(flag);</span><br><span class="line">  <span class="keyword">let</span> key, value;</span><br><span class="line"><span class="comment">// 如果没有等号，则是'name = null' 的简写'name'</span></span><br><span class="line">  <span class="keyword">if</span>(index === <span class="number">-1</span>) &#123;</span><br><span class="line">    key = item;</span><br><span class="line">    value = <span class="literal">null</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    key = item.slice(<span class="number">0</span>, index);</span><br><span class="line">    value = item.slice(index + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> [key, value];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parse</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 创建一个没有原型的空对象</span></span><br><span class="line">  <span class="keyword">let</span> result = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">  <span class="comment">// 判断str为空或不是字符串时，返回&#123;&#125;</span></span><br><span class="line">  <span class="keyword">if</span>(!str || <span class="keyword">typeof</span> str !== <span class="string">'string'</span>) <span class="keyword">return</span> result;</span><br><span class="line">  <span class="comment">// 如果传入的字符串第一个字符是#||&amp;||?，替换为‘’</span></span><br><span class="line">  <span class="keyword">const</span> newStr = str.trim().replace(<span class="regexp">/^[#&amp;?]/</span>, <span class="string">''</span>);</span><br><span class="line">  <span class="comment">// 对字符串拆分为数组</span></span><br><span class="line">  <span class="keyword">const</span> input = newStr.split(<span class="string">'&amp;'</span>);</span><br><span class="line">  <span class="comment">//遍历数组</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> input) &#123;</span><br><span class="line">    <span class="comment">//取出每一项'name=100'中的key和value</span></span><br><span class="line">    <span class="keyword">let</span> [key, value] = splitFirst(item, <span class="string">'='</span>);</span><br><span class="line">    <span class="comment">// 判断对象中有没有该key,没有的化直接加入，</span></span><br><span class="line">    <span class="keyword">if</span>(!result[key]) &#123;</span><br><span class="line">      result[key] = value;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 对象中已存在该key,有value是string和数组两种情况</span></span><br><span class="line">      <span class="comment">// name = 'han',name = [han,li]</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">typeof</span> result[key] === <span class="string">'string'</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> t = result[key];</span><br><span class="line">        result[key] = [t, value];</span><br><span class="line">      &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        result[key].push(value)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line">parse(<span class="string">'name=han&amp;name=li&amp;age=10'</span>)</span><br></pre></td></tr></table></figure>
+        <h3 id="1、安装nvm"><a href="#1、安装nvm" class="headerlink" title="1、安装nvm"></a>1、安装nvm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash</span><br><span class="line"></span><br><span class="line">如果Mac使用的zsh，需要将命令中的| bash改为 | zsh</span><br></pre></td></tr></table></figure>
+<h6 id="note：oh-my-zsh安装可以替换mac的bash-安装后可以安装一个喜欢的主题，界面将非常美观。"><a href="#note：oh-my-zsh安装可以替换mac的bash-安装后可以安装一个喜欢的主题，界面将非常美观。" class="headerlink" title="note：oh-my-zsh安装可以替换mac的bash,安装后可以安装一个喜欢的主题，界面将非常美观。"></a><em>note：<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">oh-my-zsh</a>安装可以替换mac的bash,安装后可以安装一个喜欢的主题，界面将非常美观。</em></h6><p>然后在控制台 cd ~/.nvm，观察nvm是否安装完成。<br>
+        
+          <a class="article-more-a" href="/2019/12/19/安装nvm总结(MAC)/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/安装nvm总结(MAC)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-函数链式调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/函数链式调用/">函数链式调用</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/函数链式调用/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.154Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、题目："><a href="#1、题目：" class="headerlink" title="1、题目："></a>1、题目：</h2><p>实现有如下功能的可链式调用的函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">add(1)(2)(3); // 6</span><br><span class="line">add(1)(2)(3)(4); // 10</span><br><span class="line">add(1)(2)(3)(4)(5); // 15</span><br><span class="line">var addTwo = add(2);</span><br><span class="line">addTwo; // 2</span><br><span class="line">addTwo + 5; // 7</span><br><span class="line">addTwo(3); // 5</span><br><span class="line">addTwo(3)(5); // 10</span><br></pre></td></tr></table></figure></p>
+<h2 id="2、答案："><a href="#2、答案：" class="headerlink" title="2、答案："></a>2、答案：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function add(n) &#123;</span><br><span class="line">    var sum = 0;</span><br><span class="line">    sum += n;</span><br><span class="line">    var func = function(a) &#123;</span><br><span class="line">        sum += a;</span><br><span class="line">        return func;</span><br><span class="line">    &#125;</span><br><span class="line">    func.valueOf = function() &#123;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">    func.toString = function() &#123;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">    return func;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>增强版，满足上面的功能，并可以计算多参数的和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add(1)(2, 3);   // 6</span><br><span class="line">add(1, 2)(3);   // 6</span><br><span class="line">add(1, 2, 3);   // 6</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">	var args = [...arguments];</span><br><span class="line">	var func = function()&#123;</span><br><span class="line">		args.push(...arguments);</span><br><span class="line">		return func;</span><br><span class="line">	&#125;</span><br><span class="line">	func.valueOf = function() &#123;</span><br><span class="line">		return args.reduce((acc, item)=&gt;acc+item);</span><br><span class="line">	&#125;</span><br><span class="line">	func.toString = function() &#123;</span><br><span class="line">		return args.reduce((acc, item)=&gt;acc+item);</span><br><span class="line">	&#125;</span><br><span class="line">	return func</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3、讲解"><a href="#3、讲解" class="headerlink" title="3、讲解"></a>3、讲解</h2><p>如果一个对象没有valueOf属性，将这个对象和一个数字相加将会被强制转换成字符串类型：<br>eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123; a: 1 &#125;;</span><br><span class="line">console.log( o + 1 );</span><br><span class="line">//[object Object]1</span><br></pre></td></tr></table></figure></p>
+<p>js机制将会把对象o转成字符串类型’[object Object]‘,所以结果是字符串加数字转成‘[object Object]1’<br>如果我们给它一个valueOf方法,它将返回2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123; a: 1, valueOf: function() &#123; return this.a &#125; &#125;;</span><br><span class="line">console.log( o + 1 );</span><br><span class="line">// 2</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>This can be useful in simulating value-types, which JS does not have, so that we can perform simple arithmetic or logic operations on more complex data structures. That being said, I think it’s very rarely used in practice, because it’s better to have an explicit method, rather than relying on coercion to convert an object. (For example, we might have an object that is used to calculate a running average. Rather than using valueOf to get the current average, it’s far clearer to have a method called getAverage()).</p>
+</blockquote>
+<p>函数在JS中也是对象，为了避免返回的函数转换成字符串，现在给函数添加了一个valueOf方法。这样调用函数最终将返回一个匿名函数，并拥有valueOf方法，可以和数字加减，可以链式调用。<br>eg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var n1 = add(1); // n1 is a Function, but also has a valueOf property</span><br><span class="line">var n2 = n1(2);  // ditto for n2</span><br><span class="line"></span><br><span class="line">console.log( 0 + n1 ) // =&gt; 0 + n1.valueOf() =&gt; 0 + 1 =&gt; 1</span><br><span class="line">console.log( 0 + n2 ) // =&gt; 0 + n2.valueOf() =&gt; 0 + (1+2) =&gt; 3</span><br></pre></td></tr></table></figure></p>
+
       
       
       
@@ -848,6 +724,10 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">链式调用</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -856,7 +736,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/24/query-string源码仿写/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/函数链式调用/">展开全文 >></a>
         </p>
       
 
@@ -886,22 +766,22 @@
 
 
   
-    <article id="post-location" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-同步fork来的仓库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/12/location/">window.location</a>
+      <a class="article-title" href="/2019/12/19/同步fork来的仓库/">如何同步自己fork来的仓库</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/08/12/location/" class="archive-article-date">
-  	<time datetime="2019-08-12T12:28:35.418Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
+        <a href="/2019/12/19/同步fork来的仓库/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.154Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -911,17 +791,9 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><h3 id="location-href"><a href="#location-href" class="headerlink" title="location.href"></a>location.href</h3><ul>
-<li>location.href对应的是整个URL。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//developer.mozilla.org/en-US/docs/Web/API/HTMLHyperlinkElementUtils/origin</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="location-origin"><a href="#location-origin" class="headerlink" title="location.origin"></a>location.origin</h3><ul>
-<li>从协议名到pathname之间的部分,如果有协议包含协议名。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">window</span>.location.origin; <span class="comment">// Returns:'https://developer.mozilla.org'</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="location-host"><a href="#location-host" class="headerlink" title="location.host"></a>location.host</h3><p>返回主机名和端口号<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">location.href = <span class="string">"https://developer.mozilla.org:443/en-US/HTMLHyperlinkElementUtils.host"</span></span><br><span class="line">location.host == <span class="string">"developer.mozilla.org:443"</span></span><br></pre></td></tr></table></figure></p>
+        <h1 id="如何同步自己fork来的仓库"><a href="#如何同步自己fork来的仓库" class="headerlink" title="如何同步自己fork来的仓库"></a>如何同步自己fork来的仓库</h1><h3 id="一、fork来的仓库的痛点："><a href="#一、fork来的仓库的痛点：" class="headerlink" title="一、fork来的仓库的痛点："></a>一、fork来的仓库的痛点：</h3><p>我们在进行Github协同开发的时候，往往会去fork一个仓库到自己的Github中，过一段时间以后，原仓库可能会有各种提交以及修改，很可惜，Github本身并没有自动进行同步的机制，这个需要我们手动去执行，现在我来演示一下如何进行自己的仓库和原仓库进行Gith同步的操作。<br>
         
-          <a class="article-more-a" href="/2019/08/12/location/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/同步fork来的仓库/#more">more >></a>
         
       
       
@@ -929,7 +801,7 @@
         <div class="declare" hidden="hidden"></div>
       
       
-    </div>
+    </p></div>
     <div class="article-info article-info-index">
       
       
@@ -938,11 +810,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">location</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
         		</li>
       		
 		</ul>
@@ -952,7 +820,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/12/location/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/同步fork来的仓库/">展开全文 >></a>
         </p>
       
 
@@ -982,22 +850,22 @@
 
 
   
-    <article id="post-react-rooter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-垂直盒子边距合并" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/11/react-rooter/">React路由</a>
+      <a class="article-title" href="/2019/12/19/垂直盒子边距合并/">垂直margin合并</a>
     </h1>
   
 
         <!--显示阅读次数-->
         
         
-        <a href="/2019/08/11/react-rooter/" class="archive-article-date">
-  	<time datetime="2019-08-11T08:19:26.647Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
+        <a href="/2019/12/19/垂直盒子边距合并/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.154Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
@@ -1007,136 +875,13 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="待更新"><a href="#待更新" class="headerlink" title="待更新"></a>待更新</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近回顾了react路由的相关知识，然后看了history相关的源码来从本质上区分react中常用的两种路由hashRooter和browserRooter之间的区别，发现两者最大的区别有两点，一点是在事件监听上，另一点是在页面刷新上。源码的大致的功能看明白了，但是还有许多细节需要之后的时间去完善。下面做一下技术总结。</p>
-<h2 id="React路由常用组件："><a href="#React路由常用组件：" class="headerlink" title="React路由常用组件："></a>React路由常用组件：</h2><p>在 <a href="https://reacttraining.com/react-router/web/api/Route" target="_blank" rel="noopener">React Rooter</a>的官方文档里对React常用的路由组件例如：<br><code>&lt;Router&gt;、&lt;Roote&gt;、&lt;Switch&gt;、&lt;Redict&gt;、&lt;Link&gt;</code>有详细的讲解，包括路由的匹配规则等都有详细的描述,此处不想过多的赘述它们的使用，只做简要的概括。</p>
+        <p>BFC中规定垂直方向属于同一个BFC里的元素<strong>垂直方向</strong>边距合并。</p>
+<p><strong>注意:</strong></p>
 <ul>
-<li>Router：<ul>
-<li>在公司项目里使用的包是’react-router-dom’而不是’react-rooter’，这是因为前者是基于后者的，在’react-rooter’的基础上加入了一些新的组件，例如<code>&lt;Link&gt; 、&lt;HashRooter&gt;、&lt;browserRooter&gt;</code>。<a href="https://github.com/mrdulin/blog/issues/42" target="_blank" rel="noopener">参考链接</a><ul>
-<li>在引入的时候可以直接<code>import { BrowserRouter as Rooter, Route, Link } from &quot;react-router-dom&quot;;</code>也可以直接引入Rooter，然后再Rooter的history属性上绑定 hashRooter或browserRooter，不过这样比较麻烦，因为我们需要实例化history依赖中的createHashHistory或者createBrowserRooter方法。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Route<ul>
-<li>负责渲染具体的业务组件，负责匹配url和对应的组件</li>
-<li>有三种渲染的组件的方式：component(对应的组件)、render(值是匿名函数，函数里渲染组件)、children(不关心path的匹配，无论哪种路由都会渲染)</li>
-<li>component属性值最好是组件，如果是匿名函数的话，由于route通过属性component的值使用React.createElement来构造组件，而函数是引用类型，每次都不是同一个函数，会导致每次渲染都要生成新的组件。</li>
-</ul>
-</li>
-<li>Switch<ul>
-<li>匹配到一个Route子组件就返回不再继续匹配其他组件。</li>
-</ul>
-</li>
-<li>Link<ul>
-<li>Link是对a标签的封装，通过createHref函数将to里的字段和基础字段的拼接生成新的href。<br>当点击Link组件的时候会阻止a的默认事件，并将href的值传入history.pushState()。
+<li>父子元素的垂直margin合并需要保证两者没有被非空内容、padding、border 或 clear 分隔开。在没有被分隔开的情况下，一个元素的 margin-top 会和它普通流中的第一个子元素(非浮动元素等)的 margin-top 相邻，会产生合并，否则不会合并。</li>
+<li>垂直方向的兄弟元素不受padding、border等的限制，即使含有也会产生合并
         
-          <a class="article-more-a" href="/2019/08/11/react-rooter/#more">more >></a>
-        
-      
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-      
-    </li></ul></li></ul></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">rooter</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">路由</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/11/react-rooter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-浏览器内核" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/10/浏览器内核/">浏览器内核</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        
-        <a href="/2019/08/10/浏览器内核/" class="archive-article-date">
-  	<time datetime="2019-08-10T13:03:09.646Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-10</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-		
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>  浏览器不是单进程的，假设浏览器是单进程，那么每个标签页都是浏览器的一个线程，那么当其中一个标签页崩溃后，整个浏览器将崩溃，这显然是不合理的。</p>
-<p>  另外相对于线程来说，进程之间是不共享资源和地址空间的,所以不会存在太多的安全问题，而多个线程由于共享着相同的地址空间和资源,所以线程之间有可能会存在恶意修改或者获取非授权数据等安全问题。这也是为什么浏览器是多进程的原因之一</p>
-<h2 id="浏览器内核："><a href="#浏览器内核：" class="headerlink" title="浏览器内核："></a>浏览器内核：</h2><p>对于浏览器的每个标签页都有属于自己的浏览器内核实例。而浏览器内核的主要功能是通过取得页面内容、整理信息（应用CSS）、计算和组合最终输出可视化的图像结果，因此也被称为渲染引擎(渲染进程)。</p>
-<p>浏览器内核划分：</p>
-<ul>
-<li>GUI 渲染线程</li>
-<li>JavaScript引擎线程</li>
-<li>定时触发器线程</li>
-<li>事件触发线程</li>
-<li>异步http请求线程</li>
-</ul>
-<h3 id="GUI-渲染线程"><a href="#GUI-渲染线程" class="headerlink" title="GUI 渲染线程"></a>GUI 渲染线程</h3><ul>
-<li>负责渲染浏览器界面，解析HTML，CSS，构建DOM树、CSS规则树以及渲染树，布局和绘制等。</li>
-<li>当界面需要重绘（Repaint）或由于某种操作引发回流(reflow)时，该线程就会执行</li>
-<li>GUI渲染线程与JS引擎线程是互斥的，当JS引擎执行时GUI线程会被挂起（相当于被冻结了），GUI更新会被保存在一个队列中等到JS引擎空闲时立即被执行。<h3 id="JavaScript引擎线程"><a href="#JavaScript引擎线程" class="headerlink" title="JavaScript引擎线程"></a>JavaScript引擎线程</h3>Javascript引擎，也可以称为JS内核，主要负责处理Javascript脚本程序，例如V8引擎。Javascript引擎线程理所当然是负责解析Javascript脚本，运行代码<h3 id="定时触发器线程"><a href="#定时触发器线程" class="headerlink" title="定时触发器线程"></a>定时触发器线程</h3>setInterval与setTimeout所在线程，浏览器定时计数器并不是由JavaScript引擎计数的, 因为JavaScript引擎是单线程的, 如果处于阻塞线程状态就会影响记计时的准确, 因此通过单独线程来计时并触发定时是更为合理的方案。
-        
-          <a class="article-more-a" href="/2019/08/10/浏览器内核/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/19/垂直盒子边距合并/#more">more >></a>
         
       
       
@@ -1153,11 +898,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">浏览器内核</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">margin合并</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFC</a>
         		</li>
       		
 		</ul>
@@ -1167,7 +916,271 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/10/浏览器内核/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/垂直盒子边距合并/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-从源码看redux中间件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/从源码看redux中间件/">从源码看redux中间件</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/从源码看redux中间件/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.153Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="redux-中间件"><a href="#redux-中间件" class="headerlink" title="redux 中间件"></a>redux 中间件</h1><h3 id="1-什么是中间件"><a href="#1-什么是中间件" class="headerlink" title="1.什么是中间件"></a>1.什么是中间件</h3><p>普通使用同步功能时，action的改变会立即触发reducer处理状态，而中间件redux的本质的目的是提供第三方插件的模式，自定义拦截 action -&gt; reducer 的过程。变为 action -&gt; middlewares -&gt; reducer 。这种机制可以让我们改变数据流，实现如异步 action ，action 过滤，日志输出，异常报告等功能。</p>
+<h4 id="1-1-为什么要用中间件"><a href="#1-1-为什么要用中间件" class="headerlink" title="1.1 为什么要用中间件"></a>1.1 为什么要用中间件</h4><p>原生的redux中的Store.dispatch，它是不支持异步的，且功能是单一的。举个例子，当我们调用了后端的API，然后取得返回值，此时我想拿disapatch来执行action。保存dispatch的上下文没有了。怎么办，没法dispatch了? 可以用闭包啊，闭包可以保存dispatch的引用，存在内存不被释放，这样回来不就调用dispatch了吗。– 此处膜拜中间件设计者</p>
+<p><strong>中间件机制的本质就是一个闭包，通过闭包将原生dispatch保存在内存,并通过每层中间件封装新的dispatch。applyMiddleware方法的主要任务就是通过一系列的中间件改造原生dispatch为满足特定需求的dispatch。</strong></p>
+<p>我和我的小伙伴在我们的开源库，实现了redux的mini版，有兴趣欢迎浏览。链接：<a href="https://github.com/ThinkBucket/redux-mini" target="_blank" rel="noopener">https://github.com/ThinkBucket/redux-mini</a></p>
+<h3 id="2-理解中间件预备知识"><a href="#2-理解中间件预备知识" class="headerlink" title="2.理解中间件预备知识"></a>2.理解中间件预备知识</h3><p>Redux 提供了一个叫 applyMiddleware() 的方法，可以应用多个中间件，要想理解applyMiddleware，首要理解compose()的用法，而要想看懂compose()函数，首先要理解arr.reduceRight()方法</p>
+<h4 id="2-1-arr-reduceRight-："><a href="#2-1-arr-reduceRight-：" class="headerlink" title="2.1 arr.reduceRight()："></a>2.1 arr.reduceRight()：</h4><p>reduceRight对数组的迭代方向是从右向左的迭代</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> funcs = [f,g,h]</span><br><span class="line">funcs.reduceRight(<span class="function">(<span class="params">a, b</span>) =&gt;</span> b(a), args);</span><br></pre></td></tr></table></figure>
+<p>对于数组中的每个元素，多对一迭代。最后返回 f(g(h(args))</p>
+<h4 id="2-2-compose源码"><a href="#2-2-compose源码" class="headerlink" title="2.2 compose源码"></a>2.2 compose源码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">funcs</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="params">args</span> =&gt;</span> funcs.reduceRight(<span class="function">(<span class="params">composed,f</span>) =&gt;</span> f(compose), args)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> compose([f, g, h])(store.dispatch) 结果 f(g(h(store.dispatch)))<br> f,g,h代表了三个中间件</p>
+<hr>
+<h3 id="3-applyMiddleware源码："><a href="#3-applyMiddleware源码：" class="headerlink" title="3.applyMiddleware源码："></a>3.applyMiddleware源码：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> compose <span class="keyword">from</span> <span class="string">'./compose'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">applyMiddleware</span>(<span class="params">...middlewares</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">createStore</span>) =&gt;</span> <span class="function">(<span class="params">reducer, preloadedState, enhancer</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> store = createStore(reducer, preloadedState, enhancer)</span><br><span class="line">    <span class="keyword">var</span> dispatch = store.dispatch</span><br><span class="line">    <span class="keyword">var</span> chain = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> middlewareAPI = &#123;</span><br><span class="line">      getState: store.getState,</span><br><span class="line">      dispatch: <span class="function">(<span class="params">action</span>) =&gt;</span> dispatch(action)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    chain = middlewares.map(<span class="function"><span class="params">middleware</span> =&gt;</span> middleware(middlewareAPI))</span><br><span class="line">    dispatch = compose(...chain)(store.dispatch)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      ...store,</span><br><span class="line">      dispatch</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看一眼，一脸懵逼，有没有……</p>
+<p><img src="https://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/d52a2834349b033ba6049a7710ce36d3d439bd8b.jpg" alt="image"></p>
+<p>要想看懂这一堆箭头函数，还需要看一下createStore()的源码，createStore在项目中的用法：</p>
+<p><code>store = createStore(reducer,initialState,enhancer)</code></p>
+<blockquote>
+<p>createStore源码：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">createStore</span>(<span class="params">reducer, preloadedState, enhancer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> enhancer !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> enhancer !== <span class="string">'function'</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Expected the enhancer to be a function.'</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> enhancer(createStore)(reducer, preloadedState)</span><br><span class="line">  &#125;</span><br><span class="line"> .......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中enhanser是applyMiddleware(middlewares)函数，<code>store = createStore(reducer,initialState,enhancer)</code>执行完等价于<code>return enhancer(createStore)(reducer, preloadedState)</code>等价于<br><code>applyMiddleware(middlewares)(createStore)(reducer, preloadedState)</code></p>
+<p>带着这条结果回头再看applyMiddleware源码：<br><code>store = createStore(reducer,initialState,enhancer)</code>相当于为applyMiddleware传递了所有它执行所需要的所有参数<br>applyMiddleware(middlewares)执行后，传人(createStore)(reducer, preloadedState)；<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">（(createStore) =&gt; <span class="function">(<span class="params">reducer, preloadedState, enhancer</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> store = createStore(reducer, preloadedState, enhancer)</span><br><span class="line">    <span class="keyword">var</span> dispatch = store.dispatch</span><br><span class="line">    <span class="keyword">var</span> chain = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> middlewareAPI = &#123;</span><br><span class="line">      getState: store.getState,</span><br><span class="line">      dispatch: <span class="function">(<span class="params">action</span>) =&gt;</span> dispatch(action)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    chain = middlewares.map(<span class="function"><span class="params">middleware</span> =&gt;</span> middleware(middlewareAPI))</span><br><span class="line">    dispatch = compose(...chain)(store.dispatch)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      ...store,</span><br><span class="line">      dispatch</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;）(createStore)(reducer, preloadedState)</span><br></pre></td></tr></table></figure></p>
+<p>项目中定义执行完store = createStore(reducer, preloadedState, enhancer)，然后将store绑定在Provider组件上。</p>
+<blockquote>
+<p>上面的代码执行到第二行 var store = createStore(reducer, preloadedState, enhancer)<br>此时enhance为undefined，此时返回的是一个没有绑定任何中间件的store，也就是最开始原生的store。</p>
+</blockquote>
+<ul>
+<li>需要注意的地方</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> middlewareAPI = &#123;</span><br><span class="line">  getState: store.getState,</span><br><span class="line">  dispatch: <span class="function">(<span class="params">action</span>) =&gt;</span> dispatch(action)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">chain = middlewares.map(<span class="function"><span class="params">middleware</span> =&gt;</span> middleware(middlewareAPI))</span><br><span class="line">dispatch = compose(...chain)(store.dispatch)</span><br></pre></td></tr></table></figure>
+<p>这块代码看了很多遍才理解，这块还是有点意思的。为啥单独封装了一个middlewareAPI，dispatch定义是一个function，而不是直接传store给middleware？</p>
+<p>主要是为了保证各个中间件共享dispatch。如果写成dispatch: store.dispatch那么各层拿到的dispatch都将和内层原生dispatch相同，无法动态的更新。</p>
+<p><code>dispatch = compose(...chain)(store.dispatch)</code>此处的store依旧是原生store，拿到的store.dispatch也是原生的dispatch;</p>
+<h4 id="3-1-中间件的庐山真面目"><a href="#3-1-中间件的庐山真面目" class="headerlink" title="3.1 中间件的庐山真面目"></a>3.1 中间件的庐山真面目</h4><p>中间件使用了函数式编程中函数柯理化的功能，每个中间件中的每步返回都是一个接受单参的函数。<br>redux-thunk :<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> thunk = <span class="function"><span class="params">store</span> =&gt;</span> <span class="function"><span class="params">next</span> =&gt;</span> <span class="function"><span class="params">action</span> =&gt;</span> </span><br><span class="line"><span class="keyword">typeof</span> action === <span class="string">'function'</span> ? action(store.dispatch, store.getState) : next(action);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>redux-thunk在action为function的时候可以执行 function async(dispatch,getState) =&gt; {fetch….};当不是函数的时候调用next(action)。假如系统只用了Thunk中间件。那么next(action)就是dispatch同步action，action是对象。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> logger = <span class="function"><span class="params">store</span> =&gt;</span> <span class="function"><span class="params">next</span> =&gt;</span> <span class="function"><span class="params">action</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Middleware1: logger'</span>, store.getState())</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Middleware1: logger action:'</span>, action)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'m1-next'</span>, next)</span><br><span class="line">  next(action)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>store: applyMiddleware中的middlewareAPI就是等价这里的store,<code>chain = middlewares.map(middleware =&gt; middleware(middlewareAPI))</code>,就是剥离最外层的函数。</p>
+</li>
+<li><p>next: next是内层已经封装好的dispatch,如果是洋葱图里最里面的一层，那么next就是原生的dipatch<br><img src="https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190801154435.png" alt="20190801154435.png"></p>
+</li>
+<li><p>action: action是我们dispatch的action</p>
+</li>
+</ul>
+<p>上面的洋葱图大致说明了，中间件层层嵌套，最外层调用store.dispatch(action)，通过调用next()一层层的往里剥洋葱，直到原生的dipatch，然后调用action，此时再从里到外回溯。</p>
+<h4 id="3-2-让流程更易懂点"><a href="#3-2-让流程更易懂点" class="headerlink" title="3.2 让流程更易懂点"></a>3.2 让流程更易懂点</h4><ul>
+<li>首先要明确creatStore的功能，然后再明确applyMiddleware的功能，再就是理解中间件函数结构，这就齐活了。</li>
+<li>creatStore的功能有两个，一个是生成原生的store，将middlewareAPI传给所有的中间件。二是执行enhancer()将中间件封装，生成封装后dispatch的store。</li>
+<li>applyMiddleware的功能利用闭包让所有中间件共享middlewareAPI。在中间件未执行完store会一直保存在内存，最终封装原生dispatch为新的dispatch </li>
+<li>中间件函数如 3.1所讲</li>
+</ul>
+<h4 id="是不是还是有点蒙"><a href="#是不是还是有点蒙" class="headerlink" title="是不是还是有点蒙"></a>是不是还是有点蒙</h4><p><img src="http://img.tukexw.com/img/c5ea0ded2055636f.jpg" alt="image"></p>
+<p>下面将再细化一下：</p>
+<h3 id="4-中间件的执行过程"><a href="#4-中间件的执行过程" class="headerlink" title="4.中间件的执行过程"></a>4.中间件的执行过程</h3><p>通过上面的 applyMiddleware 和 中间件的结构，假设应用了如下的中间件: [A, B, C]，一个 action 的完整执行流程</p>
+<h4 id="4-1-初始化阶段"><a href="#4-1-初始化阶段" class="headerlink" title="4.1 初始化阶段"></a>4.1 初始化阶段</h4><p>一个中间件(ES5)的结构为:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">&#123;getState，dispatch&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">next</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">action</span>) </span>&#123;...&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>初始化阶段一：middlewares map 为新的 middlewares</p>
+<blockquote>
+<p>chain = middlewares.map(middleware =&gt; middleware(middlewareAPI))</p>
+</blockquote>
+<p>执行过后，middleware 变为了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">action</span>) </span>&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>初始化阶段二：compose 新的 dispatch</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> newDispatch = compose(newMiddlewares)(store.dispatch)</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-compose-流程"><a href="#4-2-compose-流程" class="headerlink" title="4.2 compose 流程"></a>4.2 compose 流程</h4><p>假设中间件[A,B,C]</p>
+<p>第一次执行</p>
+<p>composedC = C(store.dispatch) = function C(action) {}</p>
+<blockquote>
+<p>next 闭包： store.dispatch</p>
+</blockquote>
+<p>第二次执行：</p>
+<p> composedBC = B(composedC) = function B(action){}</p>
+<blockquote>
+<p>next 闭包 composedC</p>
+</blockquote>
+<p>第三次执行：</p>
+<p>composedABC = A(composedBC) = function A(action){}</p>
+<blockquote>
+<p>next 闭包 composedBC</p>
+<p>最后的返回结果为 composedABC</p>
+</blockquote>
+<p>执行到此生成新的dispatch函数，封装好的dispatch(action)就等价与composeABC(action)</p>
+<h4 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h4><p>compose后的函数结构大约是A(B(C(dispatch.store))</p>
+<blockquote>
+<p>dispatch(action) 等于 composedABC(action) =&gt;  等于执行 function A(action) {…}</p>
+<p>在函数 A 中执行 next(action), 此时 A 中 next 为 composedBC，那么等于执行 composedBC(action) 等于执行function B(action){…}</p>
+<p>在函数 B 中执行 next(action), 此时 B 中 next 为 composedC，那么等于执行 composedC(action) 等于执行function C(action){…}</p>
+<p>在函数 C 中执行 next(action), 此时 C 中 next 为 store.dispatch 即 store 原生的 dispatch, 等于执行store.dispatch(action)</p>
+<p>store.dispatch 会执行 reducer 生成最新的 store 数据</p>
+<p>所有的 next 执行完过后开始回溯</p>
+<p>将C中的执行结果返还给B</p>
+<p> 将B中的执行结果返还给A</p>
+<p>将A中的执行结果返还给最外层</p>
+<p>整个执行 action 的过程为 A -&gt; B -&gt; C -&gt; dispatch -&gt; C -&gt; B -&gt; A</p>
+</blockquote>
+
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/从源码看redux中间件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-传递函数给组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/传递函数给组件/">传递函数给参数</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+        
+        <a href="/2019/12/19/传递函数给组件/" class="archive-article-date">
+  	<time datetime="2019-12-19T15:52:56.153Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+		
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="传递函数给组件"><a href="#传递函数给组件" class="headerlink" title="传递函数给组件"></a>传递函数给组件</h2><h3 id="一、如何绑定一个函数到一个组件实例？"><a href="#一、如何绑定一个函数到一个组件实例？" class="headerlink" title="一、如何绑定一个函数到一个组件实例？"></a>一、如何绑定一个函数到一个组件实例？<br></h3><p>  1.在构造函数中绑定:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Foo extends Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.handleClick = this.handleClick.bind(this,&apos;Click happened&apos;);</span><br><span class="line">  &#125;</span><br><span class="line">  handleClick(v) &#123;</span><br><span class="line">    console.log(v);</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;button onClick=&#123;this.handleClick&#125;&gt;Click Me&lt;/button&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2019/12/19/传递函数给组件/#more">more >></a>
+        
+      
+      
+      
+        <div class="declare" hidden="hidden"></div>
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/传递函数给组件/">展开全文 >></a>
         </p>
       
 
