@@ -44,13 +44,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src class="js-avatar">
+			<img src="https://robbie-blog.oss-cn-shanghai.aliyuncs.com/IMG_4175.JPG" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Robbie Han</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">就是喜欢前端，咋整</p>
+		<p class="header-subtitle">博客不再维护，转https://thinkbucket.cn/</p>
 		
 
 		<nav class="header-menu">
@@ -114,13 +114,13 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src class="js-avatar">
+				<img src="https://robbie-blog.oss-cn-shanghai.aliyuncs.com/IMG_4175.JPG" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Robbie Han</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>就是喜欢前端，咋整<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>博客不再维护，转https://thinkbucket.cn/<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -187,19 +187,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-query-string源码仿写" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-queryString模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/query-string源码仿写/">query-string中parse的源码实现</a>
+      <a class="article-title" href="/2020/04/29/queryString模块/">queryString模块</a>
     </h1>
   
 
         
-        <a href="/2020/04/29/query-string源码仿写/" class="archive-article-date">
+        <a href="/2020/04/29/queryString模块/" class="archive-article-date">
   	<time datetime="2020-04-29T07:36:13.890Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
 </a>
         
@@ -207,13 +207,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>query-string模块在做地址解析查询参数时，会经常用到，在项目中自己曾经通过对<code>location.search</code>做过查询参数和值的解析，但是代码写出来还是很长的，而且当别的同事看你的代码时，很可能不知道你写的是什么，所以在此处我们完全可以使用query-string来辅助我们开发。</p>
-<p>我曾经在这篇<a href="https://robbie-han.github.io/2018/12/20/queryString%E6%A8%A1%E5%9D%97/">博客</a>里写到过具体用法，此处不再赘述，网上教程也很多，简单易懂。我们的重心是queryString.parse(str)功能的实现，下面的代码是仿照源码所写，实现了queryString.parse(str)的功能。</p>
-<h2 id="源码实现"><a href="#源码实现" class="headerlink" title="源码实现"></a>源码实现</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">splitFirst</span>(<span class="params">item, flag</span>) </span>&#123;</span><br><span class="line"> <span class="comment">// 定位首次出现的 '=',避免value中有等号</span></span><br><span class="line">  <span class="keyword">const</span> index = item.indexOf(flag);</span><br><span class="line">  <span class="keyword">let</span> key, value;</span><br><span class="line"><span class="comment">// 如果没有等号，则是'name = null' 的简写'name'</span></span><br><span class="line">  <span class="keyword">if</span>(index === <span class="number">-1</span>) &#123;</span><br><span class="line">    key = item;</span><br><span class="line">    value = <span class="literal">null</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    key = item.slice(<span class="number">0</span>, index);</span><br><span class="line">    value = item.slice(index + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> [key, value];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parse</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 创建一个没有原型的空对象</span></span><br><span class="line">  <span class="keyword">let</span> result = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">  <span class="comment">// 判断str为空或不是字符串时，返回&#123;&#125;</span></span><br><span class="line">  <span class="keyword">if</span>(!str || <span class="keyword">typeof</span> str !== <span class="string">'string'</span>) <span class="keyword">return</span> result;</span><br><span class="line">  <span class="comment">// 如果传入的字符串第一个字符是#||&amp;||?，替换为‘’</span></span><br><span class="line">  <span class="keyword">const</span> newStr = str.trim().replace(<span class="regexp">/^[#&amp;?]/</span>, <span class="string">''</span>);</span><br><span class="line">  <span class="comment">// 对字符串拆分为数组</span></span><br><span class="line">  <span class="keyword">const</span> input = newStr.split(<span class="string">'&amp;'</span>);</span><br><span class="line">  <span class="comment">//遍历数组</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> input) &#123;</span><br><span class="line">    <span class="comment">//取出每一项'name=100'中的key和value</span></span><br><span class="line">    <span class="keyword">let</span> [key, value] = splitFirst(item, <span class="string">'='</span>);</span><br><span class="line">    <span class="comment">// 判断对象中有没有该key,没有的化直接加入，</span></span><br><span class="line">    <span class="keyword">if</span>(!result[key]) &#123;</span><br><span class="line">      result[key] = value;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 对象中已存在该key,有value是string和数组两种情况</span></span><br><span class="line">      <span class="comment">// name = 'han',name = [han,li]</span></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">typeof</span> result[key] === <span class="string">'string'</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> t = result[key];</span><br><span class="line">        result[key] = [t, value];</span><br><span class="line">      &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        result[key].push(value)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line">parse(<span class="string">'name=han&amp;name=li&amp;age=10'</span>)</span><br></pre></td></tr></table></figure>
+        <h2 id="queryString模块"><a href="#queryString模块" class="headerlink" title="queryString模块"></a>queryString模块</h2><h3 id="1-安装："><a href="#1-安装：" class="headerlink" title="1. 安装："></a>1. 安装：</h3><pre><code>npm install query-string;
+</code></pre><h3 id="2-引入："><a href="#2-引入：" class="headerlink" title="2. 引入："></a>2. 引入：</h3><pre><code>import queryString from &apos;query-string&apos;;
+</code></pre><h3 id="3-应用："><a href="#3-应用：" class="headerlink" title="3. 应用："></a>3. 应用：</h3><h4 id="parse方法："><a href="#parse方法：" class="headerlink" title="- parse方法："></a>- parse方法：</h4><p>queryString.parse()方法用于将一个查询字符串解析为 JavaScript对象。<br>
+        
+          <a class="article-more-a" href="/2020/04/29/queryString模块/#more">more >></a>
+        
       
 
       
-    </div>
+    </p></div>
     <div class="article-info article-info-index">
       
       
@@ -222,7 +225,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
         		</li>
       		
 		</ul>
@@ -232,7 +235,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/query-string源码仿写/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/29/queryString模块/">展开全文 >></a>
         </p>
       
 
@@ -427,19 +430,19 @@
 
 
   
-    <article id="post-number" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-pairs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/number/">关于number的判断</a>
+      <a class="article-title" href="/2020/04/29/pairs/">求数组中元素和为s最先匹配元素</a>
     </h1>
   
 
         
-        <a href="/2020/04/29/number/" class="archive-article-date">
+        <a href="/2020/04/29/pairs/" class="archive-article-date">
   	<time datetime="2020-04-29T07:36:13.888Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
 </a>
         
@@ -447,12 +450,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="判断是不是Number"><a href="#判断是不是Number" class="headerlink" title="判断是不是Number"></a>判断是不是Number</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof num === &apos;number&apos;;</span><br><span class="line">Object.prototype.toString.call(num);//[object Number]</span><br></pre></td></tr></table></figure>
-<h2 id="判断是不是整数："><a href="#判断是不是整数：" class="headerlink" title="判断是不是整数："></a>判断是不是整数：</h2><p>使用原生方法：Number.isInteger(num)//true</p>
-<h2 id="判断是不是浮点数："><a href="#判断是不是浮点数：" class="headerlink" title="判断是不是浮点数："></a>判断是不是浮点数：</h2><p>方法一：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function isFloat(num)&#123;</span><br><span class="line">  if(typeof num !== &apos;number&apos;)&#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">  return ~~num !== num</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>详解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果num是整数，则~~num === num</span><br><span class="line">~5 = -5-1,~~-6 = 6-1 =5</span><br><span class="line">如果是浮点数，则~5.5 = -6,~~-6 = 5, 5.5 !== 5</span><br></pre></td></tr></table></figure></p>
-<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function isFloat(num)&#123;</span><br><span class="line">  if(typeof num !== &apos;number&apos;)&#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">  return num % 1 !== 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  var sum_pairs=function(ints, s)&#123;</span><br><span class="line">  let pairsObj = &#123;&#125;；</span><br><span class="line">  for(item of ints)&#123;</span><br><span class="line">    if(pairsObj[s-item])&#123;</span><br><span class="line">      return [s-item, item]；</span><br><span class="line">    &#125;</span><br><span class="line">    pairsObj[item] = true；</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sum_pairs([11, 3, 7, 5],         10)</span><br><span class="line">#              ^--^      3 + 7 = 10</span><br><span class="line">== [3, 7]</span><br><span class="line"></span><br><span class="line">sum_pairs([4, 3, 2, 3, 4],         6)</span><br><span class="line">#          ^-----^         4 + 2 = 6, indices: 0, 2 *</span><br><span class="line">#             ^-----^      3 + 3 = 6, indices: 1, 3</span><br><span class="line">#                ^-----^   2 + 4 = 6, indices: 2, 4</span><br><span class="line">#  * entire pair is earlier, and therefore is the correct answer</span><br><span class="line">== [4, 2]</span><br></pre></td></tr></table></figure>
       
 
       
@@ -469,7 +468,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">number</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
         		</li>
       		
 		</ul>
@@ -479,7 +478,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/number/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/29/pairs/">展开全文 >></a>
         </p>
       
 
@@ -605,19 +604,19 @@
 
 
   
-    <article id="post-pairs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-number" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/pairs/">求数组中元素和为s最先匹配元素</a>
+      <a class="article-title" href="/2020/04/29/number/">关于number的判断</a>
     </h1>
   
 
         
-        <a href="/2020/04/29/pairs/" class="archive-article-date">
+        <a href="/2020/04/29/number/" class="archive-article-date">
   	<time datetime="2020-04-29T07:36:13.888Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
 </a>
         
@@ -625,8 +624,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  var sum_pairs=function(ints, s)&#123;</span><br><span class="line">  let pairsObj = &#123;&#125;；</span><br><span class="line">  for(item of ints)&#123;</span><br><span class="line">    if(pairsObj[s-item])&#123;</span><br><span class="line">      return [s-item, item]；</span><br><span class="line">    &#125;</span><br><span class="line">    pairsObj[item] = true；</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sum_pairs([11, 3, 7, 5],         10)</span><br><span class="line">#              ^--^      3 + 7 = 10</span><br><span class="line">== [3, 7]</span><br><span class="line"></span><br><span class="line">sum_pairs([4, 3, 2, 3, 4],         6)</span><br><span class="line">#          ^-----^         4 + 2 = 6, indices: 0, 2 *</span><br><span class="line">#             ^-----^      3 + 3 = 6, indices: 1, 3</span><br><span class="line">#                ^-----^   2 + 4 = 6, indices: 2, 4</span><br><span class="line">#  * entire pair is earlier, and therefore is the correct answer</span><br><span class="line">== [4, 2]</span><br></pre></td></tr></table></figure>
+        <h2 id="判断是不是Number"><a href="#判断是不是Number" class="headerlink" title="判断是不是Number"></a>判断是不是Number</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof num === &apos;number&apos;;</span><br><span class="line">Object.prototype.toString.call(num);//[object Number]</span><br></pre></td></tr></table></figure>
+<h2 id="判断是不是整数："><a href="#判断是不是整数：" class="headerlink" title="判断是不是整数："></a>判断是不是整数：</h2><p>使用原生方法：Number.isInteger(num)//true</p>
+<h2 id="判断是不是浮点数："><a href="#判断是不是浮点数：" class="headerlink" title="判断是不是浮点数："></a>判断是不是浮点数：</h2><p>方法一：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function isFloat(num)&#123;</span><br><span class="line">  if(typeof num !== &apos;number&apos;)&#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">  return ~~num !== num</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>详解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果num是整数，则~~num === num</span><br><span class="line">~5 = -5-1,~~-6 = 6-1 =5</span><br><span class="line">如果是浮点数，则~5.5 = -6,~~-6 = 5, 5.5 !== 5</span><br></pre></td></tr></table></figure></p>
+<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function isFloat(num)&#123;</span><br><span class="line">  if(typeof num !== &apos;number&apos;)&#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">  return num % 1 !== 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
 
       
@@ -643,7 +646,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">number</a>
         		</li>
       		
 		</ul>
@@ -653,7 +656,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/pairs/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/29/number/">展开全文 >></a>
         </p>
       
 
@@ -1120,6 +1123,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">babel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
@@ -1132,23 +1139,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">babel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闭包</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存泄漏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">深比较</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">_.isEqual()</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1168,7 +1163,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">深比较</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">_.isEqual()</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Math</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1177,22 +1184,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">变量互换</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Math</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">开发工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PicGo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1208,15 +1199,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">H5</a>
+                <a href="javascript:void(0)" class="js-tag color5">开发工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">webSocket</a>
+                <a href="javascript:void(0)" class="js-tag color1">PicGo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">web Worker</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1229,6 +1220,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">align-content</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">H5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">webSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">web Worker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1312,18 +1315,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DNS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">三次握手</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">四次挥手</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">replace</a>
               </li>
              
@@ -1348,7 +1339,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DNS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">三次握手</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">四次挥手</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">链式调用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ASCALL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1357,10 +1364,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BFC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ASCALL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1420,23 +1423,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">继承</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">重新思考setTimeout</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件循环</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">节流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滚动加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1449,6 +1440,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时间循环</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">节流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滚动加载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">继承</a>
               </li>
              
               <li class="article-tag-list-item">
