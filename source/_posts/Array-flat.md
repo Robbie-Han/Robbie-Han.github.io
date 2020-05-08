@@ -14,7 +14,7 @@ flat的语法：`var newArray = arr.flat(depth)`，其中的depth的值是个num
 
 ## 实测flat
 
-![20190729203145.png](https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190729203145.png)
+![20190729203145.png](https://raw.githubusercontent.com/Robbie-Han/picMap/master/img/20190729203145.png)
 
 测试的结果如上图所示。
 - 第一个方框说明当depth的值大于数组元素的嵌套深度的时候会将所有的数组元素打平输出。

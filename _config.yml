@@ -4,7 +4,7 @@
 
 # Site
 title: Robbie Blog
-subtitle: 就是喜欢前端，咋整
+subtitle: 博客不再维护，转https://thinkbucket.cn/
 description:
 keywords: Front-End, javaScript, Css, React, node, 开发工具
 author: Robbie Han
@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://ustc-han.github.io
+url: http://robbie-han.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -43,7 +43,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -52,7 +52,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -79,7 +79,7 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:USTC-Han/USTC-Han.github.io.git
+  repo: git@github.com:Robbie-Han/Robbie-Han.github.io.git
   branch: master
 
 jsonContent:

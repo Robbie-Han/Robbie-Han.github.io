@@ -33,7 +33,7 @@ y.b.z     // 100
 ```
 上述例子中，x对y的赋值操作不属于浅拷贝，浅拷贝对于a属性中的非引用类型应该开辟新的存储空间，即对`y.a = 2`的操作不应该影响到原对象x.a的值。
 
-![20190630101009.png](https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190630101009.png)
+![20190630101009.png](https://raw.githubusercontent.com/Robbie-Han/picMap/master/img/20190630101009.png)
 
 #### 如何算浅拷贝？
 ```

@@ -19,7 +19,7 @@ toc: true
  为了解决这个问题，一般的做法是使用 shallowCopy（浅拷贝）或 deepCopy（深拷贝）来避免被修改，但这样做造成了 CPU 和内存的浪费，因为每次state数据的改变都会重新渲染rende函数，造成不必要的浪费。要想搞清楚为什么需要了解下react生命周期中的shouldComponentUpdate().
  
   
- ![image](https://github.com/USTC-Han/USTC-Han.github.io/blob/master/pic/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.jpg)
+ ![image](https://github.com/Robbie-Han/Robbie-Han.github.io/blob/master/pic/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.jpg)
  
  React的重复渲染优化的核心其实就是在shouldComponentUpdate里面做数据比较。在优化之前，shouldComponentUpdate是默认返回true的，这导致任何时候触发任何的数据变化都会使component重新渲染。这必然会导致资源的浪费和性能的低下——你可能会感觉比较原生的响应更慢。
  然而immutable只更新改变的节点和其相关父节点，减少了不必要节点的更新。大大的提高了效率。

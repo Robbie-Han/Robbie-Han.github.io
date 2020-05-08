@@ -158,7 +158,7 @@ const logger = store => next => action => {
 - store: applyMiddleware中的middlewareAPI就是等价这里的store,`chain = middlewares.map(middleware => middleware(middlewareAPI))`,就是剥离最外层的函数。
 
 - next: next是内层已经封装好的dispatch,如果是洋葱图里最里面的一层，那么next就是原生的dipatch
-![20190801154435.png](https://raw.githubusercontent.com/USTC-Han/picMap/master/img/20190801154435.png)
+![20190801154435.png](https://raw.githubusercontent.com/Robbie-Han/picMap/master/img/20190801154435.png)
 
 - action: action是我们dispatch的action
 

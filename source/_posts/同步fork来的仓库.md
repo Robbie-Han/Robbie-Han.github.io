@@ -18,8 +18,8 @@ git remote -v
 ```
 result:
 ```
-origin	git@github.com:USTC-Han/v4-debug-helper.git (fetch)
-origin	git@github.com:USTC-Han/v4-debug-helper.git (push)
+origin	git@github.com:Robbie-Han/v4-debug-helper.git (fetch)
+origin	git@github.com:Robbie-Han/v4-debug-helper.git (push)
 ```
 2.配置原仓库的路径：
 ```
@@ -31,8 +31,8 @@ git remote -v
 ```
 result:
 ```
-origin	git@github.com:USTC-Han/v4-debug-helper.git (fetch)
-origin	git@github.com:USTC-Han/v4-debug-helper.git (push)
+origin	git@github.com:Robbie-Han/v4-debug-helper.git (fetch)
+origin	git@github.com:Robbie-Han/v4-debug-helper.git (push)
 upstream  git@github.com:TradeshiftCN/v4-debug-helper.git (fetch)
 upstream  git@github.com:TradeshiftCN/v4-debug-helper.git (push)
 ```

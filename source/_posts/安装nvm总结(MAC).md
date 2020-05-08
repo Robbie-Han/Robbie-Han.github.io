@@ -44,7 +44,7 @@ nvm install 10
 ```
 系统会默认安装8或10的最新版本，如果需要特定版本，可以补全次版本号和修订号。
 
-[node版本号讲解链接](https://github.com/USTC-Han/USTC-Han.github.io/blob/master/node/node%E7%89%88%E6%9C%AC%E5%8F%B7.md)
+[node版本号讲解链接](https://github.com/Robbie-Han/Robbie-Han.github.io/blob/master/node/node%E7%89%88%E6%9C%AC%E5%8F%B7.md)
 
 ### 3、为不同的本地仓库配置不同的npm版本
 切换到仓库的的根目录：

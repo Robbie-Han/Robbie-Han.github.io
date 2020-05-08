@@ -7,7 +7,7 @@ toc: true
 ## 前言
 query-string模块在做地址解析查询参数时，会经常用到，在项目中自己曾经通过对`location.search`做过查询参数和值的解析，但是代码写出来还是很长的，而且当别的同事看你的代码时，很可能不知道你写的是什么，所以在此处我们完全可以使用query-string来辅助我们开发。
 
-我曾经在这篇[博客](https://ustc-han.github.io/2018/12/20/queryString%E6%A8%A1%E5%9D%97/)里写到过具体用法，此处不再赘述，网上教程也很多，简单易懂。我们的重心是queryString.parse(str)功能的实现，下面的代码是仿照源码所写，实现了queryString.parse(str)的功能。
+我曾经在这篇[博客](https://robbie-han.github.io/2018/12/20/queryString%E6%A8%A1%E5%9D%97/)里写到过具体用法，此处不再赘述，网上教程也很多，简单易懂。我们的重心是queryString.parse(str)功能的实现，下面的代码是仿照源码所写，实现了queryString.parse(str)的功能。
 
 ## 源码实现
 ```js

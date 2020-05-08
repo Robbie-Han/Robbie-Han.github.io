@@ -43,12 +43,12 @@ git commit -m "remove test.txt "
 
 创建gitHub项目，建立连接
 将本地从仓库和在gitHub上新建的库连接起来 new Repository -->获得SSH
-git remote add origin git@github.com:USTC-Han/git-test.git
+git remote add origin git@github.com:Robbie-Han/git-test.git
 将本地仓库推到远程库git push -u origin master (首次)
 以后向同一地方提交：git push origin master 
 
 从远程仓库到本地：
-git clone git@github.com:USTC-Han/git-test.git
+git clone git@github.com:Robbie-Han/git-test.git
 
 分支：
 查看分枝：git branch
