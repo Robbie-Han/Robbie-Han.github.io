@@ -370,19 +370,19 @@
 
 
   
-    <article id="post-重新思考setTimeout--1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-继承之ES5和ES6对比" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/重新思考setTimeout--1/">重新思考setTimeout(一)</a>
+      <a class="article-title" href="/2020/04/29/继承之ES5和ES6对比/">ES5和ES6继承的写法</a>
     </h1>
   
 
         
-        <a href="/2020/04/29/重新思考setTimeout--1/" class="archive-article-date">
+        <a href="/2020/04/29/继承之ES5和ES6对比/" class="archive-article-date">
   	<time datetime="2020-04-29T07:36:13.905Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
 </a>
         
@@ -390,10 +390,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>浏览器事件循环经典题目:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</span><br><span class="line">    setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>, i)</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
-<p>解析： 根据setTimeout定义的操作在函数调用栈清空之后才会执行的特点，for循环里定义了5个setTimeout操作。而等待1秒后，任务队列里的setTimeout开始依次执行时，for循环的i值，已经先一步变成了5。因为任务队列推到函数调用栈执行的时间可以忽略不记（毫秒级），所以打印的GMT时间（精确到秒）和i的值都是相同的。</p>
+        <h1 id="ES5和ES6继承的写法："><a href="#ES5和ES6继承的写法：" class="headerlink" title="ES5和ES6继承的写法："></a>ES5和ES6继承的写法：</h1><h2 id="ES5代码："><a href="#ES5代码：" class="headerlink" title="ES5代码："></a>ES5代码：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.showName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line">User.prototype.showAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vipuser</span>(<span class="params">name,age,level</span>)</span>&#123;</span><br><span class="line">    User.call(<span class="keyword">this</span>,name,age);</span><br><span class="line">    <span class="keyword">this</span>.level = level;</span><br><span class="line">&#125;</span><br><span class="line">Vipuser.prototype = <span class="keyword">new</span> User();</span><br><span class="line">Vipuser.prototype.constructor = Vipuser;</span><br><span class="line"></span><br><span class="line">Vipuser.prototype.showLevel=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.level);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v1 = <span class="keyword">new</span> Vipuser(<span class="string">'hum'</span>,<span class="number">12</span>,<span class="number">3</span>);</span><br><span class="line">v1.showName();        </span><br><span class="line">v1.showAge();       </span><br><span class="line">v1.showLevel();</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2020/04/29/重新思考setTimeout--1/#more">more >></a>
+          <a class="article-more-a" href="/2020/04/29/继承之ES5和ES6对比/#more">more >></a>
         
       
 
@@ -411,11 +410,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">重新思考setTimeout</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件循环</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">继承</a>
         		</li>
       		
 		</ul>
@@ -425,7 +420,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/重新思考setTimeout--1/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/29/继承之ES5和ES6对比/">展开全文 >></a>
         </p>
       
 
@@ -546,19 +541,19 @@
 
 
   
-    <article id="post-继承之ES5和ES6对比" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-重新思考setTimeout--1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/继承之ES5和ES6对比/">ES5和ES6继承的写法</a>
+      <a class="article-title" href="/2020/04/29/重新思考setTimeout--1/">重新思考setTimeout(一)</a>
     </h1>
   
 
         
-        <a href="/2020/04/29/继承之ES5和ES6对比/" class="archive-article-date">
+        <a href="/2020/04/29/重新思考setTimeout--1/" class="archive-article-date">
   	<time datetime="2020-04-29T07:36:13.905Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
 </a>
         
@@ -566,9 +561,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="ES5和ES6继承的写法："><a href="#ES5和ES6继承的写法：" class="headerlink" title="ES5和ES6继承的写法："></a>ES5和ES6继承的写法：</h1><h2 id="ES5代码："><a href="#ES5代码：" class="headerlink" title="ES5代码："></a>ES5代码：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.showName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line">User.prototype.showAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vipuser</span>(<span class="params">name,age,level</span>)</span>&#123;</span><br><span class="line">    User.call(<span class="keyword">this</span>,name,age);</span><br><span class="line">    <span class="keyword">this</span>.level = level;</span><br><span class="line">&#125;</span><br><span class="line">Vipuser.prototype = <span class="keyword">new</span> User();</span><br><span class="line">Vipuser.prototype.constructor = Vipuser;</span><br><span class="line"></span><br><span class="line">Vipuser.prototype.showLevel=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.level);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v1 = <span class="keyword">new</span> Vipuser(<span class="string">'hum'</span>,<span class="number">12</span>,<span class="number">3</span>);</span><br><span class="line">v1.showName();        </span><br><span class="line">v1.showAge();       </span><br><span class="line">v1.showLevel();</span><br></pre></td></tr></table></figure>
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>浏览器事件循环经典题目:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</span><br><span class="line">    setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>, i)</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br><span class="line">VM84:<span class="number">3</span> Wed Oct <span class="number">09</span> <span class="number">2019</span> <span class="number">09</span>:<span class="number">29</span>:<span class="number">47</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<p>解析： 根据setTimeout定义的操作在函数调用栈清空之后才会执行的特点，for循环里定义了5个setTimeout操作。而等待1秒后，任务队列里的setTimeout开始依次执行时，for循环的i值，已经先一步变成了5。因为任务队列推到函数调用栈执行的时间可以忽略不记（毫秒级），所以打印的GMT时间（精确到秒）和i的值都是相同的。</p>
         
-          <a class="article-more-a" href="/2020/04/29/继承之ES5和ES6对比/#more">more >></a>
+          <a class="article-more-a" href="/2020/04/29/重新思考setTimeout--1/#more">more >></a>
         
       
 
@@ -586,7 +582,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">继承</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">重新思考setTimeout</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件循环</a>
         		</li>
       		
 		</ul>
@@ -596,7 +596,97 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/继承之ES5和ES6对比/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/29/重新思考setTimeout--1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-线程和进程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/29/线程和进程/">老朋友-进程和线程</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/29/线程和进程/" class="archive-article-date">
+  	<time datetime="2020-04-29T07:36:13.904Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>  进程和线程应该是操作系统最基础的知识点，长时间不看有些遗忘，现总结一下。</p>
+<h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><p>课本中：进程是cpu资源分配的最小单位，线程是cpu调度的最小单位。</p>
+<blockquote>
+<p>进程就是包括上下文切换的程序执行时间总和 = CPU加载上下文+CPU执行+CPU保存上下文</p>
+</blockquote>
+<p><code>进程的颗粒度太大，每次都要有上下的调入，保存，调出。</code>如果我们把进程比喻为一个运行在电脑上的软件，那么一个软件的执行不可能是一条逻辑执行的，必定有多个分支和多个程序段，就好比要实现程序A，实际分成 a，b，c等多个块组合而成。</p>
+<p>那么这里具体的执行就可能变成：程序A得到CPU -&gt; CPU加载上下文，开始执行程序A的a小段，然后执行A的b小段，然后再执行A的c小段，最后CPU保存A的上下文。这里a，b，c的执行是共享了A的上下文，CPU在执行的时候没有进行上下文切换的。这里的a，b，c就是线程，<code>也就是说线程是共享了进程的上下文环境，的更为细小的CPU时间段</code>。</p>
+        
+          <a class="article-more-a" href="/2020/04/29/线程和进程/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/29/线程和进程/">展开全文 >></a>
         </p>
       
 
@@ -700,96 +790,6 @@ showargs(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/29/类数组对象/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-线程和进程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/线程和进程/">老朋友-进程和线程</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/29/线程和进程/" class="archive-article-date">
-  	<time datetime="2020-04-29T07:36:13.904Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>  进程和线程应该是操作系统最基础的知识点，长时间不看有些遗忘，现总结一下。</p>
-<h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><p>课本中：进程是cpu资源分配的最小单位，线程是cpu调度的最小单位。</p>
-<blockquote>
-<p>进程就是包括上下文切换的程序执行时间总和 = CPU加载上下文+CPU执行+CPU保存上下文</p>
-</blockquote>
-<p><code>进程的颗粒度太大，每次都要有上下的调入，保存，调出。</code>如果我们把进程比喻为一个运行在电脑上的软件，那么一个软件的执行不可能是一条逻辑执行的，必定有多个分支和多个程序段，就好比要实现程序A，实际分成 a，b，c等多个块组合而成。</p>
-<p>那么这里具体的执行就可能变成：程序A得到CPU -&gt; CPU加载上下文，开始执行程序A的a小段，然后执行A的b小段，然后再执行A的c小段，最后CPU保存A的上下文。这里a，b，c的执行是共享了A的上下文，CPU在执行的时候没有进行上下文切换的。这里的a，b，c就是线程，<code>也就是说线程是共享了进程的上下文环境，的更为细小的CPU时间段</code>。</p>
-        
-          <a class="article-more-a" href="/2020/04/29/线程和进程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Node</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/线程和进程/">展开全文 >></a>
         </p>
       
 
@@ -1198,6 +1198,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">闭包</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存泄漏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">babel</a>
               </li>
              
@@ -1211,14 +1219,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">width:100%</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闭包</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存泄漏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1238,6 +1238,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">深拷贝</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">深比较</a>
               </li>
              
@@ -1246,31 +1254,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Math</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">深拷贝</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">变量互换</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Object.create()</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">new Object()</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Promise</a>
+                <a href="javascript:void(0)" class="js-tag color5">Math</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1286,15 +1274,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">flex</a>
+                <a href="javascript:void(0)" class="js-tag color1">Object.create()</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">align-items</a>
+                <a href="javascript:void(0)" class="js-tag color3">new Object()</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">align-content</a>
+                <a href="javascript:void(0)" class="js-tag color3">Promise</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1311,6 +1299,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Async</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">flex</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">align-items</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">align-content</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1338,11 +1338,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">immutable</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterable</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterable</a>
+                <a href="javascript:void(0)" class="js-tag color5">immutable</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1362,6 +1362,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">number</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">npm link</a>
               </li>
              
@@ -1370,7 +1374,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">number</a>
+                <a href="javascript:void(0)" class="js-tag color4">parseInt</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1378,7 +1382,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">parseInt</a>
+                <a href="javascript:void(0)" class="js-tag color3">replace</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1390,11 +1398,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">replace</a>
+                <a href="javascript:void(0)" class="js-tag color4">DNS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
+                <a href="javascript:void(0)" class="js-tag color5">三次握手</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">四次挥手</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1411,18 +1423,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">层次遍历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DNS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">三次握手</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">四次挥手</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1450,10 +1450,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">水平居中</a>
               </li>
              
@@ -1463,6 +1459,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">水平垂直居中</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1486,15 +1486,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">类数组对象</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">类数组对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">继承</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">节流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滚动加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1515,18 +1527,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时间循环</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">节流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滚动加载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">继承</a>
               </li>
              
               <li class="article-tag-list-item">
